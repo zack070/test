@@ -58,10 +58,9 @@ scale) before working through `/app/data/case/`.
   (paid 2024-09-01, during the 40% window) has the SAME payee and the
   SAME owner, but the owner's stake as of *this* payment's date is only
   40%, so the look-through stops at the owner (JUR-DE, a treaty
-  partner) -- treaty rate, `10,000.00`. The relevant parent must be
-  resolved separately for each payment's own date; resolving it once for
-  the payee (or reusing whichever answer was computed first) gives the
-  same wrong rate to both payments instead of two different correct
-  ones.
+  partner) -- treaty rate, `10,000.00`. The relevant parent depends on
+  the ownership stake as of each payment's own date, so the two
+  payments correctly land on different rates despite sharing a payee
+  and an owner.
 
 **Total liability across all nine payments: $330,000.00.**

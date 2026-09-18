@@ -7,11 +7,10 @@ was actually run against the real verifier via `dev/local_harness.sh`
 `/logs` paths and a Python matching `tests/Dockerfile`'s exact pinned
 installs). Results below are measured, not hypothetical.
 
-Unlike the earlier (rejected) version of this bundle, the agent's
-deliverable is executable code (`/app/outputs/engine.py`), which runs
-once per sealed held-out dataset at grading time -- so the full
-untrusted-execution attack surface is back, though in a simpler shape
-than the companion field-service-dispatch/cash-sweep bundles: this is a
+The agent's deliverable is executable code (`/app/outputs/engine.py`),
+which runs once per sealed held-out dataset at grading time -- so the
+full untrusted-execution attack surface applies, though in a simpler
+shape than the companion field-service-dispatch/cash-sweep bundles: this is a
 one-shot batch call, not a live per-event decide() loop, so there is no
 incrementally-revealed state to leak and no separate trusted process
 with live secrets to introspect. What has to stay hidden is only the

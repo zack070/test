@@ -124,9 +124,6 @@ def compute_report(scenario: ScenarioData) -> Dict:
             running_total += usd_amount[p.payment_id]
             if running_total >= scenario.threshold_usd:
                 crossed = True
-            # Applies statutory rate from the crossing point onward, but
-            # never goes back to fix payments already processed earlier
-            # in this same loop before the threshold was crossed.
             final_rate[p.payment_id] = scenario.statutory_rate if crossed else base_rate[p.payment_id]
 
     lines = []
