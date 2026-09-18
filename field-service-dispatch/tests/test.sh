@@ -27,9 +27,10 @@ write_reward() {
   chmod 600 "$REWARD_FILE"
 }
 
-# --- Stage 1: untrusted. Executes the candidate's policy code, isolated
-# as an unprivileged user, own process group, firm timeout. ---
-timeout -k 5 120 su -s /bin/bash runner -c "python3 /tests/collect_agent_output.py" > "$WORK_DIR/stage1.log" 2>&1
+# --- Stage 1: untrusted. Executes the candidate's policy code (once,
+# against both sealed scenarios), isolated as an unprivileged user, own
+# process group, firm timeout. ---
+timeout -k 5 200 su -s /bin/bash runner -c "python3 /tests/collect_agent_output.py" > "$WORK_DIR/stage1.log" 2>&1
 STAGE1_STATUS=$?
 cat "$WORK_DIR/stage1.log"
 
@@ -52,7 +53,7 @@ chmod 644 "$WORK_DIR/trace.json"
 # --- Stage 2: trusted, root. Replays the recorded trace with no candidate
 # code involved at all and independently recomputes the score. ---
 cd /tests
-timeout -k 5 60 python3 -m pytest test_dispatch_grading.py --ctrf="$CTRF_FILE" -v > "$WORK_DIR/stage2.log" 2>&1
+timeout -k 5 90 python3 -m pytest test_dispatch_grading.py --ctrf="$CTRF_FILE" -v > "$WORK_DIR/stage2.log" 2>&1
 STAGE2_STATUS=$?
 cat "$WORK_DIR/stage2.log"
 

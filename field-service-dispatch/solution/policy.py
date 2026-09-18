@@ -1,23 +1,32 @@
 """Reference policy: at each decision point, treats tech<->job assignment
-as a genuine weighted bipartite matching problem and solves it exactly
-(brute force; batches are capped at MAX_JOINT so this stays fast), rather
-than picking greedily one job at a time in a fixed priority order. Every
-factor that matters -- avoiding a self-inflicted breach, reserving
-scarce-skill technicians, minimizing overtime and fatigue-inflated
-duration -- is folded into ONE per-pairing cost so the search can legitimately
-trade them off (e.g. deliberately serving a slightly-less-urgent job first
-when serving the most-urgent one would breach it anyway but the other
-still makes its deadline), which no fixed-priority greedy rule can do
-correctly in general."""
-import itertools
+as a genuine weighted bipartite matching problem and solves it EXACTLY via
+the Hungarian algorithm (O((techs+jobs)^3), no batch truncation needed at
+these scales), rather than picking greedily one job at a time in a fixed
+priority order. Every factor that matters -- avoiding a self-inflicted
+breach, reserving scarce-skill technicians, minimizing overtime and
+fatigue-inflated duration -- is folded into ONE per-pairing cost so the
+search can legitimately trade them off (e.g. deliberately serving a
+slightly-less-urgent job first when serving the most-urgent one would
+breach it anyway but the other still makes its deadline), which no
+fixed-priority greedy rule can do correctly in general.
 
+An earlier version of this reference capped the batch considered per
+decision to a small MAX_JOINT and picked which jobs entered that window by
+a fixed priority pre-filter. Under enough backlog that pre-filter can
+silently exclude a job an exact search would have served, making the
+"exact" matching perform worse than a full-consideration greedy on that
+job -- a real correctness bug, not a difficulty feature. The Hungarian
+formulation below has no such window: every currently pending job and
+every currently free technician is in the search every time.
+"""
 FATIGUE_THRESHOLD_MIN = 180
 FATIGUE_MULTIPLIER = 1.25
-MAX_JOINT = 12  # cap on jobs considered jointly per decision (keeps brute force fast);
-                # kept well above typical technician-pool size so a moderate-priority
-                # job stuck behind a temporary rush of more urgent ones doesn't fall
-                # out of consideration and starve
 BREACH_PENALTY = 200.0
+
+# Safety valve only (never expected to bind at realistic shift scales): caps
+# how many pending jobs enter the matching in one decision, by taking the
+# most urgent/soonest-due ones first, purely to bound worst-case runtime.
+_SAFETY_JOB_CAP = 120
 
 
 def _scarcity(skill, techs):
@@ -72,32 +81,96 @@ def _pairing_cost(job, tech, now, all_techs):
     return overtime * 1.5 + fatigue_waste + scarcity_penalty + avoided_breach_credit + cascade_risk
 
 
+def _hungarian_min_cost(cost):
+    """Classic O(n^3) Kuhn-Munkres on a square cost matrix (list of lists
+    of floats). Returns result[i] = column index assigned to row i."""
+    n = len(cost)
+    INF = float("inf")
+    u = [0.0] * (n + 1)
+    v = [0.0] * (n + 1)
+    p = [0] * (n + 1)
+    way = [0] * (n + 1)
+    for i in range(1, n + 1):
+        p[0] = i
+        j0 = 0
+        minv = [INF] * (n + 1)
+        used = [False] * (n + 1)
+        while True:
+            used[j0] = True
+            i0 = p[j0]
+            delta = INF
+            j1 = -1
+            for j in range(1, n + 1):
+                if not used[j]:
+                    cur = cost[i0 - 1][j - 1] - u[i0] - v[j]
+                    if cur < minv[j]:
+                        minv[j] = cur
+                        way[j] = j0
+                    if minv[j] < delta:
+                        delta = minv[j]
+                        j1 = j
+            for j in range(n + 1):
+                if used[j]:
+                    u[p[j]] += delta
+                    v[j] -= delta
+                else:
+                    minv[j] -= delta
+            j0 = j1
+            if p[j0] == 0:
+                break
+        while j0:
+            j1 = way[j0]
+            p[j0] = p[j1]
+            j0 = j1
+    result = [0] * n
+    for j in range(1, n + 1):
+        if p[j] != 0:
+            result[p[j] - 1] = j - 1
+    return result
+
+
 def _best_matching(jobs, techs, now, all_techs):
-    """Exact brute-force minimum-cost matching over which subset of jobs
-    (size m = min(len(jobs), len(techs))) to serve and which technician
-    serves each."""
-    n = len(jobs)
-    m = min(n, len(techs))
-    if m == 0:
+    """Exact minimum-cost matching (maximize jobs served, then minimize
+    real cost among ways of doing that) via the Hungarian algorithm on a
+    padded square matrix: real tech/job pairs carry a large negative bonus
+    when feasible (so serving a job is always preferred to leaving it, as
+    long as any feasible pairing exists), dummy rows/columns represent
+    "leave this technician idle" / "leave this job unserved" at cost 0, and
+    infeasible real pairs get a cost far larger than any bonus so they are
+    never chosen over a dummy option."""
+    R, C = len(techs), len(jobs)
+    if R == 0 or C == 0:
         return []
-    best = []
-    best_key = (0, 0.0)
-    for job_subset in itertools.combinations(jobs, m):
-        for tech_perm in itertools.permutations(techs, m):
-            assignment = []
-            total_cost = 0.0
-            feasible_count = 0
-            for j, t in zip(job_subset, tech_perm):
-                cost = _pairing_cost(j, t, now, all_techs)
-                if cost is not None:
-                    assignment.append((j, t))
-                    feasible_count += 1
-                    total_cost += cost
-            key = (feasible_count, -total_cost)
-            if key > best_key:
-                best_key = key
-                best = assignment
-    return best
+
+    BONUS = 1_000_000.0
+    BIG = 1_000_000_000.0
+    n = R + C  # pad to a square matrix with R dummy jobs and C dummy techs
+    cost = [[0.0] * n for _ in range(n)]
+    raw = {}
+    for i, t in enumerate(techs):
+        for j, jb in enumerate(jobs):
+            c = _pairing_cost(jb, t, now, all_techs)
+            if c is None:
+                cost[i][j] = BIG
+            else:
+                raw[(i, j)] = c
+                cost[i][j] = c - BONUS
+    # dummy jobs (columns C..C+R-1): tech i can "skip" via its own dummy column at cost 0
+    for i in range(R):
+        cost[i][C + i] = 0.0
+    # dummy techs (rows R..R+C-1): job j can go "unserved" via its own dummy row at cost 0
+    for j in range(C):
+        cost[R + j][j] = 0.0
+    # dummy-dummy block stays at the default 0.0 already set above
+
+    assign = _hungarian_min_cost(cost)  # assign[i] = column for row i
+
+    result = []
+    for i in range(R):
+        j = assign[i]
+        if j < C and (i, j) in raw:
+            result.append((jobs[j], techs[i]))
+    return result
 
 
 def decide(state):
@@ -106,19 +179,13 @@ def decide(state):
     if not all_jobs or not all_techs:
         return []
 
-    techs_ranked = all_techs[:MAX_JOINT]
-
-    # rank by urgency/deadline only to decide which jobs enter the joint
-    # search when the backlog exceeds MAX_JOINT -- the search itself (via
-    # avoided_breach_credit above) is free to prefer a lower-ranked job over
-    # a higher-ranked one once inside that window
     def job_priority(j):
         return (0 if j.priority == "urgent" else 1, j.deadline)
 
-    servable_now = [j for j in all_jobs if any(j.required_skill in t.skills for t in techs_ranked)]
-    jobs_to_serve = sorted(servable_now, key=job_priority)[:MAX_JOINT]
+    jobs_to_serve = sorted(all_jobs, key=job_priority)[:_SAFETY_JOB_CAP]
+    techs_batch = all_techs[:_SAFETY_JOB_CAP]
 
-    result = _best_matching(jobs_to_serve, techs_ranked, state.current_time, all_techs)
+    result = _best_matching(jobs_to_serve, techs_batch, state.current_time, all_techs)
 
     assignments = []
     used_techs = set()

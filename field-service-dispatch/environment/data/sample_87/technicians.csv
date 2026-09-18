@@ -1,6 +1,9 @@
 tech_id,skills,shift_end,max_overtime
-T1,A;C;general,420,90
-T2,C;general,420,90
-T3,B;general,420,90
-T4,C;general,420,90
-T5,B;C;general,420,90
+T1,general,480,69
+T2,C;general,480,119
+T3,A;general,480,92
+T4,general,480,85
+T5,A;B;general,480,113
+T6,C;general,480,113
+T7,B;general,480,106
+T8,B;general,480,117

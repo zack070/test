@@ -1,14 +1,30 @@
 {
-  "held_out_scenario": "held_out",
-  "pass_bar_cost": 1200.0,
-  "calibration": {
-    "naive_fifo_baseline_cost": 2545.0,
-    "obvious_earliest_deadline_first_no_awareness_cost": 1889.0,
-    "best_fixed_priority_greedy_cost": 1702.0,
-    "exact_matching_without_scarcity_awareness_cost": 1335.0,
-    "exact_matching_with_scarcity_awareness_cost": 1090.0,
-    "reference_policy_cost": 1090.0,
-    "margin_added": 110.0,
-    "note": "Held-out scenario batches several jobs and free technicians onto the pending list at once, with overlapping multi-skill eligibility (skills A/B/C plus a general skill every technician has). Twelve different fixed-priority greedy policies were tried as adversarial probes -- every combination of job-ordering rule (deadline, urgent-first, scarcity-of-required-skill-first) crossed with tech tie-break rule (first-eligible, least-fatigued, fewest-total-skills, most/least-remaining-capacity, feasibility-filtered best-fit) -- and every one lands at exactly 1702.0 or worse; a policy combining every one of those tie-break tricks in a single fixed-priority pass (mega_greedy) also lands at exactly 1702.0, confirming no fixed per-job priority ordering reaches lower no matter how many heuristics it stacks. A policy that recognizes the decision as a joint assignment problem and solves it exactly (brute-force search over which technician serves which job in the current batch) but without scarce-skill reasoning reaches 1335.0 -- meaningfully better than any greedy probe, but still well short. Only combining exact joint assignment WITH scarce-skill-reservation reasoning reaches the 1090.0 floor; two independently-built implementations of that combination (differing in cost-function details) both landed at exactly 1090.0, confirming it as a real, non-overfit floor rather than an artifact of one specific formula. The pass bar sits between the exact-matching-without-scarcity probe (1335.0) and this floor (1090.0)."
+  "scenarios": {
+    "held_out_1": {
+      "pass_bar_cost": 1350.0,
+      "calibration": {
+        "naive_fifo_baseline_cost": 2952.5,
+        "obvious_earliest_deadline_first_no_awareness_cost": 2252.5,
+        "best_fixed_priority_greedy_cost": 1419.5,
+        "exact_matching_without_scarcity_awareness_cost": 1349.0,
+        "exact_matching_with_scarcity_awareness_cost": 1272.5,
+        "reference_policy_cost": 1272.5,
+        "second_independent_reference_cost": 1531.0,
+        "note": "Thirteen fixed-priority probes (three job-ordering rules x four tie-breaks, plus one stacking every tie-break trick) were run against this scenario; the best of them reaches exactly 1419.5 and none goes lower, confirming no fixed per-job priority ordering does better regardless of how many heuristics it stacks. An exact joint-batch-matching search (Hungarian algorithm on real overtime/breach/fatigue cost, no scarce-skill term) reaches 1349.0. Adding scarce-skill reservation to that same search reaches 1272.5 (the shipped reference). A second, independently-implemented exact search (different algorithm -- min-cost flow via successive shortest augmenting paths -- and a differently-shaped scarcity term) reaches 1531.0 on this scenario: WORSE than the no-scarcity search, demonstrating that a scarcity bonus with a miscalibrated weight can actively hurt rather than help, and that this scenario's scarcity-specific margin is too narrow and formula-sensitive to gate pass/fail on safely. The pass bar (1350.0) is therefore set to require genuinely recognizing and solving the batch as a joint assignment problem under real cost accounting -- comfortably below every tested fixed-priority greedy (1419.5 or worse) and comfortably above the true reference floor (1272.5) -- without additionally requiring the fragile scarcity-optimal value."
+      }
+    },
+    "held_out_2": {
+      "pass_bar_cost": 750.0,
+      "calibration": {
+        "naive_fifo_baseline_cost": 1442.5,
+        "obvious_earliest_deadline_first_no_awareness_cost": 1242.5,
+        "best_fixed_priority_greedy_cost": 1013.5,
+        "exact_matching_without_scarcity_awareness_cost": 609.0,
+        "exact_matching_with_scarcity_awareness_cost": 609.0,
+        "reference_policy_cost": 609.0,
+        "second_independent_reference_cost": 609.0,
+        "note": "Thirteen fixed-priority probes land at 1013.5 or worse; none goes lower. On this severe single-skill-scarcity, small-technician-pool scenario, exact joint-batch matching alone (no scarcity term) already reaches the same 609.0 floor as the version with scarce-skill reservation, and a second, independently-implemented exact search (different algorithm and a differently-shaped scarcity term) also converges on exactly 609.0 -- a clean, stable floor. The pass bar (750.0) sits with a 141-point cushion above that floor and a 263.5-point margin below the best tested greedy (1013.5), comfortably requiring genuine joint-assignment reasoning while leaving real room for legitimate implementation variance."
+      }
+    }
   }
 }

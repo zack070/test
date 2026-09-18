@@ -11,6 +11,15 @@ Unlike a CSV-output-only task, this one genuinely executes candidate code
 (the submitted `decide()` policy), so the full untrusted-execution attack
 surface applies and was tested directly.
 
+Re-verified after the recalibration that replaced the single sealed
+`held_out` scenario with two structurally distinct ones (`held_out_1`,
+`held_out_2`, both must individually clear their own pass bar) and
+switched the reference matching algorithm from brute force to the
+Hungarian algorithm. All five exploits below still measure reward 0
+against the current two-scenario `tests/collect_agent_output.py` /
+`test_dispatch_grading.py`; the sealing and UID-sweep mechanics they
+target are unchanged by that recalibration.
+
 ## 1. Early exit (`early_exit/`)
 
 `policy.py` calls `os._exit(0)` at import time, betting the untrusted

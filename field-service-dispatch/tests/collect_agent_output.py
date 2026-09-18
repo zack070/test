@@ -3,15 +3,18 @@
 Stage 1 (UNTRUSTED). Runs as the unprivileged `runner` user, under a
 wall-clock timeout enforced by test.sh (`timeout` wraps this whole script).
 
-Imports the candidate's submitted policy module and runs it, via the real
-simulator, against the sealed held-out scenario. Records the RAW decision
-trace (list of (tech_id, job_id) pairs the candidate's decide() returned at
-each call) to /work/trace.json. Makes no pass/fail judgment and does not
-trust its own computed cost for grading purposes -- Stage 2 independently
-replays the trace through the trusted simulator from scratch. This script
-never reads anything under tests/sealed/reference (sealed 700/600 before
-this runs) and the scenario input data it does read is not the answer to
-anything -- only the trace it produces matters downstream.
+Imports the candidate's submitted policy module ONCE and runs it, via the
+real simulator, against EVERY sealed held-out scenario (there are two,
+with deliberately different structure -- technician-pool size, skill
+scarcity, arrival cadence -- so a policy tuned to only one shape can't
+coast on the other). Records the RAW decision trace (list of (tech_id,
+job_id) pairs the candidate's decide() returned at each call) per scenario
+to /work/trace.json. Makes no pass/fail judgment and does not trust its
+own computed cost for grading purposes -- Stage 2 independently replays
+each trace through the trusted simulator from scratch. This script never
+reads anything under tests/sealed/reference (sealed 700/600 before this
+runs) and the scenario input data it does read is not the answer to
+anything -- only the traces it produces matter downstream.
 """
 import importlib.util
 import json
@@ -22,7 +25,10 @@ sys.path.insert(0, os.path.dirname(__file__))
 import simulator as sim
 
 ARTIFACT_PATH = "/app/outputs/policy.py"
-SEALED_SCENARIO_DIR = "/tests/sealed/inputs/held_out"
+SEALED_SCENARIO_DIRS = {
+    "held_out_1": "/tests/sealed/inputs/held_out_1",
+    "held_out_2": "/tests/sealed/inputs/held_out_2",
+}
 OUT_PATH = "/work/trace.json"
 
 
@@ -53,7 +59,7 @@ def load_scenario(data_dir):
 
 
 def main():
-    out = {"status": "ok", "trace": None, "error": None}
+    out = {"status": "ok", "traces": {}, "error": None}
 
     if not os.path.exists(ARTIFACT_PATH):
         out["status"] = "missing"
@@ -76,13 +82,17 @@ def main():
         _write(out)
         return
 
-    try:
-        techs, jobs, shift_length = load_scenario(SEALED_SCENARIO_DIR)
-        result = sim.run_simulation(techs, jobs, shift_length, decide)
-        out["trace"] = result.decision_trace
-    except Exception as e:  # noqa: BLE001
-        out["status"] = "crashed"
-        out["error"] = str(e)
+    for name, data_dir in SEALED_SCENARIO_DIRS.items():
+        try:
+            techs, jobs, shift_length = load_scenario(data_dir)
+            result = sim.run_simulation(techs, jobs, shift_length, decide)
+            out["traces"][name] = result.decision_trace
+        except Exception as e:  # noqa: BLE001
+            out["status"] = "crashed"
+            out["error"] = f"{name}: {e}"
+            out["traces"][name] = None
+            # keep going -- still attempt the remaining scenario(s) so a
+            # crash specific to one doesn't hide a result for the other
 
     _write(out)
 
@@ -91,7 +101,7 @@ def _write(out):
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
     with open(OUT_PATH, "w") as f:
         json.dump(out, f)
-    print(f"collected -> {OUT_PATH}: status={out['status']}")
+    print(f"collected -> {OUT_PATH}: status={out['status']} scenarios={list(out['traces'].keys())}")
 
 
 if __name__ == "__main__":
