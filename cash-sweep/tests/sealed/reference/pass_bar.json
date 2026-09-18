@@ -1,0 +1,12 @@
+{
+  "scenarios": {
+    "held_out_1": {
+      "reference_cost": 175.55,
+      "pass_bar_cost": 210.66
+    },
+    "held_out_2": {
+      "reference_cost": 172.18,
+      "pass_bar_cost": 206.61
+    }
+  }
+}

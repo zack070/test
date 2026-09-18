@@ -1,0 +1,41 @@
+{
+  "currencies": [
+    "AUD",
+    "BRL",
+    "CAD",
+    "CHF",
+    "DKK",
+    "EUR",
+    "FIL2",
+    "FIL3",
+    "FIL4",
+    "FIL5",
+    "FIL6",
+    "FIL7",
+    "GBP",
+    "HKD",
+    "INR",
+    "JPY",
+    "MXN",
+    "NOK",
+    "NZD",
+    "PLN",
+    "SEK",
+    "SGD",
+    "THB",
+    "USD",
+    "ZAR"
+  ],
+  "starting_balances": {
+    "USD": 70000.0,
+    "HKD": 2000.0,
+    "PLN": 2000.0,
+    "GBP": 500.0,
+    "JPY": 500.0,
+    "MXN": 500.0,
+    "THB": 500.0,
+    "NZD": 1000.0,
+    "BRL": 1000.0
+  },
+  "horizon": 726
+}

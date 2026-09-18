@@ -1,0 +1,25 @@
+{
+  "currencies": [
+    "AUD",
+    "BRL",
+    "CAD",
+    "DKK",
+    "EUR",
+    "JPY",
+    "MXN",
+    "NOK",
+    "NZD",
+    "PLN",
+    "SEK",
+    "THB",
+    "USD"
+  ],
+  "starting_balances": {
+    "USD": 30000.0,
+    "PLN": 1000.0,
+    "NZD": 1000.0,
+    "SEK": 500.0,
+    "JPY": 500.0
+  },
+  "horizon": 391
+}
