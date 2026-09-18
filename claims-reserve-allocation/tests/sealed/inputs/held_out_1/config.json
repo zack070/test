@@ -1,0 +1,28 @@
+{
+  "claim_types": {
+    "AUTO": {
+      "mean_severity_usd": 15000.0,
+      "severity_cv": 0.4,
+      "litigation_prob": 0.1,
+      "escalation_factor": 1.5
+    },
+    "PROPERTY": {
+      "mean_severity_usd": 40000.0,
+      "severity_cv": 0.6,
+      "litigation_prob": 0.15,
+      "escalation_factor": 1.8
+    },
+    "LIABILITY": {
+      "mean_severity_usd": 90000.0,
+      "severity_cv": 0.9,
+      "litigation_prob": 0.25,
+      "escalation_factor": 2.2
+    }
+  },
+  "cluster_sigma": 0.9,
+  "interest_rate_annual": 0.06,
+  "deferral_years": 1.0,
+  "risk_alpha": 0.95,
+  "risk_lambda": 3.0,
+  "budget_usd": 1378214.58
+}

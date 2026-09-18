@@ -1,0 +1,42 @@
+artifacts = ["/app/outputs/policy.py"]
+
+[task]
+name = "afterquery/claims-reserve-allocation"
+
+[metadata]
+author_name = "Tonny Muthoka"
+author_email = "tonnysammy952@gmail.com"
+
+difficulty_explanation = """
+Claims/reserving analysts and actuaries who manage a live book of open claims spend real budget cycles deciding which claims to settle now (at a negotiated discount) versus defer, under a hard cash cap, knowing that deferred claims carry real, correlated risk -- claims from the same incident or claimant tend to move together, and a portfolio that looks fine on average can still carry unacceptable tail exposure if that correlated risk is concentrated rather than spread. This task reproduces that decision using a synthetic but fully disclosed generative model (severity distributions by claim type, a shared per-incident-cluster correlation factor, litigation escalation, interest accrual -- see MODEL_SPEC.md) and synthetic claim/portfolio data generated for this task, not real filings. The agent must submit a policy (code, run once per portfolio) choosing settle-now vs. defer per claim, minimizing E[total_cost] + risk_lambda * CVaR_95(total_cost) subject to a hard budget cap. Even with the full model disclosed, there is no closed-form or simple lookup answer: this is a combinatorial optimization (which claims to settle, a budget-constrained 0/1 choice) compounded by a nonlinear tail-risk term over correlated random variables, which only a real stochastic/combinatorial optimization technique (e.g. a scenario-based program with a CVaR linearization, or an equivalent search method) can solve well. This was measured directly, not assumed: an EXACT expected-value-optimal 0/1 knapsack solution (ignoring correlation and tail risk entirely -- a real, sophisticated-looking baseline, not a strawman) scores worse than a risk-aware scenario-based solution on both sealed held-out portfolios by a stable, real margin (3.7% and 3.79% respectively, roughly 15-20x the Monte Carlo estimation noise at the grading path count), and this gap held up across seven independently-generated calibration instances before the two sealed portfolios were finalized (gap range 3.1%-6.6%, never inverted). The pass bar sits at the midpoint between the two, so beating it requires genuinely accounting for correlated tail risk, not just optimizing expected cost well.
+"""
+
+solution_explanation = """
+The reference solution (solution/policy.py) is a scenario-based mixed-integer program: it Monte Carlo-samples the disclosed model to build a scenario matrix of each claim's deferred cost under 2,000 draws (respecting the shared per-cluster correlation factor), then solves a MILP (via scipy.optimize.milp / HiGHS) that jointly picks settle/defer decisions and a Rockafellar-Uryasev linearization of CVaR_95, minimizing the exact disclosed objective subject to the budget cap. This measurably outperforms the exact expected-value-optimal knapsack baseline (dev/solvers.py:ev_optimal, also built and measured as part of calibration) on both sealed portfolios, and the improvement is stable: measured across seven independently-generated calibration instances (not just the two sealed ones) before parameters were finalized, with the gap never inverting once the solver's own scenario count was large enough (300 scenarios was measurably too few and gave unstable, sometimes-negative gaps; 2,000 resolved this, which is itself part of what was checked, not assumed).
+"""
+
+verification_explanation = """
+The agent's deliverable is /app/outputs/policy.py -- executable code, run once per sealed held-out portfolio as a fresh subprocess under the unprivileged runner user with a firm per-portfolio timeout, the same one-shot-batch isolation pattern used on the companion withholding-tax bundle (no live decide()-per-event loop, so no incrementally-revealed state and no frame-introspection surface). What must stay hidden is the exact Monte Carlo draws used to compute the graded objective and the numeric pass bar itself; both live in tests/sealed/reference/, chown+chmod sealed to root before Stage 1 (untrusted) ever runs. The sealed INPUT portfolio data (claims.csv, config.json) is deliberately left readable, since the candidate's code legitimately needs it to compute anything -- the model itself is fully disclosed, on purpose; only the specific grading realization is secret. Stage 2 (trusted, root, executes no candidate code) independently re-simulates the submitted decision set against the sealed seed and checks the budget constraint mechanically before ever running a simulation. Ten adversarial submissions were tested against the real verifier (see cheat/README.md for each one's measured result): reward forgery, a sealed-reference read attempt, a crash, a malformed interface, an infinite loop, a budget-cap violation, settling nothing, a naive fixed-order greedy, the exact expected-value-optimal-but-risk-blind knapsack (the most important one -- this is a real, sophisticated-looking submission, not a strawman, and it still measurably fails both sealed bars), and a memorized-visible-answers lookup -- all measure reward 0; the reference solution measures reward 1 on both held-out portfolios.
+"""
+
+category = "Operations"
+subcategory = "Claims"
+tags = ["insurance", "claims", "actuarial", "optimization", "risk"]
+expert_time_estimate_hours = 7
+relevant_experience = """
+I work as an operations and business data analyst (2024-present), where I have directly reviewed business scenarios involving budget-constrained resource allocation, risk-adjusted decision-making, and reconciliation of outcomes against a stated policy under real operational constraints. This gives me a working sense of what a genuine claims/reserving operation actually has to weigh (settlement discounts, correlated exposure, tail risk versus expected cost) and what a realistic versus contrived version of that tradeoff looks like. I also evaluate AI-generated business outputs against predefined criteria and have supported AI training/evaluation projects involving business reasoning and quality assurance, which is directly relevant to judging whether this task's grading (a sealed Monte Carlo re-simulation of the agent's own submitted policy, with a pass bar calibrated against measured baseline performance) is a fair and meaningful test of the underlying skill rather than an arbitrary one. I am not an actuary or an operations-research specialist by training; the technical implementation (the generative model and its parameters, the scenario-based MILP reference solution, the calibration of the pass bar against measured baseline objectives across multiple independently-generated instances, and the two-stage sealed verifier) was built with AI assistance under my direction, with my own judgment applied to whether the model, the baselines, and the grading reflect a realistic claims-reserving tradeoff and a realistic test of solving it well.
+"""
+
+[verifier]
+timeout_sec = 500.0
+environment_mode = "separate"
+
+[agent]
+timeout_sec = 10800.0
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0

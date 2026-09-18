@@ -1,0 +1,18 @@
+{
+  "note": "Measured objective for two clearly-suboptimal example policies, for calibrating your own simulator against -- NOT the task's answer. There is no single correct decision set; you are scored on the objective your own policy achieves.",
+  "settle_nothing": {
+    "expected_cost": 783627.77,
+    "cvar": 2078026.84,
+    "objective": 7017708.29
+  },
+  "naive_ratio_greedy": {
+    "expected_cost": 571402.76,
+    "cvar": 1141587.19,
+    "objective": 3996164.35
+  },
+  "ev_optimal_knapsack": {
+    "expected_cost": 571402.76,
+    "cvar": 1141587.19,
+    "objective": 3996164.35
+  }
+}
