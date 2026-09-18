@@ -24,9 +24,23 @@ decide() returned at each call) per scenario to /work/trace.json. Makes
 no pass/fail judgment and does not trust its own computed cost for
 grading purposes -- Stage 2 independently replays each trace through the
 trusted simulator from scratch. This script never reads anything under
-tests/sealed/reference (sealed 700/600 before this runs) and the scenario
-input data it does read is not the answer to anything -- only the traces
-it produces matter downstream.
+tests/sealed/reference (sealed 700/600 before this runs).
+
+The raw scenario files under tests/sealed/inputs/ are NOT pre-sealed by
+test.sh, because this script (running as the unprivileged `runner` user)
+genuinely needs to read them once to drive the real simulator. But the
+candidate's own worker process runs under that exact same UID -- process
+isolation stops it from reading this process's live memory, but does
+nothing about the filesystem, so without further action the candidate
+could simply open() the same files directly and read every future
+arrival, a much simpler shortcut than the introspection attack process
+isolation was built to close. So every scenario is read and then
+immediately chmod 000'd (see _seal_scenario_dir) BEFORE any candidate
+code, including the very first worker process, is ever spawned -- by the
+time any candidate code runs, the data no longer exists on disk for
+`runner` (or anyone but root) to read, regardless of how it asks. Stage 2
+still reads these same files later, as root, which bypasses permission
+bits entirely.
 """
 import json
 import multiprocessing
@@ -74,6 +88,31 @@ def load_scenario(data_dir):
     with open(os.path.join(data_dir, "config.json")) as f:
         cfg = json.load(f)
     return techs, jobs, cfg["shift_length"]
+
+
+def _seal_scenario_dir(data_dir):
+    """Locks the raw scenario files (and the directory itself) to mode 000
+    the moment this (trusted, in-this-process) read of them is done and
+    BEFORE any candidate code -- including the isolated worker process --
+    has run at all. The candidate's own worker runs under this same
+    `runner` UID (that is what process isolation actually buys: no shared
+    MEMORY with the simulator, not a different UID), so a chmod on file
+    permissions alone can't tell "this script's read" apart from "the
+    candidate's read" by who is asking -- only by whether the data still
+    exists to be read at all by the time anyone else asks. chmod 000
+    blocks every non-root reader, including this very process and the
+    worker it is about to spawn, while leaving Stage 2 (root) unaffected,
+    since root bypasses permission bits entirely. The alternative
+    (deleting the files) was rejected: Stage 2 runs later in the same
+    container and needs to read this same data to recompute ground truth
+    for replay, so it must still exist on disk, just inaccessible to
+    anyone without root."""
+    try:
+        for entry in os.listdir(data_dir):
+            os.chmod(os.path.join(data_dir, entry), 0o000)
+        os.chmod(data_dir, 0o000)
+    except OSError:
+        pass
 
 
 def _state_to_payload(state):
@@ -165,9 +204,20 @@ def main():
         _write(out)
         return
 
+    # Load every scenario's raw data AND seal every scenario directory
+    # BEFORE spawning any candidate code at all -- including before the
+    # first worker process for even the first scenario. This way no
+    # candidate process, however it is scheduled, is ever running while
+    # any scenario's files are still readable by a non-root user.
+    loaded = {}
+    for name, data_dir in SEALED_SCENARIO_DIRS.items():
+        loaded[name] = load_scenario(data_dir)
+    for data_dir in SEALED_SCENARIO_DIRS.values():
+        _seal_scenario_dir(data_dir)
+
     ctx = multiprocessing.get_context("spawn")
 
-    for name, data_dir in SEALED_SCENARIO_DIRS.items():
+    for name in SEALED_SCENARIO_DIRS:
         proc = in_q = out_q = None
         try:
             proc, in_q, out_q = _spawn_worker(ctx)  # raises WorkerFailure => "malformed"
@@ -188,7 +238,7 @@ def main():
             return [tuple(pair) for pair in msg["assignments"]]
 
         try:
-            techs, jobs, shift_length = load_scenario(data_dir)
+            techs, jobs, shift_length = loaded[name]
             result = sim.run_simulation(techs, jobs, shift_length, proxy_decide)
             out["traces"][name] = result.decision_trace
         except Exception as e:  # noqa: BLE001 - a runtime failure once loaded is "crashed", not "malformed"

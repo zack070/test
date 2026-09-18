@@ -11,7 +11,7 @@ Unlike a CSV-output-only task, this one genuinely executes candidate code
 (the submitted `decide()` policy), so the full untrusted-execution attack
 surface applies and was tested directly.
 
-Re-verified three times after recalibration: once when the single sealed
+Re-verified four times after recalibration: once when the single sealed
 `held_out` scenario was replaced with two structurally distinct ones
 (`held_out_1`, `held_out_2`, both must individually clear their own pass
 bar) and the reference matching algorithm switched from brute force to
@@ -21,10 +21,12 @@ choice, and a technician could be committed to a job that could no longer
 meet its deadline) was found and fixed, the reference was given the same
 time-zero batching a capable policy needs, and both scenarios were
 rebuilt with a verified swap-tension mechanism so a joint solve has a
-real, measured advantage over every tested greedy; and again after the
+real, measured advantage over every tested greedy; again after the
 architecture change described in #6 below, which changed how Stage 1
-runs the candidate at all. Exploits #1-5 still measure reward 0 against
-the current `tests/collect_agent_output.py` / `test_dispatch_grading.py`;
+runs the candidate at all; and again after the fix described in #7 below,
+which changed who owns the raw scenario files on disk. Exploits #1-6
+still measure reward 0 against the current
+`tests/collect_agent_output.py` / `test_dispatch_grading.py` / `test.sh`;
 the sealing and UID-sweep mechanics they target are unchanged by any of
 that.
 
@@ -124,6 +126,57 @@ The accounting-tamper half of the attack was already defeated
 independently: Stage 2 never imports or trusts anything Stage 1
 computed, so a monkey-patched `BREACH_PENALTY` in the candidate's process
 has no effect on Stage 2's own fresh import of the real constants.
+
+## 7. Direct raw-scenario-file read (`sealed_input_read/`)
+
+`decide()` skips introspection entirely and just `open()`s
+`/tests/sealed/inputs/*/jobs.csv` and `technicians.csv` directly -- the
+same raw CSVs `collect_agent_output.py` itself reads to drive the
+simulator. This was found while designing a *different* task's verifier
+(reasoning through how a trusted orchestrator's own raw data files need
+to be secured surfaced that this bundle had the same gap): the fix for
+exploit #6 puts `decide()` in its own OS process so it can no longer walk
+the trusted simulator's live stack frames, but that worker process still
+runs under the same `runner` UID as `collect_agent_output.py` -- process
+isolation stops shared memory, not shared filesystem access. If the raw
+scenario files are still readable by `runner` once any candidate code
+runs, reading them straight off disk is strictly simpler than the
+introspection attack #6 needed, and hands over the entire future job list
+(including jobs that haven't "arrived" in the documented `SimState`),
+not just whatever happens to be reachable from a live stack frame.
+
+**First attempt at a fix measured a false pass.** `collect_agent_output.py`
+was changed to read each scenario once into memory and then `chmod 000`
+every file and directory for every scenario -- before spawning any worker
+process at all -- so by the time any candidate code runs, the data
+shouldn't exist on disk for anyone but root to read. Running this cheat
+against that first version still measured `READ_OK` on every file: `chmod`
+only succeeds for a file's owner (or root), and the raw scenario files
+under `/tests/sealed/inputs/` were root-owned (never `chown`'d anywhere),
+while `collect_agent_output.py` runs as `runner` -- so its own
+`os.chmod(path, 0o000)` call raised `PermissionError`, an `OSError`, which
+the seal helper's `except OSError: pass` swallowed silently. The seal
+never actually took effect; it just failed quietly every time.
+
+**Fix:** `test.sh` now `chown -R runner:runner /tests/sealed/inputs`
+before Stage 1 runs at all (mirroring how `/work` is already handed to
+`runner`), so `collect_agent_output.py`, now the genuine owner, can
+actually `chmod 000` what it just read. Stage 2 (root) is unaffected
+either way, since root bypasses permission bits regardless of ownership.
+
+**Measured result: reward 0**, and the read now genuinely fails:
+
+    {"path": "/tests/sealed/inputs/held_out_1/jobs.csv", "status": "blocked",
+     "error": "[Errno 13] Permission denied: '/tests/sealed/inputs/held_out_1/jobs.csv'"}
+
+confirmed via a side channel (`/tmp/sealed_input_read_debug.json`, added
+for this verification only) showing `leak_succeeded: false`. The
+directories are `d---------`, owned by `runner`, after the run. Because
+the read fails, `decide()` falls back to its plain legal greedy (the same
+pattern as #6's fallback), so the measured reward of 0 confirms the leak
+contributed nothing, rather than merely confirming an empty schedule
+fails: the fallback still produces a full, legal decision trace (measured
+2534.5 and 1555.0 against bars of 600.0 and 400.0).
 
 ## Why the "claim more than is true" family doesn't apply to exploits #1-5
 

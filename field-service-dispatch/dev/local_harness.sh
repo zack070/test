@@ -23,7 +23,25 @@ chmod 755 "$SCRATCH"
 chown -R runner:runner "$SCRATCH/app" "$SCRATCH/work"
 chmod -R o+rX "$SCRATCH/tests"
 
+# Some cheats hardcode absolute /tests/... paths (that's the real path any
+# real candidate would see too) -- when EXPLOIT_TEST_SYMLINK=1, point a
+# temporary /tests symlink at this scratch dir so such a cheat resolves its
+# paths faithfully instead of getting an inconclusive "No such file".
+SYMLINKED=0
+if [ "${EXPLOIT_TEST_SYMLINK:-0}" = "1" ]; then
+    if [ -e /tests ] || [ -L /tests ]; then
+        echo "EXPLOIT_TEST_SYMLINK=1 but /tests already exists -- refusing to touch it" >&2
+        exit 1
+    fi
+    ln -s "$SCRATCH/tests" /tests
+    SYMLINKED=1
+fi
+
 bash "$SCRATCH/tests/test.sh"
+
+if [ "$SYMLINKED" = "1" ]; then
+    rm -f /tests
+fi
 
 echo "---- reward ----"
 cat "$SCRATCH/logs/verifier/reward.txt"

@@ -21,6 +21,16 @@ find /tests/sealed/reference -type d -exec chmod 700 {} \;
 chown runner:runner "$WORK_DIR"
 chmod 700 "$WORK_DIR"
 
+# The raw scenario CSVs must be owned by `runner`, not root, before stage 1
+# starts. collect_agent_output.py runs as `runner` and, after its one
+# trusted read, chmod 000's each scenario file/dir so no code that runs
+# afterward under that same UID (including the candidate's own worker
+# process) can read the raw data directly. chmod only succeeds for the
+# file's owner (or root) -- left root-owned, that chmod 000 call would
+# fail with EPERM and silently do nothing, leaving the files readable for
+# the whole run. Ownership, not just permission bits, has to move first.
+chown -R runner:runner /tests/sealed/inputs
+
 write_reward() {
   echo -n "$1" > "$REWARD_FILE"
   chown root:root "$REWARD_FILE"
