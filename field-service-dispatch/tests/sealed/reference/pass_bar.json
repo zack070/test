@@ -1,0 +1,14 @@
+{
+  "held_out_scenario": "held_out",
+  "pass_bar_cost": 1200.0,
+  "calibration": {
+    "naive_fifo_baseline_cost": 2545.0,
+    "obvious_earliest_deadline_first_no_awareness_cost": 1889.0,
+    "best_fixed_priority_greedy_cost": 1702.0,
+    "exact_matching_without_scarcity_awareness_cost": 1335.0,
+    "exact_matching_with_scarcity_awareness_cost": 1090.0,
+    "reference_policy_cost": 1090.0,
+    "margin_added": 110.0,
+    "note": "Held-out scenario batches several jobs and free technicians onto the pending list at once, with overlapping multi-skill eligibility (skills A/B/C plus a general skill every technician has). Twelve different fixed-priority greedy policies were tried as adversarial probes -- every combination of job-ordering rule (deadline, urgent-first, scarcity-of-required-skill-first) crossed with tech tie-break rule (first-eligible, least-fatigued, fewest-total-skills, most/least-remaining-capacity, feasibility-filtered best-fit) -- and every one lands at exactly 1702.0 or worse; a policy combining every one of those tie-break tricks in a single fixed-priority pass (mega_greedy) also lands at exactly 1702.0, confirming no fixed per-job priority ordering reaches lower no matter how many heuristics it stacks. A policy that recognizes the decision as a joint assignment problem and solves it exactly (brute-force search over which technician serves which job in the current batch) but without scarce-skill reasoning reaches 1335.0 -- meaningfully better than any greedy probe, but still well short. Only combining exact joint assignment WITH scarce-skill-reservation reasoning reaches the 1090.0 floor; two independently-built implementations of that combination (differing in cost-function details) both landed at exactly 1090.0, confirming it as a real, non-overfit floor rather than an artifact of one specific formula. The pass bar sits between the exact-matching-without-scarcity probe (1335.0) and this floor (1090.0)."
+  }
+}
