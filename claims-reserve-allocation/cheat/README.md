@@ -94,31 +94,40 @@ is not a strawman -- it is mathematically optimal for expected cost alone,
 and would pass a task that only measured expected cost.
 
 **Measured result: reward 0 on both portfolios.** Held-out 1: objective
-26,297,599 against a pass bar of 25,798,709. Held-out 2: objective
-23,292,732 against a pass bar of 22,858,574. In both cases the shortfall
-(~1.9%-2.0%) is real and reproducible, not a rounding artifact -- this
-baseline concentrates deferred exposure inside the large correlated
+26,254,698 against a pass bar of 25,798,709 (expected_cost=4,554,257,
+cvar=7,233,481). Held-out 2: objective 23,296,704 against a pass bar of
+22,858,574 (expected_cost=4,094,213, cvar=6,400,830). In both cases the
+shortfall (~1.8%-1.9%) is real and reproducible, not a rounding artifact --
+this baseline concentrates deferred exposure inside the large correlated
 clusters (because doing so is expected-value-neutral or better) and pays
 for it in CVaR.
 
 ## 10. Memorized visible answers (`hardcoded_answers/`)
 
-Ships a lookup table of decisions computed on the visible `case/` dataset
-(built with `ev_optimal`), keyed by `claim_id`, falling back to
-settle-nothing for anything unrecognized.
+Embeds a lookup table of decisions computed on the visible `case/`
+dataset (built with `ev_optimal`), keyed by `claim_id`, falling back to
+settle-nothing for anything unrecognized -- embedded directly in
+`policy.py` rather than shipped as a side file, since only the one
+submitted file is ever graded (`cheat/hardcoded_answers/memorized.json`
+is kept alongside only for readability, and isn't read by the cheat
+itself).
 
 **Measured result: reward 0.** Held-out `claim_id`s happen to reuse the
 same `CLM####` numbering scheme as the visible case dataset (both restart
 at `CLM0001`), so this cheat's lookup table technically "hits" on every
-held-out id -- but the underlying facts (claim type, cluster membership,
-settlement offer, budget) differ, so the memorized decisions don't
-reflect the held-out portfolio's actual structure. Confirms held-out
-grading tests whether the policy's LOGIC generalizes, not whether the
-agent can pattern-match on identifiers.
+held-out id -- but the underlying facts differ, and concretely: the
+visible case dataset's budget is larger than either sealed portfolio's,
+so replaying the case-dataset decisions verbatim overspends the held-out
+budget (measured: $1,373,644.92 used against a $1,267,629.60 cap on
+held_out_2) and is rejected on the mechanical feasibility check before
+any simulation runs. Confirms held-out grading tests whether the
+policy's logic generalizes to the actual portfolio it's run against, not
+whether the agent can pattern-match on identifiers.
 
 ## Reference solution, for contrast
 
 `solution/policy.py` (the scenario-based, CVaR-aware MILP) measures
-reward 1 on both held-out portfolios: objective 25,299,819 (bar
-25,798,709) on held_out_1, and 22,424,416 (bar 22,858,574) on held_out_2 --
-comfortably under both bars, not just barely.
+reward 1 on both held-out portfolios: objective 25,200,854 (bar
+25,798,709, margin ~2.3%) on held_out_1, and 21,894,412 (bar 22,858,574,
+margin ~4.2%) on held_out_2 -- comfortably under both bars, not just
+barely.
