@@ -7,7 +7,7 @@ way -- the kind of mistakes a competent engineer plausibly makes, not
 absurd or arbitrary ones. Your job is to find and fix them so this
 pipeline's output is actually correct, not just structurally reasonable.
 
-Run it with: python3 -m pipeline.engine <data_dir> <output_path>
+Run it with: python3 engine.py <data_dir> <output_path>
 
 It reads entities.csv, ownership.csv, payments.csv, fx_rates.csv, and
 config.json from <data_dir> (see RULEBOOK.md for the exact formats) and
@@ -202,7 +202,7 @@ def run(data_dir: str) -> Dict:
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("usage: python3 -m pipeline.engine <data_dir> <output_path>", file=sys.stderr)
+        print("usage: python3 engine.py <data_dir> <output_path>", file=sys.stderr)
         sys.exit(1)
     report = run(sys.argv[1])
     with open(sys.argv[2], "w") as f:
