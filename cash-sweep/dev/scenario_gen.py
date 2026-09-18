@@ -144,6 +144,20 @@ def generate_scenario(seed: int, n_gadgets: int, n_filler: int, home_balance: fl
         credit_currency = HOME
         credits.append(CreditSpec("CR1", credit_currency, home_balance * 0.4, arrival_time=max(1, latest_due // 3)))
 
+    # Internal construction used "GADGET{i}_C/D" / "FILL{i}" IDs to keep
+    # the generator's own code readable, but shipping those literally
+    # would hand a policy a free signal for exactly the thing it's
+    # supposed to have to work out on its own: which obligations are
+    # part of a funding-tension pair and which aren't. A real obligation
+    # ID never encodes "this one requires joint reasoning" -- renumber
+    # to a neutral, arrival-ordered scheme before this scenario is ever
+    # written to disk, so nothing about the ID reveals scenario structure.
+    obligations = sorted(obligations, key=lambda o: (o.arrival_time, o.due_time, o.currency))
+    obligations = [
+        ObligationSpec(f"OBL{i+1:04d}", o.currency, o.amount, due_time=o.due_time, arrival_time=o.arrival_time)
+        for i, o in enumerate(obligations)
+    ]
+
     return Scenario(
         currencies=sorted(sc_currencies),
         spread_cheap=spread_cheap,
