@@ -44,10 +44,11 @@ to write instruction.md yourself. Facts only; no narrative framing implied.
   holding_period_days). This is the SAME dataset that gets graded --
   there is no separate hidden dataset, since the agent has to see what
   it's computing over.
-- `/app/data/worked_example/` -- six small, fully-explained payments
-  with the correct answer already computed and shown
-  (`expected_answer.json`, explained line-by-line in `README.md`), one
-  per rule behavior. Meant for the agent to validate its own
+- `/app/data/worked_example/` -- seven small, fully-explained payments
+  (six illustrating one rule behavior each, plus a second payment for
+  the threshold-breach case, which needs two) with the correct answer
+  already computed and shown (`expected_answer.json`, explained
+  line-by-line in `README.md`). Meant for the agent to validate its own
   understanding before tackling the real dataset. Not graded.
 
 ## Rules (already precisely defined in RULEBOOK.md -- the instruction
@@ -81,14 +82,17 @@ the fact that the rulebook already states them exactly)
   the same dataset the agent worked from, independently cross-checked
   with a second, separately-coded implementation (both agree exactly,
   to the cent, on all 109 payments).
-- Comparison is per-payment (both `final_withholding_usd` and
-  `true_up_usd`), not just the aggregate total -- a correct grand total
-  computed the wrong way (or reverse-engineered) will not pass; see
-  cheat/README.md's "correct total, wrong distribution" case.
-- Small absolute tolerance ($0.02 per line, $0.05 on the total) to
-  accommodate legitimate floating-point implementation differences, not
-  to forgive a wrong rule application -- every tested naive/wrong
-  strategy misses by orders of magnitude more than this tolerance.
+- Comparison is per-payment -- `initial_rate`, `final_rate`,
+  `initial_withholding_usd`, `final_withholding_usd`, and `true_up_usd`
+  are all checked individually -- not just the aggregate total; a
+  correct grand total computed the wrong way (or reverse-engineered)
+  will not pass; see cheat/README.md's "correct total, wrong
+  distribution" case.
+- Small absolute tolerance ($0.02 per line on dollar figures, 1e-6 on
+  rates, $0.05 on the total) to accommodate legitimate floating-point
+  implementation differences, not to forgive a wrong rule application --
+  every tested naive/wrong strategy misses by orders of magnitude more
+  than this tolerance.
 
 ## Constraints
 
@@ -100,6 +104,20 @@ the fact that the rulebook already states them exactly)
   (not the numbers themselves, which belong to a different, smaller
   dataset) and make sure the JSON is well-formed and covers every
   payment_id in `payments.csv`.
+
+## Required closing sentence (platform structural requirement, easy to miss)
+
+Per the authoring guide: instruction.md must end with a blank line, then
+**exactly** this sentence, verbatim, where N is the integer value of
+`[agent].timeout_sec` in task.toml, then at most one trailing newline:
+
+    You have N seconds to complete this task. Do not cheat by using online solutions or hints specific to this task.
+
+This task's `[agent].timeout_sec` is `10800.0`, so N = **10800**. This
+is a structural/pipeline check, not stylistic -- get the exact wording
+and number right. (The companion field-service-dispatch and cash-sweep
+bundles both end with this same sentence, verbatim except for N, which
+matched their own task.toml value each time.)
 
 ## Open items only you can fill in (task.toml)
 

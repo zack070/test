@@ -70,6 +70,29 @@ def test_every_payment_final_withholding_correct(submitted, ground_truth):
     assert not bad, f"{len(bad)} payment(s) wrong (showing up to 10): {bad[:10]}"
 
 
+RATE_TOLERANCE = 1e-6
+
+
+def test_every_payment_rates_and_initial_withholding_correct(submitted, ground_truth):
+    by_id = {ln["payment_id"]: ln for ln in submitted["payments"] if isinstance(ln, dict)}
+    bad = []
+    for exp in ground_truth["payments"]:
+        pid = exp["payment_id"]
+        got = by_id.get(pid, {})
+        for field, tol in (
+            ("initial_rate", RATE_TOLERANCE),
+            ("final_rate", RATE_TOLERANCE),
+            ("initial_withholding_usd", LINE_TOLERANCE_USD),
+        ):
+            got_val = got.get(field)
+            if got_val is None or not isinstance(got_val, (int, float)):
+                bad.append((pid, f"missing or non-numeric {field}"))
+                continue
+            if abs(got_val - exp[field]) > tol:
+                bad.append((pid, f"{field}: expected {exp[field]}, got {got_val}"))
+    assert not bad, f"{len(bad)} field(s) wrong (showing up to 10): {bad[:10]}"
+
+
 def test_every_payment_true_up_correct(submitted, ground_truth):
     by_id = {ln["payment_id"]: ln for ln in submitted["payments"] if isinstance(ln, dict)}
     bad = []
