@@ -1,30 +1,31 @@
 {
   "scenarios": {
     "held_out_1": {
-      "pass_bar_cost": 1350.0,
+      "pass_bar_cost": 600.0,
       "calibration": {
-        "naive_fifo_baseline_cost": 2952.5,
-        "obvious_earliest_deadline_first_no_awareness_cost": 2252.5,
-        "best_fixed_priority_greedy_cost": 1419.5,
-        "exact_matching_without_scarcity_awareness_cost": 1349.0,
-        "exact_matching_with_scarcity_awareness_cost": 1272.5,
-        "reference_policy_cost": 1272.5,
-        "second_independent_reference_cost": 1531.0,
-        "note": "Thirteen fixed-priority probes (three job-ordering rules x four tie-breaks, plus one stacking every tie-break trick) were run against this scenario; the best of them reaches exactly 1419.5 and none goes lower, confirming no fixed per-job priority ordering does better regardless of how many heuristics it stacks. An exact joint-batch-matching search (Hungarian algorithm on real overtime/breach/fatigue cost, no scarce-skill term) reaches 1349.0. Adding scarce-skill reservation to that same search reaches 1272.5 (the shipped reference). A second, independently-implemented exact search (different algorithm -- min-cost flow via successive shortest augmenting paths -- and a differently-shaped scarcity term) reaches 1531.0 on this scenario: WORSE than the no-scarcity search, demonstrating that a scarcity bonus with a miscalibrated weight can actively hurt rather than help, and that this scenario's scarcity-specific margin is too narrow and formula-sensitive to gate pass/fail on safely. The pass bar (1350.0) is therefore set to require genuinely recognizing and solving the batch as a joint assignment problem under real cost accounting -- comfortably below every tested fixed-priority greedy (1419.5 or worse) and comfortably above the true reference floor (1272.5) -- without additionally requiring the fragile scarcity-optimal value."
+        "naive_fifo_baseline_cost": 3234.5,
+        "obvious_earliest_deadline_first_no_awareness_cost": 2534.5,
+        "best_of_51_greedy_probes_cost": 782.0,
+        "exact_matching_without_scarcity_awareness_cost": 1544.5,
+        "exact_matching_with_scarcity_awareness_cost": 527.0,
+        "reference_policy_cost": 527.0,
+        "second_independent_reference_cost": 527.0,
+        "note": "51 probes were run: 13 fixed-priority families (earliest-deadline / urgent-first / least-slack / scarcest-skill-first, crossed with first-eligible / least-fatigued / fewest-total-skills / most-remaining-capacity tie-breaks, each with and without a feasibility filter, plus a kitchen-sink and a real-cost pair-picker), and 16 more that additionally defer at t=0 until the arrival batch stabilizes before applying the same fixed-priority logic -- specifically to check whether deferral alone (without genuinely solving the resulting batch jointly) is enough to match the reference. None of the 51 gets below 782.0; the deferral-aware ones do noticeably better than their non-deferring twins but still fall well short, confirming the gap is about solving the batch jointly, not merely about knowing to wait for it to arrive. The reference (exact minimum-cost bipartite matching via the Hungarian algorithm, batched at t=0 the same way) reaches 527.0, matched exactly by a second, independently-implemented exact solver (different algorithm -- min-cost flow via successive shortest augmenting paths -- and a differently-shaped scarcity term). The pass bar (600.0) sits with a 73-point cushion above the floor and a 182-point margin below the best of 51 tested greedy/heuristic probes."
       }
     },
     "held_out_2": {
-      "pass_bar_cost": 750.0,
+      "pass_bar_cost": 400.0,
       "calibration": {
-        "naive_fifo_baseline_cost": 1442.5,
-        "obvious_earliest_deadline_first_no_awareness_cost": 1242.5,
-        "best_fixed_priority_greedy_cost": 1013.5,
-        "exact_matching_without_scarcity_awareness_cost": 609.0,
-        "exact_matching_with_scarcity_awareness_cost": 609.0,
-        "reference_policy_cost": 609.0,
-        "second_independent_reference_cost": 609.0,
-        "note": "Thirteen fixed-priority probes land at 1013.5 or worse; none goes lower. On this severe single-skill-scarcity, small-technician-pool scenario, exact joint-batch matching alone (no scarcity term) already reaches the same 609.0 floor as the version with scarce-skill reservation, and a second, independently-implemented exact search (different algorithm and a differently-shaped scarcity term) also converges on exactly 609.0 -- a clean, stable floor. The pass bar (750.0) sits with a 141-point cushion above that floor and a 263.5-point margin below the best tested greedy (1013.5), comfortably requiring genuine joint-assignment reasoning while leaving real room for legitimate implementation variance."
+        "naive_fifo_baseline_cost": 1984.0,
+        "obvious_earliest_deadline_first_no_awareness_cost": 1784.0,
+        "best_of_51_greedy_probes_cost": 785.0,
+        "exact_matching_without_scarcity_awareness_cost": 1071.0,
+        "exact_matching_with_scarcity_awareness_cost": 267.5,
+        "reference_policy_cost": 267.5,
+        "second_independent_reference_cost": 267.5,
+        "note": "Same 51-probe sweep as held_out_1 (see that scenario's note for the full probe family description). None gets below 785.0 here either. The reference reaches 267.5, matched exactly by the second independent implementation. The pass bar (400.0) sits with a 132.5-point cushion above the floor and a 385-point margin below the best tested probe."
       }
     }
-  }
+  },
+  "mechanism_note": "Both floors depend on two things a fixed-priority or single-pairing-cost greedy cannot capture regardless of tie-break sophistication: (1) the simulator reveals same-timestamp job arrivals to decide() one event at a time (confirmed directly against environment/sim/simulator.py's event queue construction), so a policy that commits to each job the instant it individually becomes visible never actually sees the jobs that arrive moments later at the same timestamp -- it has to defer and let the pending batch materialize first; (2) even once deferred and batched, several technician/job pairs in each scenario are a genuine weighted-bipartite-matching 'swap' case (two technicians whose overtime headroom is split differently despite similar totals, two jobs of different duration) where the locally-cheapest single pairing is provably not part of the jointly optimal assignment -- confirmed directly: every one of the 51 tested probes, including one that greedily picks the single cheapest real-cost pairing at each step, lands on the same suboptimal combination on these pairs, while an exact joint solve does not. Verified with a targeted search (dev/find_swap_gadget.py) against the real cost formula before being embedded in the scenarios, not assumed."
 }

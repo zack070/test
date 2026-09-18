@@ -108,6 +108,44 @@ def generate_scenario(profile: ScenarioProfile):
     return tech_rows, job_rows, profile.shift_length
 
 
+def inject_swap_gadget(tech_rows, job_rows, gadget_id, shift_length, params, next_job_num, next_tech_num):
+    """Appends one guaranteed 'swap' pair: two technicians whose shift_end
+    is split very differently even though their total overtime headroom is
+    similar, plus a short and a long job, all sharing one skill that only
+    these two technicians have (so nothing else in the scenario can dilute
+    or interfere with it). The pairing that minimizes cost is genuinely a
+    SWAP (long job to the late-shift_end technician, short job to the
+    early-shift_end one) -- reacting to whichever job happens to arrive
+    first and greedily picking its pairwise-cheapest technician commits
+    the wrong one, because that technician looks locally fine for the
+    first job while quietly being the only one who can absorb the second
+    job's overtime cheaply. `params` supplies verified (se_a, mo_a, se_b,
+    mo_b, d1, d2, urgent1, urgent2) that make this failure large and
+    unambiguous (not a near-tie), found by direct search against the real
+    cost formula -- see dev/find_swap_gadget.py.
+    """
+    skill = f"gadget{gadget_id}"
+    tA, tB = f"G{next_tech_num}A", f"G{next_tech_num}B"
+    tech_rows.append({
+        "tech_id": tA, "skills": skill, "shift_end": params["se_a"], "max_overtime": params["mo_a"],
+    })
+    tech_rows.append({
+        "tech_id": tB, "skills": skill, "shift_end": params["se_b"], "max_overtime": params["mo_b"],
+    })
+    safe_deadline = shift_length + params["mo_a"] + params["mo_b"] + max(params["d1"], params["d2"])
+    j1, j2 = f"G{next_job_num}a", f"G{next_job_num}b"
+    job_rows.append({
+        "job_id": j1, "required_skill": skill, "base_duration": params["d1"],
+        "priority": "urgent" if params["urgent1"] else "standard",
+        "deadline": safe_deadline, "arrival_time": 0,
+    })
+    job_rows.append({
+        "job_id": j2, "required_skill": skill, "base_duration": params["d2"],
+        "priority": "urgent" if params["urgent2"] else "standard",
+        "deadline": safe_deadline, "arrival_time": 0,
+    })
+
+
 def write_scenario(out_dir: str, tech_rows, job_rows, shift_length: int):
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "technicians.csv"), "w", newline="") as f:

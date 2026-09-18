@@ -9,9 +9,39 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
-from scenario_gen import ScenarioProfile, SkillSpec, WaveSpec, generate_scenario, write_scenario
+from scenario_gen import ScenarioProfile, SkillSpec, WaveSpec, generate_scenario, write_scenario, inject_swap_gadget
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Verified swap-gadget parameter sets (dev/find_swap_gadget.py), each a
+# distinct instance where committing to whichever job arrives first, by
+# picking its pairwise-cheapest technician, locks in the wrong technician
+# for the other job at a large, unambiguous real cost gap (250+ points)
+# versus the true joint-optimal pairing -- the classic reason greedy
+# provably fails weighted bipartite matching, realized here using this
+# simulator's own disclosed overtime/breach-avoidance mechanics rather
+# than an artificial rule. See scenario_gen.inject_swap_gadget for why
+# each field is shaped the way it is.
+GADGETS = [
+    dict(se_a=400, mo_a=47, se_b=60, mo_b=190, d1=73, d2=250, urgent1=True, urgent2=True),
+    dict(se_a=274, mo_a=20, se_b=73, mo_b=199, d1=81, d2=249, urgent1=True, urgent2=False),
+    dict(se_a=69, mo_a=197, se_b=266, mo_b=98, d1=76, d2=250, urgent1=True, urgent2=False),
+    dict(se_a=252, mo_a=20, se_b=63, mo_b=194, d1=73, d2=244, urgent1=False, urgent2=False),
+    dict(se_a=363, mo_a=12, se_b=61, mo_b=191, d1=68, d2=238, urgent1=False, urgent2=False),
+    dict(se_a=61, mo_a=191, se_b=359, mo_b=37, d1=72, d2=247, urgent1=True, urgent2=True),
+    dict(se_a=329, mo_a=111, se_b=66, mo_b=199, d1=75, d2=243, urgent1=False, urgent2=False),
+    dict(se_a=307, mo_a=78, se_b=63, mo_b=194, d1=70, d2=247, urgent1=True, urgent2=True),
+]
+
+# which gadgets (by index into GADGETS) go into which scenario -- distinct
+# subsets per scenario so no two scenarios share identical gadget instances
+GADGET_ASSIGNMENT = {
+    "environment/data/sample_45": [0],
+    "environment/data/sample_87": [1],
+    "environment/data/sample_150": [2, 3],
+    "tests/sealed/inputs/held_out_1": [4, 5],
+    "tests/sealed/inputs/held_out_2": [6, 7],
+}
 
 PROFILES = {
     # -------- visible development samples --------
@@ -90,9 +120,17 @@ PROFILES = {
 def main():
     for rel_path, profile in PROFILES.items():
         tech_rows, job_rows, shift_length = generate_scenario(profile)
+
+        for gadget_num, gadget_idx in enumerate(GADGET_ASSIGNMENT.get(rel_path, [])):
+            inject_swap_gadget(
+                tech_rows, job_rows, gadget_id=gadget_idx, shift_length=shift_length,
+                params=GADGETS[gadget_idx], next_job_num=1000 + gadget_idx, next_tech_num=100 + gadget_idx,
+            )
+
         out_dir = os.path.join(ROOT, rel_path)
         write_scenario(out_dir, tech_rows, job_rows, shift_length)
-        print(f"wrote {rel_path}: {len(tech_rows)} techs, {len(job_rows)} jobs, shift_length={shift_length}")
+        n_gadgets = len(GADGET_ASSIGNMENT.get(rel_path, []))
+        print(f"wrote {rel_path}: {len(tech_rows)} techs, {len(job_rows)} jobs, shift_length={shift_length}, {n_gadgets} swap gadget(s)")
 
 
 if __name__ == "__main__":

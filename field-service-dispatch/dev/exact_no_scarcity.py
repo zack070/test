@@ -29,15 +29,14 @@ def _pairing_cost(job, tech, now):
     shift_limit = tech.shift_end + tech.max_overtime
     if finish > shift_limit:
         return None
+    if finish > job.deadline:
+        # doesn't actually save the job -- infeasible, not neutral (see
+        # solution/policy.py for the full reasoning)
+        return None
     overtime = max(0, finish - max(now, tech.shift_end))
     fatigue_waste = dur - job.duration
-    if finish > job.deadline:
-        avoided_breach_credit = 0.0
-        cascade_risk = 50.0 if job.priority == "urgent" else 0.0
-    else:
-        avoided_breach_credit = -(BREACH_PENALTY * 0.9) - (30.0 if job.priority == "urgent" else 0.0)
-        cascade_risk = 0.0
-    return overtime * 1.5 + fatigue_waste + avoided_breach_credit + cascade_risk
+    avoided_breach_credit = -(BREACH_PENALTY * 0.9) - (30.0 if job.priority == "urgent" else 0.0)
+    return overtime * 1.5 + fatigue_waste + avoided_breach_credit
 
 
 def _best_matching(jobs, techs, now):

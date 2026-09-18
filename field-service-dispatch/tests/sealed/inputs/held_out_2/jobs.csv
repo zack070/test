@@ -25,3 +25,7 @@ J23,general,44,urgent,459,380
 J24,A,46,urgent,457,380
 J25,general,37,standard,467,380
 J26,general,59,urgent,481,380
+G1006a,gadget6,75,standard,973,0
+G1006b,gadget6,243,standard,973,0
+G1007a,gadget7,70,urgent,939,0
+G1007b,gadget7,247,urgent,939,0

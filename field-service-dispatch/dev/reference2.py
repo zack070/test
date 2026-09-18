@@ -36,27 +36,36 @@ def _pairing_cost(job, tech, now, all_techs):
     if finish > limit:
         return None
 
+    if finish > job.deadline:
+        # doesn't actually save the job from breaching -- the breach fires
+        # at the same wall-clock moment regardless of assignment, so this
+        # pairing buys nothing and only removes the technician from the
+        # pool for work that IS savable. Infeasible, not neutral.
+        return None
+
     overtime = max(0, finish - max(now, tech.shift_end))
     fatigue_waste = dur - job.duration
 
+    # Bounded/saturating scarcity bonus (differs deliberately from the
+    # primary reference's unbounded linear form, for genuine cross-check
+    # diversity): the bonus for spending this technician grows toward a
+    # cap as their rarest OTHER skill's supply gets more abundant, and
+    # shrinks toward (not below) zero as that supply gets scarce -- a
+    # technician with a genuinely scarce other skill is the LEAST
+    # attractive choice for work anyone else could do, never a bonus
+    # pick, and a technician with no other skill at all has nothing to
+    # waste, so it gets the full cap, same as maximal abundance would.
     other_skills = tech.skills - {job.required_skill}
+    CAP = BREACH_PENALTY * 0.12
     if other_skills:
         rarest = min(_scarcity_count(s, all_techs) for s in other_skills)
+        scarcity_penalty = -CAP * (1.0 - 1.0 / (rarest + 1))
     else:
-        rarest = 10 ** 6
-    # Inverse-shaped scarcity penalty (differs deliberately from the primary
-    # reference's linear form): grows sharply as the rarest other skill's
-    # supply count shrinks toward 1, and is negligible once supply is ample.
-    scarcity_penalty = -(BREACH_PENALTY * 0.06) / max(1, rarest)
+        scarcity_penalty = -CAP
 
-    if finish > job.deadline:
-        avoided_breach_credit = 0.0
-        cascade_risk = 45.0 if job.priority == "urgent" else 0.0
-    else:
-        avoided_breach_credit = -(BREACH_PENALTY * 0.92) - (28.0 if job.priority == "urgent" else 0.0)
-        cascade_risk = 0.0
+    avoided_breach_credit = -(BREACH_PENALTY * 0.92) - (28.0 if job.priority == "urgent" else 0.0)
 
-    return overtime * 1.5 + fatigue_waste + scarcity_penalty + avoided_breach_credit + cascade_risk
+    return overtime * 1.5 + fatigue_waste + scarcity_penalty + avoided_breach_credit
 
 
 class _MCMF:
@@ -150,11 +159,20 @@ def _best_assignment(jobs, techs, now, all_techs):
     return result
 
 
+_t0_state = {"last_pending_count": -1, "settled": False}
+
+
 def decide(state):
     all_jobs = list(state.pending_jobs)
     all_techs = list(state.free_technicians)
     if not all_jobs or not all_techs:
         return []
+
+    if state.current_time == 0 and not _t0_state["settled"]:
+        if len(all_jobs) > _t0_state["last_pending_count"]:
+            _t0_state["last_pending_count"] = len(all_jobs)
+            return []
+        _t0_state["settled"] = True
 
     def job_priority(j):
         return (0 if j.priority == "urgent" else 1, j.deadline)

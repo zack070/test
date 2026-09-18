@@ -46,7 +46,16 @@ def _pairing_cost(job, tech, now, all_techs):
     finish = now + dur
     shift_limit = tech.shift_end + tech.max_overtime
     if finish > shift_limit:
-        return None  # infeasible
+        return None  # infeasible: can't even finish within the overtime cap
+    if finish > job.deadline:
+        # this pairing would not actually save the job from breaching --
+        # the breach fires at the same wall-clock moment whether or not
+        # anyone is assigned, so tying up a technician here buys nothing
+        # and only removes them from the pool for work that IS savable.
+        # Never a legitimate choice, so it's infeasible, not merely
+        # "neutral" -- a neutral cost could still be chosen over leaving
+        # the technician free if some other term made it look cheap.
+        return None
 
     overtime = max(0, finish - max(now, tech.shift_end))
     fatigue_waste = dur - job.duration
@@ -56,29 +65,30 @@ def _pairing_cost(job, tech, now, all_techs):
     # not wasteful, so it must never be penalized like spending them on
     # generic work would be
     other_skills = tech.skills - {job.required_skill}
-    other_skills_scarcity = min((_scarcity(s, all_techs) for s in other_skills), default=99)
-    # reward spending a technician whose OTHER skills are abundant (safe to
-    # use); lower scarcity count means MORE scarce, so the penalty for
-    # spending them must fall as the count rises
+    if other_skills:
+        # lower scarcity count means MORE scarce
+        other_skills_scarcity = min(_scarcity(s, all_techs) for s in other_skills)
+    else:
+        # nothing else to protect: this technician has no other skill this
+        # assignment could waste, which is the SAFEST possible case, not a
+        # neutral one -- treat it as at least as safe as the most abundant
+        # skill any technician could have (every technician "has" it)
+        other_skills_scarcity = len(all_techs)
+    # reward spending a technician whose other skills are abundant (safe
+    # to use) or nonexistent (nothing to waste); the reward must shrink as
+    # the count falls toward genuine scarcity, so a true specialist is the
+    # LEAST attractive choice for work anyone could do, not a bonus pick
     scarcity_penalty = -other_skills_scarcity * 5.0
 
-    if finish > job.deadline:
-        # this pairing does not actually save the job from breaching, so it
-        # earns none of the avoided-breach credit below, and an urgent miss
-        # additionally risks spawning a cascade follow-up
-        avoided_breach_credit = 0.0
-        cascade_risk = 50.0 if job.priority == "urgent" else 0.0
-    else:
-        # completing the job now genuinely avoids its breach; credit close
-        # to the real BREACH_PENALTY so the search prefers serving whichever
-        # job is actually savable when it can't serve every pending job.
-        # among jobs that are all savable, still give urgent ones a modest
-        # edge (much smaller than the breach-avoidance gap) since an urgent
-        # miss is more costly than a standard one
-        avoided_breach_credit = -(BREACH_PENALTY * 0.9) - (30.0 if job.priority == "urgent" else 0.0)
-        cascade_risk = 0.0
+    # completing the job now genuinely avoids its breach; credit close to
+    # the real BREACH_PENALTY so the search prefers serving whichever job
+    # is actually savable when it can't serve every pending job. among
+    # jobs that are all savable, still give urgent ones a modest edge
+    # (much smaller than the breach-avoidance gap) since an urgent miss is
+    # more costly than a standard one
+    avoided_breach_credit = -(BREACH_PENALTY * 0.9) - (30.0 if job.priority == "urgent" else 0.0)
 
-    return overtime * 1.5 + fatigue_waste + scarcity_penalty + avoided_breach_credit + cascade_risk
+    return overtime * 1.5 + fatigue_waste + scarcity_penalty + avoided_breach_credit
 
 
 def _hungarian_min_cost(cost):
@@ -173,11 +183,32 @@ def _best_matching(jobs, techs, now, all_techs):
     return result
 
 
+# Tracks whether the t=0 arrival batch has finished materializing. Every
+# job with arrival_time=0 fires as its own "arrival" event, strictly
+# before the simulator's guaranteed "start" event (arrivals are pushed to
+# the event queue first, "start" last, and the heap breaks same-timestamp
+# ties by push order) -- so as long as nothing is assigned yet, the
+# pending count at t=0 strictly grows with each arrival and then holds
+# steady exactly once on the "start" call. Reacting only once it holds
+# steady means every t=0 job gets jointly matched together instead of
+# being committed one at a time as it happens to arrive, which is the
+# only way the joint search's batch reasoning ever has more than one job
+# to actually reason across (job arrivals are always revealed one at a
+# time, even when several share a timestamp).
+_t0_state = {"last_pending_count": -1, "settled": False}
+
+
 def decide(state):
     all_jobs = list(state.pending_jobs)
     all_techs = list(state.free_technicians)
     if not all_jobs or not all_techs:
         return []
+
+    if state.current_time == 0 and not _t0_state["settled"]:
+        if len(all_jobs) > _t0_state["last_pending_count"]:
+            _t0_state["last_pending_count"] = len(all_jobs)
+            return []  # more t=0 arrivals may still be coming; wait
+        _t0_state["settled"] = True  # pending count held steady: batch is complete
 
     def job_priority(j):
         return (0 if j.priority == "urgent" else 1, j.deadline)

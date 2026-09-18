@@ -11,14 +11,20 @@ Unlike a CSV-output-only task, this one genuinely executes candidate code
 (the submitted `decide()` policy), so the full untrusted-execution attack
 surface applies and was tested directly.
 
-Re-verified after the recalibration that replaced the single sealed
-`held_out` scenario with two structurally distinct ones (`held_out_1`,
-`held_out_2`, both must individually clear their own pass bar) and
-switched the reference matching algorithm from brute force to the
-Hungarian algorithm. All five exploits below still measure reward 0
-against the current two-scenario `tests/collect_agent_output.py` /
-`test_dispatch_grading.py`; the sealing and UID-sweep mechanics they
-target are unchanged by that recalibration.
+Re-verified twice after recalibration: once when the single sealed
+`held_out` scenario was replaced with two structurally distinct ones
+(`held_out_1`, `held_out_2`, both must individually clear their own pass
+bar) and the reference matching algorithm switched from brute force to
+the Hungarian algorithm; again after a real cost-model bug (a scarcity
+sentinel scored a pure generalist as merely neutral instead of the safest
+choice, and a technician could be committed to a job that could no longer
+meet its deadline) was found and fixed, the reference was given the same
+time-zero batching a capable policy needs, and both scenarios were
+rebuilt with a verified swap-tension mechanism so a joint solve has a
+real, measured advantage over every tested greedy. All five exploits
+below still measure reward 0 against the current
+`tests/collect_agent_output.py` / `test_dispatch_grading.py`; the sealing
+and UID-sweep mechanics they target are unchanged by any of that.
 
 ## 1. Early exit (`early_exit/`)
 
