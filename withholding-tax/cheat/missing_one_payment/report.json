@@ -1,0 +1,977 @@
+{
+  "payments": [
+    {
+      "payment_id": "PAY0001",
+      "payee": "ENT0001",
+      "initial_rate": 0.05,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 18679.39,
+      "final_withholding_usd": 112076.31,
+      "true_up_usd": 93396.93
+    },
+    {
+      "payment_id": "PAY0002",
+      "payee": "ENT0001",
+      "initial_rate": 0.05,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 17947.71,
+      "final_withholding_usd": 107686.25,
+      "true_up_usd": 89738.54
+    },
+    {
+      "payment_id": "PAY0003",
+      "payee": "ENT0001",
+      "initial_rate": 0.05,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 18973.51,
+      "final_withholding_usd": 113841.08,
+      "true_up_usd": 94867.57
+    },
+    {
+      "payment_id": "PAY0004",
+      "payee": "ENT0002",
+      "initial_rate": 0.05,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 13352.96,
+      "final_withholding_usd": 80117.75,
+      "true_up_usd": 66764.79
+    },
+    {
+      "payment_id": "PAY0005",
+      "payee": "ENT0002",
+      "initial_rate": 0.05,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 12092.74,
+      "final_withholding_usd": 72556.46,
+      "true_up_usd": 60463.72
+    },
+    {
+      "payment_id": "PAY0006",
+      "payee": "ENT0002",
+      "initial_rate": 0.05,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 13351.47,
+      "final_withholding_usd": 80108.83,
+      "true_up_usd": 66757.36
+    },
+    {
+      "payment_id": "PAY0007",
+      "payee": "ENT0003",
+      "initial_rate": 0.08,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 21050.45,
+      "final_withholding_usd": 78939.18,
+      "true_up_usd": 57888.73
+    },
+    {
+      "payment_id": "PAY0008",
+      "payee": "ENT0003",
+      "initial_rate": 0.08,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 21065.33,
+      "final_withholding_usd": 78994.99,
+      "true_up_usd": 57929.66
+    },
+    {
+      "payment_id": "PAY0009",
+      "payee": "ENT0003",
+      "initial_rate": 0.08,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 21883.88,
+      "final_withholding_usd": 82064.56,
+      "true_up_usd": 60180.68
+    },
+    {
+      "payment_id": "PAY0010",
+      "payee": "ENT0004",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 30464.36,
+      "final_withholding_usd": 91393.08,
+      "true_up_usd": 60928.72
+    },
+    {
+      "payment_id": "PAY0011",
+      "payee": "ENT0004",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 32156.36,
+      "final_withholding_usd": 96469.08,
+      "true_up_usd": 64312.72
+    },
+    {
+      "payment_id": "PAY0012",
+      "payee": "ENT0004",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 30026.24,
+      "final_withholding_usd": 90078.73,
+      "true_up_usd": 60052.49
+    },
+    {
+      "payment_id": "PAY0013",
+      "payee": "ENT0005",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 33334.83,
+      "final_withholding_usd": 100004.5,
+      "true_up_usd": 66669.67
+    },
+    {
+      "payment_id": "PAY0014",
+      "payee": "ENT0005",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 32392.56,
+      "final_withholding_usd": 97177.67,
+      "true_up_usd": 64785.11
+    },
+    {
+      "payment_id": "PAY0015",
+      "payee": "ENT0005",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 35827.66,
+      "final_withholding_usd": 107482.98,
+      "true_up_usd": 71655.32
+    },
+    {
+      "payment_id": "PAY0016",
+      "payee": "ENT0006",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 30460.16,
+      "final_withholding_usd": 91380.48,
+      "true_up_usd": 60920.32
+    },
+    {
+      "payment_id": "PAY0017",
+      "payee": "ENT0006",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 32151.93,
+      "final_withholding_usd": 96455.78,
+      "true_up_usd": 64303.85
+    },
+    {
+      "payment_id": "PAY0018",
+      "payee": "ENT0006",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 33653.65,
+      "final_withholding_usd": 100960.96,
+      "true_up_usd": 67307.31
+    },
+    {
+      "payment_id": "PAY0019",
+      "payee": "ENT0007",
+      "initial_rate": 0.12,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 44367.61,
+      "final_withholding_usd": 110919.03,
+      "true_up_usd": 66551.42
+    },
+    {
+      "payment_id": "PAY0020",
+      "payee": "ENT0007",
+      "initial_rate": 0.12,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 42978.27,
+      "final_withholding_usd": 107445.69,
+      "true_up_usd": 64467.41
+    },
+    {
+      "payment_id": "PAY0021",
+      "payee": "ENT0007",
+      "initial_rate": 0.12,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 46402.01,
+      "final_withholding_usd": 116005.03,
+      "true_up_usd": 69603.02
+    },
+    {
+      "payment_id": "PAY0022",
+      "payee": "ENT0008",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 36969.31,
+      "final_withholding_usd": 110907.94,
+      "true_up_usd": 73938.63
+    },
+    {
+      "payment_id": "PAY0023",
+      "payee": "ENT0008",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 35514.62,
+      "final_withholding_usd": 106543.85,
+      "true_up_usd": 71029.23
+    },
+    {
+      "payment_id": "PAY0024",
+      "payee": "ENT0008",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 38664.48,
+      "final_withholding_usd": 115993.43,
+      "true_up_usd": 77328.95
+    },
+    {
+      "payment_id": "PAY0025",
+      "payee": "ENT0009",
+      "initial_rate": 0.05,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 15696.29,
+      "final_withholding_usd": 94177.74,
+      "true_up_usd": 78481.45
+    },
+    {
+      "payment_id": "PAY0026",
+      "payee": "ENT0009",
+      "initial_rate": 0.05,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 16828.26,
+      "final_withholding_usd": 100969.56,
+      "true_up_usd": 84141.3
+    },
+    {
+      "payment_id": "PAY0027",
+      "payee": "ENT0009",
+      "initial_rate": 0.05,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 15012.33,
+      "final_withholding_usd": 90073.99,
+      "true_up_usd": 75061.66
+    },
+    {
+      "payment_id": "PAY0028",
+      "payee": "ENT0010",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 26310.56,
+      "final_withholding_usd": 78931.67,
+      "true_up_usd": 52621.12
+    },
+    {
+      "payment_id": "PAY0029",
+      "payee": "ENT0010",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 27200.65,
+      "final_withholding_usd": 81601.95,
+      "true_up_usd": 54401.3
+    },
+    {
+      "payment_id": "PAY0030",
+      "payee": "ENT0010",
+      "initial_rate": 0.1,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 25552.85,
+      "final_withholding_usd": 76658.54,
+      "true_up_usd": 51105.7
+    },
+    {
+      "payment_id": "PAY0031",
+      "payee": "ENT0011",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 35385.03,
+      "final_withholding_usd": 35385.03,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0032",
+      "payee": "ENT0011",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 5812.69,
+      "final_withholding_usd": 5812.69,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0033",
+      "payee": "ENT0014",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 30605.47,
+      "final_withholding_usd": 30605.47,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0034",
+      "payee": "ENT0014",
+      "initial_rate": 0.08,
+      "final_rate": 0.08,
+      "initial_withholding_usd": 8127.01,
+      "final_withholding_usd": 8127.01,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0035",
+      "payee": "ENT0017",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 27665.43,
+      "final_withholding_usd": 27665.43,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0036",
+      "payee": "ENT0017",
+      "initial_rate": 0.12,
+      "final_rate": 0.12,
+      "initial_withholding_usd": 10556.52,
+      "final_withholding_usd": 10556.52,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0037",
+      "payee": "ENT0020",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 38260.6,
+      "final_withholding_usd": 38260.6,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0038",
+      "payee": "ENT0020",
+      "initial_rate": 0.12,
+      "final_rate": 0.12,
+      "initial_withholding_usd": 15413.39,
+      "final_withholding_usd": 15413.39,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0039",
+      "payee": "ENT0023",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 20401.98,
+      "final_withholding_usd": 20401.98,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0040",
+      "payee": "ENT0023",
+      "initial_rate": 0.08,
+      "final_rate": 0.08,
+      "initial_withholding_usd": 5792.43,
+      "final_withholding_usd": 5792.43,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0041",
+      "payee": "ENT0026",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 35394.19,
+      "final_withholding_usd": 35394.19,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0042",
+      "payee": "ENT0026",
+      "initial_rate": 0.08,
+      "final_rate": 0.08,
+      "initial_withholding_usd": 10712.91,
+      "final_withholding_usd": 10712.91,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0043",
+      "payee": "ENT0029",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 23776.28,
+      "final_withholding_usd": 23776.28,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0044",
+      "payee": "ENT0029",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4047.45,
+      "final_withholding_usd": 4047.45,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0045",
+      "payee": "ENT0032",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 26469.28,
+      "final_withholding_usd": 26469.28,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0046",
+      "payee": "ENT0032",
+      "initial_rate": 0.1,
+      "final_rate": 0.1,
+      "initial_withholding_usd": 8242.66,
+      "final_withholding_usd": 8242.66,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0047",
+      "payee": "ENT0035",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 38252.26,
+      "final_withholding_usd": 38252.26,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0048",
+      "payee": "ENT0035",
+      "initial_rate": 0.12,
+      "final_rate": 0.12,
+      "initial_withholding_usd": 16002.5,
+      "final_withholding_usd": 16002.5,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0049",
+      "payee": "ENT0038",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 28961.45,
+      "final_withholding_usd": 28961.45,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0050",
+      "payee": "ENT0038",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 5337.1,
+      "final_withholding_usd": 5337.1,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0051",
+      "payee": "ENT0041",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 16643.14,
+      "final_withholding_usd": 16643.14,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0052",
+      "payee": "ENT0042",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 7432.69,
+      "final_withholding_usd": 7432.69,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0053",
+      "payee": "ENT0043",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 28022.64,
+      "final_withholding_usd": 28022.64,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0054",
+      "payee": "ENT0044",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 18382.12,
+      "final_withholding_usd": 18382.12,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0055",
+      "payee": "ENT0045",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1667.05,
+      "final_withholding_usd": 1667.05,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0056",
+      "payee": "ENT0046",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 11521.53,
+      "final_withholding_usd": 11521.53,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0057",
+      "payee": "ENT0047",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 12746.82,
+      "final_withholding_usd": 12746.82,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0058",
+      "payee": "ENT0048",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 15162.74,
+      "final_withholding_usd": 15162.74,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0059",
+      "payee": "ENT0049",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1476.27,
+      "final_withholding_usd": 1476.27,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0060",
+      "payee": "ENT0050",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2528.39,
+      "final_withholding_usd": 2528.39,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0061",
+      "payee": "ENT0051",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 25762.29,
+      "final_withholding_usd": 25762.29,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0062",
+      "payee": "ENT0052",
+      "initial_rate": 0.1,
+      "final_rate": 0.1,
+      "initial_withholding_usd": 4052.35,
+      "final_withholding_usd": 4052.35,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0063",
+      "payee": "ENT0053",
+      "initial_rate": 0.1,
+      "final_rate": 0.1,
+      "initial_withholding_usd": 5683.37,
+      "final_withholding_usd": 5683.37,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0064",
+      "payee": "ENT0054",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 11456.56,
+      "final_withholding_usd": 11456.56,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0065",
+      "payee": "ENT0055",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 6614.9,
+      "final_withholding_usd": 6614.9,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0066",
+      "payee": "ENT0056",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 18530.66,
+      "final_withholding_usd": 18530.66,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0067",
+      "payee": "ENT0057",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 25264.69,
+      "final_withholding_usd": 25264.69,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0068",
+      "payee": "ENT0058",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 18440.02,
+      "final_withholding_usd": 18440.02,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0069",
+      "payee": "ENT0059",
+      "initial_rate": 0.1,
+      "final_rate": 0.1,
+      "initial_withholding_usd": 6176.32,
+      "final_withholding_usd": 6176.32,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0070",
+      "payee": "ENT0060",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 20355.31,
+      "final_withholding_usd": 20355.31,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0071",
+      "payee": "ENT0061",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 18536.6,
+      "final_withholding_usd": 18536.6,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0072",
+      "payee": "ENT0062",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4480.31,
+      "final_withholding_usd": 4480.31,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0073",
+      "payee": "ENT0063",
+      "initial_rate": 0.1,
+      "final_rate": 0.1,
+      "initial_withholding_usd": 5668.49,
+      "final_withholding_usd": 5668.49,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0074",
+      "payee": "ENT0064",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1802.05,
+      "final_withholding_usd": 1802.05,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0075",
+      "payee": "ENT0065",
+      "initial_rate": 0.08,
+      "final_rate": 0.08,
+      "initial_withholding_usd": 3430.27,
+      "final_withholding_usd": 3430.27,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0076",
+      "payee": "ENT0066",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 18389.0,
+      "final_withholding_usd": 18389.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0077",
+      "payee": "ENT0067",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 11574.97,
+      "final_withholding_usd": 11574.97,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0078",
+      "payee": "ENT0068",
+      "initial_rate": 0.08,
+      "final_rate": 0.08,
+      "initial_withholding_usd": 2703.71,
+      "final_withholding_usd": 2703.71,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0079",
+      "payee": "ENT0069",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 20634.34,
+      "final_withholding_usd": 20634.34,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0080",
+      "payee": "ENT0070",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 19226.04,
+      "final_withholding_usd": 19226.04,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0081",
+      "payee": "ENT0071",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 24319.08,
+      "final_withholding_usd": 24319.08,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0082",
+      "payee": "ENT0072",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 11476.24,
+      "final_withholding_usd": 11476.24,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0083",
+      "payee": "ENT0073",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4288.75,
+      "final_withholding_usd": 4288.75,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0084",
+      "payee": "ENT0074",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2595.96,
+      "final_withholding_usd": 2595.96,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0085",
+      "payee": "ENT0075",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2460.54,
+      "final_withholding_usd": 2460.54,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0086",
+      "payee": "ENT0076",
+      "initial_rate": 0.12,
+      "final_rate": 0.12,
+      "initial_withholding_usd": 4861.57,
+      "final_withholding_usd": 4861.57,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0087",
+      "payee": "ENT0077",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 20008.02,
+      "final_withholding_usd": 20008.02,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0088",
+      "payee": "ENT0078",
+      "initial_rate": 0.08,
+      "final_rate": 0.08,
+      "initial_withholding_usd": 4619.6,
+      "final_withholding_usd": 4619.6,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0089",
+      "payee": "ENT0079",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 18408.63,
+      "final_withholding_usd": 18408.63,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0090",
+      "payee": "ENT0080",
+      "initial_rate": 0.12,
+      "final_rate": 0.12,
+      "initial_withholding_usd": 6801.43,
+      "final_withholding_usd": 6801.43,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0091",
+      "payee": "ENT0081",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 16289.65,
+      "final_withholding_usd": 16289.65,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0092",
+      "payee": "ENT0082",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 25254.49,
+      "final_withholding_usd": 25254.49,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0093",
+      "payee": "ENT0083",
+      "initial_rate": 0.08,
+      "final_rate": 0.08,
+      "initial_withholding_usd": 2491.09,
+      "final_withholding_usd": 2491.09,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0094",
+      "payee": "ENT0084",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4482.41,
+      "final_withholding_usd": 4482.41,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0095",
+      "payee": "ENT0085",
+      "initial_rate": 0.08,
+      "final_rate": 0.08,
+      "initial_withholding_usd": 4897.52,
+      "final_withholding_usd": 4897.52,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0096",
+      "payee": "ENT0086",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 25736.57,
+      "final_withholding_usd": 25736.57,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0097",
+      "payee": "ENT0087",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 21236.4,
+      "final_withholding_usd": 21236.4,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0098",
+      "payee": "ENT0088",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1475.74,
+      "final_withholding_usd": 1475.74,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0099",
+      "payee": "ENT0089",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 18085.07,
+      "final_withholding_usd": 18085.07,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0100",
+      "payee": "ENT0090",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 20613.49,
+      "final_withholding_usd": 20613.49,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0101",
+      "payee": "ENT0091",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 10426.65,
+      "final_withholding_usd": 10426.65,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0102",
+      "payee": "ENT0092",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 7480.96,
+      "final_withholding_usd": 7480.96,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0103",
+      "payee": "ENT0093",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 15201.17,
+      "final_withholding_usd": 15201.17,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0104",
+      "payee": "ENT0094",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 7431.77,
+      "final_withholding_usd": 7431.77,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0105",
+      "payee": "ENT0095",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 7285.56,
+      "final_withholding_usd": 7285.56,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0106",
+      "payee": "ENT0096",
+      "initial_rate": 0.12,
+      "final_rate": 0.12,
+      "initial_withholding_usd": 5282.98,
+      "final_withholding_usd": 5282.98,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0107",
+      "payee": "ENT0097",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 13207.44,
+      "final_withholding_usd": 13207.44,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0108",
+      "payee": "ENT0098",
+      "initial_rate": 0.12,
+      "final_rate": 0.12,
+      "initial_withholding_usd": 60000.0,
+      "final_withholding_usd": 60000.0,
+      "true_up_usd": 0.0
+    }
+  ],
+  "total_liability_usd": 4000100.91
+}

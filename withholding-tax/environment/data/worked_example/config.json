@@ -1,0 +1,9 @@
+{
+  "statutory_rate": 0.3,
+  "treaty_partners": {
+    "JUR-DE": 0.1,
+    "JUR-SG": 0.08
+  },
+  "threshold_usd": 500000.0,
+  "holding_period_days": 365
+}

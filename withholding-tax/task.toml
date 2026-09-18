@@ -1,0 +1,42 @@
+artifacts = ["/app/outputs/report.json"]
+
+[task]
+name = "afterquery/withholding-tax"
+
+[metadata]
+author_name = "Tonny Muthoka"
+author_email = "tonnysammy952@gmail.com"
+
+difficulty_explanation = """
+This work is performed by treasury and tax-compliance teams at multinational companies who must compute cross-border withholding tax correctly on interest, royalty, and dividend payments -- getting it wrong means either underpaying (a compliance and penalty exposure) or overpaying (a real cash cost, since excess withholding is not automatically refunded). The dataset (109 payments across 101 entities, all synthetically generated) requires composing four rules correctly: a statutory default rate; treaty relief conditional on a minimum holding period; an anti-treaty-shopping ownership look-through that must be resolved separately for each payment's own date, not once per payee, because ownership stakes shift during the year; and a cumulative annual per-payee threshold that, once crossed, retroactively re-rates every one of that payee's payments for the year, including ones already computed at a lower rate. Both non-obvious mechanisms were validated directly, not assumed: a solver who resolves the ownership look-through once per payee instead of once per payment (a natural-looking shortcut that gets the underlying rule completely right, just applied at the wrong point in time) diverges from the correct total by +5.6% on this dataset; a solver who gets every payment's own-facts rate correct but never applies the retroactive threshold diverges by -51.2%. Beyond the two headline mechanisms, five boundary conventions (ownership stake of exactly 50%, holding period of exactly the threshold day count, a cumulative total landing exactly on the annual threshold, which calendar month's FX rate applies, and when rounding happens) were each checked with an ablation: the best-fit answer under the most plausible alternate reading of each convention was computed against the actual dataset, and four of the five diverge from the correct total by a clear, measured margin ($6.8k-$90k depending on the convention); the fifth (rounding order) was found to be genuinely immaterial at this rulebook's scale (a sub-cent effect, since rounding happens before a rate multiplication that shrinks it further) rather than forced to matter artificially, and is stated precisely in the rulebook for completeness rather than left as a source of graded difficulty. All entity/jurisdiction names, ownership structures, and the specific payment data are synthetically generated for this task and do not represent any real company's operations.
+"""
+
+solution_explanation = """
+The reference implementation resolves each payment's relevant parent by walking the ownership chain from the payee, continuing past any owner holding more than 50% of the entity below it and stopping at the first owner holding 50% or less (evaluated using the ownership record covering that specific payment's own date, not a single resolution per payee), checks that jurisdiction against the treaty table, applies the holding-period test, then in a second pass sums each payee's annual USD-converted total and retroactively re-rates every one of that payee's payments to the statutory rate if the sum exceeds the threshold. A second, independently-coded implementation was built specifically to cross-check this (dev/rule_engine2.py) -- same rule text, but an iterative precomputed ownership timeline instead of per-call recursion, and a single date-sorted pass per payee instead of a separate breach-set lookup. The two implementations were compared line-by-line, not just on the aggregate: across all 109 payments in the graded dataset, and across all 5 profile-varied test scenarios generated during calibration, every single line matched to the cent, with zero discrepancies. Building the reference also surfaced and fixed one real correctness bug in the scenario generator itself (not the rule engine): early embedded "threshold gadget" payees could, depending on which currency and FX rate a given random seed happened to draw, convert to just under the intended threshold instead of over it, silently failing to trigger the retroactive re-rating the scenario was built to test -- caught by adding a hard assertion (not a hope) that every embedded gadget actually produces its intended tension once real FX conversion is applied, checked at generation time.
+"""
+
+verification_explanation = """
+The agent's deliverable is a computed report file (/app/outputs/report.json), not executable code, so the verifier architecture here is deliberately much simpler than a task where candidate code must be isolated: there is no process to sandbox, no live state that could leak, and no filesystem access to seal, because nothing the candidate writes ever runs at grading time. tests/test.sh (root, its own container the agent never sees) seals tests/sealed (defense in depth, though nothing untrusted ever reads it) and runs a single pytest module that reads the submitted JSON artifact and compares it against a ground truth computed ahead of time from the exact same dataset the agent worked from (environment/data/case) -- since the deliverable is a data file, the graded dataset must be visible to the agent to begin with; there is no held-out/hidden-scenario mechanism in this bundle the way there is in the companion field-service-dispatch and cash-sweep bundles, and rigor instead comes from grading all 109 payments individually with tight tolerance ($0.02/line, $0.05 on the total), not just the aggregate. This was checked directly: a cheat attempt that reports the exactly correct grand total but distributes it evenly across every line regardless of each payment's actual facts fails the per-line checks even though the total-only check would have passed it. Nine adversarial submissions were tested against the real verifier (see cheat/README.md for each one's measured result): three schema/completeness attacks (empty object, total with no line items, one payment silently dropped) and six plausible-but-wrong computations (four naive rate strategies including the two validated headline shortcuts, an all-zero report, and the correct-total-wrong-distribution case above) all measure reward 0; the reference solution measures reward 1.
+"""
+
+category = "Operations"
+subcategory = "Compliance"
+tags = ["tax", "compliance", "treasury", "cross-border-payments", "rule-engine"]
+expert_time_estimate_hours = 5
+relevant_experience = """
+I work as an operations and business data analyst (2024-present), where I have directly reviewed business scenarios involving regulatory compliance, financial reconciliation, and rule-governed decision-making under real operational constraints -- applying structured, rule-based reasoning to determine correct outcomes and assessing whether a given computation or classification correctly reflects a stated policy. This gives me a working sense of what a genuine treasury/tax-compliance operation actually has to get right (treaty eligibility, ownership look-through, threshold-triggered reclassification) and what a realistic versus contrived version of that complexity looks like. I also evaluate AI-generated business outputs against predefined criteria and have supported AI training/evaluation projects involving business reasoning and quality assurance, which is directly relevant to judging whether this task's grading (an exact/tolerance-based comparison of a computed report against a cross-checked reference) is a fair and meaningful test rather than an arbitrary one. I am not a tax attorney or a compliance engineer by training; the technical implementation (the rule engine, its independent cross-check, the ablation checks proving the rulebook's boundary conventions are unambiguous, and the calibration of the dataset against measured naive-strategy failures) was built with AI assistance under my direction, with my own judgment applied to whether the rules and grading reflect a realistic cross-border withholding-tax operation.
+"""
+
+[verifier]
+timeout_sec = 120.0
+environment_mode = "separate"
+
+[agent]
+timeout_sec = 10800.0
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0

@@ -1,0 +1,877 @@
+{
+  "payments": [
+    {
+      "payment_id": "PAY0001",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0002",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0003",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0004",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0005",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0006",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0007",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0008",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0009",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0010",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0011",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0012",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0013",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0014",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0015",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0016",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0017",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0018",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0019",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0020",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0021",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0022",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0023",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0024",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0025",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0026",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0027",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0028",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0029",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0030",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0031",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0032",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0033",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0034",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0035",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0036",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0037",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0038",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0039",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0040",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0041",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0042",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0043",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0044",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0045",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0046",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0047",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0048",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0049",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0050",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0051",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0052",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0053",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0054",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0055",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0056",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0057",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0058",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0059",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0060",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0061",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0062",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0063",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0064",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0065",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0066",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0067",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0068",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0069",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0070",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0071",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0072",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0073",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0074",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0075",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0076",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0077",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0078",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0079",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0080",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0081",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0082",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0083",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0084",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0085",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0086",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0087",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0088",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0089",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0090",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0091",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0092",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0093",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0094",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0095",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0096",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0097",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0098",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0099",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0100",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0101",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0102",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0103",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0104",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0105",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0106",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0107",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0108",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0109",
+      "initial_rate": 0.0,
+      "final_rate": 0.0,
+      "initial_withholding_usd": 0.0,
+      "final_withholding_usd": 0.0,
+      "true_up_usd": 0.0
+    }
+  ],
+  "total_liability_usd": 0.0
+}

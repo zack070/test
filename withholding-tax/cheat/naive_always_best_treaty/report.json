@@ -1,0 +1,877 @@
+{
+  "payments": [
+    {
+      "payment_id": "PAY0001",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 18679.39,
+      "final_withholding_usd": 18679.39,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0002",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 17947.71,
+      "final_withholding_usd": 17947.71,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0003",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 18973.51,
+      "final_withholding_usd": 18973.51,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0004",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 13352.96,
+      "final_withholding_usd": 13352.96,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0005",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 12092.74,
+      "final_withholding_usd": 12092.74,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0006",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 13351.47,
+      "final_withholding_usd": 13351.47,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0007",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 13156.53,
+      "final_withholding_usd": 13156.53,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0008",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 13165.83,
+      "final_withholding_usd": 13165.83,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0009",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 13677.43,
+      "final_withholding_usd": 13677.43,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0010",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 15232.18,
+      "final_withholding_usd": 15232.18,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0011",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 16078.18,
+      "final_withholding_usd": 16078.18,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0012",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 15013.12,
+      "final_withholding_usd": 15013.12,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0013",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 16667.42,
+      "final_withholding_usd": 16667.42,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0014",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 16196.28,
+      "final_withholding_usd": 16196.28,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0015",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 17913.83,
+      "final_withholding_usd": 17913.83,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0016",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 15230.08,
+      "final_withholding_usd": 15230.08,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0017",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 16075.96,
+      "final_withholding_usd": 16075.96,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0018",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 16826.83,
+      "final_withholding_usd": 16826.83,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0019",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 18486.51,
+      "final_withholding_usd": 18486.51,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0020",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 17907.61,
+      "final_withholding_usd": 17907.61,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0021",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 19334.17,
+      "final_withholding_usd": 19334.17,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0022",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 18484.66,
+      "final_withholding_usd": 18484.66,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0023",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 17757.31,
+      "final_withholding_usd": 17757.31,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0024",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 19332.24,
+      "final_withholding_usd": 19332.24,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0025",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 15696.29,
+      "final_withholding_usd": 15696.29,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0026",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 16828.26,
+      "final_withholding_usd": 16828.26,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0027",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 15012.33,
+      "final_withholding_usd": 15012.33,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0028",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 13155.28,
+      "final_withholding_usd": 13155.28,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0029",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 13600.32,
+      "final_withholding_usd": 13600.32,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0030",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 12776.42,
+      "final_withholding_usd": 12776.42,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0031",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 5897.51,
+      "final_withholding_usd": 5897.51,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0032",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 5812.69,
+      "final_withholding_usd": 5812.69,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0033",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 5100.91,
+      "final_withholding_usd": 5100.91,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0034",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 5079.38,
+      "final_withholding_usd": 5079.38,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0035",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4610.91,
+      "final_withholding_usd": 4610.91,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0036",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4398.55,
+      "final_withholding_usd": 4398.55,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0037",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 6376.77,
+      "final_withholding_usd": 6376.77,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0038",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 6422.25,
+      "final_withholding_usd": 6422.25,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0039",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3400.33,
+      "final_withholding_usd": 3400.33,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0040",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3620.27,
+      "final_withholding_usd": 3620.27,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0041",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 5899.03,
+      "final_withholding_usd": 5899.03,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0042",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 6695.57,
+      "final_withholding_usd": 6695.57,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0043",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3962.71,
+      "final_withholding_usd": 3962.71,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0044",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4047.45,
+      "final_withholding_usd": 4047.45,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0045",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4411.55,
+      "final_withholding_usd": 4411.55,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0046",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4121.33,
+      "final_withholding_usd": 4121.33,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0047",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 6375.38,
+      "final_withholding_usd": 6375.38,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0048",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 6667.71,
+      "final_withholding_usd": 6667.71,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0049",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4826.91,
+      "final_withholding_usd": 4826.91,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0050",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 5337.1,
+      "final_withholding_usd": 5337.1,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0051",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2773.86,
+      "final_withholding_usd": 2773.86,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0052",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1238.78,
+      "final_withholding_usd": 1238.78,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0053",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4670.44,
+      "final_withholding_usd": 4670.44,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0054",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3063.69,
+      "final_withholding_usd": 3063.69,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0055",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1667.05,
+      "final_withholding_usd": 1667.05,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0056",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1920.25,
+      "final_withholding_usd": 1920.25,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0057",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2124.47,
+      "final_withholding_usd": 2124.47,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0058",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2527.12,
+      "final_withholding_usd": 2527.12,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0059",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1476.27,
+      "final_withholding_usd": 1476.27,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0060",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2528.39,
+      "final_withholding_usd": 2528.39,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0061",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4293.72,
+      "final_withholding_usd": 4293.72,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0062",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2026.17,
+      "final_withholding_usd": 2026.17,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0063",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2841.69,
+      "final_withholding_usd": 2841.69,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0064",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1909.43,
+      "final_withholding_usd": 1909.43,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0065",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1102.48,
+      "final_withholding_usd": 1102.48,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0066",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3088.44,
+      "final_withholding_usd": 3088.44,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0067",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4210.78,
+      "final_withholding_usd": 4210.78,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0068",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3073.34,
+      "final_withholding_usd": 3073.34,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0069",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3088.16,
+      "final_withholding_usd": 3088.16,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0070",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3392.55,
+      "final_withholding_usd": 3392.55,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0071",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3089.43,
+      "final_withholding_usd": 3089.43,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0072",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4480.31,
+      "final_withholding_usd": 4480.31,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0073",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2834.25,
+      "final_withholding_usd": 2834.25,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0074",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1802.05,
+      "final_withholding_usd": 1802.05,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0075",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2143.92,
+      "final_withholding_usd": 2143.92,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0076",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3064.83,
+      "final_withholding_usd": 3064.83,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0077",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1929.16,
+      "final_withholding_usd": 1929.16,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0078",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1689.82,
+      "final_withholding_usd": 1689.82,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0079",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3439.06,
+      "final_withholding_usd": 3439.06,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0080",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3204.34,
+      "final_withholding_usd": 3204.34,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0081",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4053.18,
+      "final_withholding_usd": 4053.18,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0082",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1912.71,
+      "final_withholding_usd": 1912.71,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0083",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4288.75,
+      "final_withholding_usd": 4288.75,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0084",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2595.96,
+      "final_withholding_usd": 2595.96,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0085",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2460.54,
+      "final_withholding_usd": 2460.54,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0086",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2025.65,
+      "final_withholding_usd": 2025.65,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0087",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3334.67,
+      "final_withholding_usd": 3334.67,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0088",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2887.25,
+      "final_withholding_usd": 2887.25,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0089",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3068.11,
+      "final_withholding_usd": 3068.11,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0090",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2833.93,
+      "final_withholding_usd": 2833.93,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0091",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2714.94,
+      "final_withholding_usd": 2714.94,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0092",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4209.08,
+      "final_withholding_usd": 4209.08,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0093",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1556.93,
+      "final_withholding_usd": 1556.93,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0094",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4482.41,
+      "final_withholding_usd": 4482.41,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0095",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3060.95,
+      "final_withholding_usd": 3060.95,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0096",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 4289.43,
+      "final_withholding_usd": 4289.43,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0097",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3539.4,
+      "final_withholding_usd": 3539.4,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0098",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1475.74,
+      "final_withholding_usd": 1475.74,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0099",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3014.18,
+      "final_withholding_usd": 3014.18,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0100",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 3435.58,
+      "final_withholding_usd": 3435.58,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0101",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1737.77,
+      "final_withholding_usd": 1737.77,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0102",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1246.83,
+      "final_withholding_usd": 1246.83,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0103",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2533.53,
+      "final_withholding_usd": 2533.53,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0104",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1238.63,
+      "final_withholding_usd": 1238.63,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0105",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 1214.26,
+      "final_withholding_usd": 1214.26,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0106",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2201.24,
+      "final_withholding_usd": 2201.24,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0107",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2201.24,
+      "final_withholding_usd": 2201.24,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0108",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 25000.0,
+      "final_withholding_usd": 25000.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0109",
+      "initial_rate": 0.05,
+      "final_rate": 0.05,
+      "initial_withholding_usd": 2409.48,
+      "final_withholding_usd": 2409.48,
+      "true_up_usd": 0.0
+    }
+  ],
+  "total_liability_usd": 762783.74
+}
