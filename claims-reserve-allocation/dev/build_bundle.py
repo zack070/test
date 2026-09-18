@@ -80,10 +80,11 @@ def build_visible(name: str, seed: int, n_singleton_ish: int, trap_clusters, out
     with open(os.path.join(out_dir, "reference_metrics.json"), "w") as f:
         json.dump({
             "note": (
-                "Measured objective for two clearly-suboptimal example policies, "
-                "for calibrating your own simulator against -- NOT the task's "
-                "answer. There is no single correct decision set; you are scored "
-                "on the objective your own policy achieves."
+                "Measured objective for three example policies (settle_nothing, "
+                "naive_ratio_greedy, ev_optimal_knapsack), for calibrating your "
+                "own simulator against -- NOT the task's answer. There is no "
+                "single correct decision set; you are scored on the objective "
+                "your own policy achieves."
             ),
             "settle_nothing": {k: round(v, 2) for k, v in r_nothing.items()},
             "naive_ratio_greedy": {k: round(v, 2) for k, v in r_naive.items()},

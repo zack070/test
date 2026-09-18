@@ -11,10 +11,10 @@ groups larger than one -- look at the distribution of cluster sizes in
 `claims.csv` yourself rather than assuming it matches the worked example's
 exact shape.
 
-`reference_metrics.json` gives the same two suboptimal-baseline
-measurements as the worked example (settle-nothing, and plain
-ratio-greedy), for validating your simulator at this larger scale. Notice
-that the ratio-greedy and the exact expected-value-optimal knapsack
-solution (also included) don't necessarily agree on which one scores
-better under the full objective -- expected-value optimality and
-objective optimality are not the same thing here.
+`reference_metrics.json` gives the same three baseline measurements as
+the worked example (settle-nothing, plain ratio-greedy, and the exact
+expected-value-optimal knapsack), for validating your simulator at this
+larger scale. Notice that the ratio-greedy and the expected-value-optimal
+knapsack don't necessarily agree on which one scores better under the
+full objective -- expected-value optimality and objective optimality are
+not the same thing here.

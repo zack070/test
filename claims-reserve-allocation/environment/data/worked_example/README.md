@@ -24,11 +24,12 @@ Two things worth noticing in this data before you build anything:
   ordinary, uncorrelated exposure.
 
 `reference_metrics.json` in this directory gives the measured
-`expected_cost` / `cvar` / `objective` for two clearly-suboptimal example
-policies -- settling nothing, and a plain per-claim ratio-greedy fill of
-the budget -- computed with a large number of simulation paths under
-`MODEL_SPEC.md`'s exact formulas. These are here so you can validate your
-own simulator: build it, run it against these same two policies on this
-data, and confirm your numbers land close to the ones given. They are not
-the task's answer -- there is no single correct decision set to match
-against, only an objective to minimize.
+`expected_cost` / `cvar` / `objective` for three example policies --
+settling nothing, a plain per-claim ratio-greedy fill of the budget, and
+the exact expected-value-optimal knapsack -- computed with a large number
+of simulation paths under `MODEL_SPEC.md`'s exact formulas. These are
+here so you can validate your own simulator: build it, run it against
+these same three policies on this data, and confirm your numbers land
+close to the ones given. They are not the task's answer -- there is no
+single correct decision set to match against, only an objective to
+minimize.
