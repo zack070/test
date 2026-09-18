@@ -11,7 +11,7 @@ Unlike a CSV-output-only task, this one genuinely executes candidate code
 (the submitted `decide()` policy), so the full untrusted-execution attack
 surface applies and was tested directly.
 
-Re-verified twice after recalibration: once when the single sealed
+Re-verified three times after recalibration: once when the single sealed
 `held_out` scenario was replaced with two structurally distinct ones
 (`held_out_1`, `held_out_2`, both must individually clear their own pass
 bar) and the reference matching algorithm switched from brute force to
@@ -21,10 +21,12 @@ choice, and a technician could be committed to a job that could no longer
 meet its deadline) was found and fixed, the reference was given the same
 time-zero batching a capable policy needs, and both scenarios were
 rebuilt with a verified swap-tension mechanism so a joint solve has a
-real, measured advantage over every tested greedy. All five exploits
-below still measure reward 0 against the current
-`tests/collect_agent_output.py` / `test_dispatch_grading.py`; the sealing
-and UID-sweep mechanics they target are unchanged by any of that.
+real, measured advantage over every tested greedy; and again after the
+architecture change described in #6 below, which changed how Stage 1
+runs the candidate at all. Exploits #1-5 still measure reward 0 against
+the current `tests/collect_agent_output.py` / `test_dispatch_grading.py`;
+the sealing and UID-sweep mechanics they target are unchanged by any of
+that.
 
 ## 1. Early exit (`early_exit/`)
 
@@ -80,7 +82,50 @@ erroring out uncaught.
 **Measured result: reward 0.** Stage 1 detects the missing callable and
 records `status: "malformed"` before ever attempting to run a simulation.
 
-## Why the "claim more than is true" family doesn't apply here the same way
+## 6. Frame introspection / future-knowledge leak (`frame_introspection/`)
+
+`decide()` walks the Python call stack with `sys._getframe()` looking for
+a frame whose locals contain `job_states` -- the trusted simulator's own
+internal dict, which (unlike the documented `SimState` snapshot passed to
+`decide()`) includes jobs still marked `"not_arrived"`. If found, it reads
+those future jobs for clairvoyant scheduling, and separately tries to
+tamper with the untrusted-side accounting (replace `overtime_used` with a
+self-absorbing zero-like object, monkey-patch `BREACH_PENALTY` /
+`OVERTIME_RATE` / `CASCADE_COST` to 0 on every loaded module that has
+them). This was a real, measured hole in an earlier version of this
+verifier: `decide()` used to run as a plain in-process function call
+directly inside `sim.run_simulation`'s own event loop, so `sys._getframe`
+genuinely could reach that loop's live locals -- every individual
+assignment stayed *legal* at the moment it was returned (technician
+free, job pending, skill match), so Stage 2's replay-and-revalidate
+design, which only checks legality, never caught it. The unfairness was
+entirely in what information `decide()` was never supposed to have, not
+in anything a legality check can see.
+
+**Fix:** `decide()` now runs in a genuinely separate OS process
+(`tests/candidate_worker.py`, spawned fresh per scenario via
+`multiprocessing`'s `spawn` context, never `fork`), and `collect_agent_
+output.py` talks to it only through two queues carrying JSON-encoded
+`SimState` fields -- current_time, free technicians, pending jobs, exactly
+what the documented snapshot exposes. `run_simulation` itself never
+executes in that process, so there is no live frame containing
+`job_states` (or anything else) to walk to; the fix is structural, not a
+block on `sys._getframe` specifically, so it isn't defeated by an
+equivalent technique such as `gc.get_objects()`.
+
+**Measured result: reward 0.** A side channel written from inside the
+exploit's own `decide()` (`/tmp/exploit_debug.json`, added for this
+verification only) confirms `found_job_states: false` and
+`future_jobs_seen: false` on all 129 decide() calls across both sealed
+scenarios -- the frame walk finds nothing every single time, so the
+policy falls back to its plain legal greedy, which naturally fails both
+pass bars (measured 3234.5 and 1734.0 against bars of 600.0 and 400.0).
+The accounting-tamper half of the attack was already defeated
+independently: Stage 2 never imports or trusts anything Stage 1
+computed, so a monkey-patched `BREACH_PENALTY` in the candidate's process
+has no effect on Stage 2's own fresh import of the real constants.
+
+## Why the "claim more than is true" family doesn't apply to exploits #1-5
 
 There is no submitted claim of cost, feasibility, or optimality to distrust
 in the first place: the candidate submits code, not a result. Stage 2
@@ -93,4 +138,8 @@ actually free, job actually pending, skill match, overtime cap) and
 recomputing the cost from scratch. A trace that claims an assignment no
 longer valid at replay time is simply not applied -- replay can only ever
 score a tampered or inconsistent trace the same or worse than a faithful
-one, never better.
+one, never better. Legality-only revalidation is NOT sufficient on its own,
+though -- exploit #6 above is the counterexample: every assignment it
+produced was legal, and the problem was entirely in what information
+`decide()` had access to while deciding, which is exactly why that fix had
+to change where `decide()` runs, not what Stage 2 checks about its output.
