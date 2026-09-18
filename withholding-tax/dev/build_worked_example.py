@@ -1,9 +1,11 @@
 """Builds the small worked example shipped to the agent with its answer
 shown, so the agent can validate its understanding of every rule against
 a known-correct case before tackling the real (much larger) dataset in
-environment/data/case/. Six payments, one per rule behavior, hand-picked
+/app/data/case/. Seven rule behaviors across nine payments, hand-picked
 rather than randomly generated so each one's reasoning is traceable in
-one line.
+one line. Deliberately includes a case with time-varying ownership
+(case 7) so that a payment-date-caching bug in a candidate pipeline is
+independently detectable here, not just in the much larger case dataset.
 """
 import sys
 import os
@@ -61,6 +63,21 @@ def build():
     e6 = b.new_entity("JUR-DE")
     b.new_payment(e6, 300_000.0, "USD", date(2024, 3, 1), date(2022, 1, 1))
     b.new_payment(e6, 300_000.0, "USD", date(2024, 7, 1), date(2022, 1, 1))
+
+    # 7. Ownership look-through resolved per PAYMENT DATE, not once for
+    #    the payee: the payee's owner holds 60% through June (over 50%,
+    #    look-through continues to the owner's own parent in a no-treaty
+    #    jurisdiction) and only 40% from July on (50% or less, look-
+    #    through stops at the owner itself, in a treaty jurisdiction).
+    #    Two payments -- one in each window -- must get DIFFERENT rates.
+    e7 = b.new_entity("JUR-SG")
+    owner7 = b.new_entity("JUR-DE")
+    grandparent7 = b.new_entity("JUR-KY")
+    b.ownership.append(OwnershipRow(owner7, e7, 60.0, date(2024, 1, 1), date(2024, 7, 1)))
+    b.ownership.append(OwnershipRow(owner7, e7, 40.0, date(2024, 7, 1), date(2025, 1, 1)))
+    b.ownership.append(OwnershipRow(grandparent7, owner7, 100.0, date(2024, 1, 1), date(2025, 1, 1)))
+    b.new_payment(e7, 100_000.0, "USD", date(2024, 3, 1), date(2022, 1, 1))
+    b.new_payment(e7, 100_000.0, "USD", date(2024, 9, 1), date(2022, 1, 1))
 
     return b
 

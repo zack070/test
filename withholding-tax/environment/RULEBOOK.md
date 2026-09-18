@@ -1,8 +1,11 @@
 # Withholding tax rulebook
 
 This is the complete, authoritative rule set for computing withholding
-tax liability on the payments in `data/case/`. Nothing needed to compute
-the correct answer is left out of this document or the data files.
+tax liability. Nothing needed to compute the correct answer is left out
+of this document or the data files. `pipeline/engine.py` is supposed to
+implement every rule below exactly, but it doesn't yet -- see
+`pipeline/engine.py`'s own module docstring and `data/case/`'s
+`README.md` for what that means for you.
 
 ## Data files
 
@@ -99,6 +102,6 @@ rounded value in a further computation.
 
 ## Worked example
 
-See `data/worked_example/README.md` for six fully-explained payments
-covering every rule above, with the correct answer shown in
-`data/worked_example/expected_answer.json`.
+See `data/worked_example/README.md` for seven rule behaviors across nine
+fully-explained payments covering every rule above, with the correct
+answer shown in `data/worked_example/expected_answer.json`.

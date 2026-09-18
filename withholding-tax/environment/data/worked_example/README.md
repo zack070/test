@@ -1,11 +1,11 @@
 # Worked example
 
-Six payments, each illustrating one rule outcome in isolation, with the
-correct answer shown in `expected_answer.json`. Currency is USD
-throughout (rate 1.0) so the numbers below aren't obscured by FX
-conversion. This is a teaching example, not the graded dataset -- use it
-to check your understanding of the rules before running your program
-against `environment/data/case/`.
+Seven rule behaviors across nine payments, with the correct answer shown
+in `expected_answer.json`. Currency is USD throughout (rate 1.0) so the
+numbers below aren't obscured by FX conversion. This is a teaching
+example, not the graded dataset -- use it to check your understanding of
+the rules (and to reproduce some of the given pipeline's bugs on a small
+scale) before working through `/app/data/case/`.
 
 - **PAY0001** (payee ENT0001, jurisdiction JUR-DE, no owner on record,
   acquired 2022-01-01, paid 2024-06-01): JUR-DE is a treaty partner, the
@@ -29,8 +29,8 @@ against `environment/data/case/`.
   The owner's jurisdiction is JUR-KY -- no treaty. Statutory rate
   applies. `30,000.00`.
 
-- **PAY0005** (ENT0005, JUR-KY, owned 40% by an entity in JUR-DE, which
-  is itself wholly owned by another JUR-KY entity): the payee's
+- **PAY0005** (payee ENT0006, JUR-KY, owned 40% by an entity in JUR-DE,
+  which is itself wholly owned by another JUR-KY entity): the payee's
   immediate owner holds only 40% -- 50% or less -- so the look-through
   STOPS there; that owner (JUR-DE, a treaty partner) is the relevant
   parent, regardless of what owns *that* entity in turn. Treaty rate
@@ -39,9 +39,9 @@ against `environment/data/case/`.
   grandparent's jurisdiction -- only the entity the walk stops at
   matters.)
 
-- **PAY0006 + PAY0007** (both ENT0006, JUR-DE, no owner, $300,000 each,
-  paid 2024-03-01 and 2024-07-01): each individually qualifies for the
-  treaty rate (10%) on its own facts. But their combined USD total,
+- **PAY0006 + PAY0007** (both payee ENT0009, JUR-DE, no owner, $300,000
+  each, paid 2024-03-01 and 2024-07-01): each individually qualifies for
+  the treaty rate (10%) on its own facts. But their combined USD total,
   $600,000, exceeds the $500,000 annual threshold. Both payments --
   including the first one, already "paid" at the treaty rate -- are
   retroactively re-rated to the statutory rate (30%). Each shows
@@ -49,4 +49,19 @@ against `environment/data/case/`.
   (the additional amount owed beyond what was withheld at the time of
   each payment).
 
-**Total liability across all seven payments: $290,000.00.**
+- **PAY0008 + PAY0009** (both payee ENT0010, JUR-SG, owned by an entity
+  in JUR-DE whose stake is 60% through June 30 and 40% from July 1
+  onward; that owner is itself wholly owned by an entity in JUR-KY):
+  PAY0008 (paid 2024-03-01, during the 60% window) has an owner stake
+  over 50%, so the look-through continues past the owner to the
+  JUR-KY grandparent -- no treaty, statutory rate, `30,000.00`. PAY0009
+  (paid 2024-09-01, during the 40% window) has the SAME payee and the
+  SAME owner, but the owner's stake as of *this* payment's date is only
+  40%, so the look-through stops at the owner (JUR-DE, a treaty
+  partner) -- treaty rate, `10,000.00`. The relevant parent must be
+  resolved separately for each payment's own date; resolving it once for
+  the payee (or reusing whichever answer was computed first) gives the
+  same wrong rate to both payments instead of two different correct
+  ones.
+
+**Total liability across all nine payments: $330,000.00.**

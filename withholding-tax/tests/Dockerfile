@@ -5,9 +5,12 @@ FROM python:3.13-slim-bookworm
 # the grading logic is pure standard library.
 RUN pip install --no-cache-dir pytest==9.1.1 pytest-json-ctrf==0.5.2
 
+RUN useradd -m -u 1001 -s /bin/bash runner
+
 # Bake tests into the image; harbor does NOT upload tests/ at verify time
 COPY . /tests/
 
 # Pre-create the parent dir of every declared artifact, or harbor's upload
 # fails with "Could not find the file /app in container"
-RUN mkdir -p /app/outputs /logs/verifier
+RUN mkdir -p /app/outputs /work /logs/verifier \
+    && chown runner:runner /work

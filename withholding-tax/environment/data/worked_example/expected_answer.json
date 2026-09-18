@@ -62,7 +62,25 @@
       "initial_withholding_usd": 30000.0,
       "final_withholding_usd": 90000.0,
       "true_up_usd": 60000.0
+    },
+    {
+      "payment_id": "PAY0008",
+      "payee": "ENT0010",
+      "initial_rate": 0.3,
+      "final_rate": 0.3,
+      "initial_withholding_usd": 30000.0,
+      "final_withholding_usd": 30000.0,
+      "true_up_usd": 0.0
+    },
+    {
+      "payment_id": "PAY0009",
+      "payee": "ENT0010",
+      "initial_rate": 0.1,
+      "final_rate": 0.1,
+      "initial_withholding_usd": 10000.0,
+      "final_withholding_usd": 10000.0,
+      "true_up_usd": 0.0
     }
   ],
-  "total_liability_usd": 290000.0
+  "total_liability_usd": 330000.0
 }

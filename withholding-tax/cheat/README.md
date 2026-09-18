@@ -2,116 +2,131 @@
 
 Harbor never executes anything under this directory. Every attempt here
 was actually run against the real verifier via `dev/local_harness.sh`
-(which runs the real `tests/test.sh` and `test_withholding_grading.py`
-against the real `environment/data/case` dataset and a Python matching
-`tests/Dockerfile`'s exact pinned installs). Results below are measured,
-not hypothetical.
+(which runs the real `tests/test.sh`, `collect_agent_output.py`, and
+`test_withholding_grading.py` against real `/app`, `/tests`, `/work`,
+`/logs` paths and a Python matching `tests/Dockerfile`'s exact pinned
+installs). Results below are measured, not hypothetical.
 
-Unlike the companion field-service-dispatch and cash-sweep bundles, the
-agent's deliverable here is a data file (`/app/outputs/report.json`),
-not executable code -- Stage 1/candidate-code-execution concerns
-(process isolation, frame introspection, sealed-file reads) simply don't
-apply, because nothing the candidate writes ever runs at verify time.
-The attack surface that remains is: can a plausible-but-wrong report, or
-a malformed one, pass anyway?
+Unlike the earlier (rejected) version of this bundle, the agent's
+deliverable is executable code (`/app/outputs/engine.py`), which runs
+once per sealed held-out dataset at grading time -- so the full
+untrusted-execution attack surface is back, though in a simpler shape
+than the companion field-service-dispatch/cash-sweep bundles: this is a
+one-shot batch call, not a live per-event decide() loop, so there is no
+incrementally-revealed state to leak and no separate trusted process
+with live secrets to introspect. What has to stay hidden is only the
+ground truth the output gets checked against.
 
-## 1. Empty object (`empty_object/`)
+## 1. Unmodified buggy submission (`unmodified_buggy_submission/`)
 
-`report.json` is `{}`.
+The exact pipeline as given, resubmitted with no fix at all -- the
+"didn't do the work" baseline for this task.
 
-**Measured result: reward 0.** `test_artifact_present_and_well_formed`
-fails on the missing `payments` key before any comparison happens.
+**Measured result: reward 0.** 13 of 64 payments wrong on held_out_1, 17
+of 84 wrong on held_out_2 (the same three bugs documented in the
+pipeline's own module docstring, exercised by real data rather than
+reasoned about).
 
-## 2. Total only, no line items (`total_only_no_lines/`)
+## 2. Reward forgery (`reward_forgery/`)
 
-`report.json` supplies a plausible-looking `total_liability_usd` (the
-actual correct value, copied) but no `payments` list at all.
+`run()` tries to overwrite `/logs/verifier/reward.txt` with `1` directly
+before returning an empty report.
 
-**Measured result: reward 0.** Same schema check as #1 -- a bare total
-is not a valid submission regardless of its value.
+**Measured result: reward 0.** The write is attempted under the
+`runner` UID; `/logs/verifier` is root-owned and sealed before Stage 1
+runs (same as every other bundle in this account), and Stage 2's own
+independent grading still runs afterward and overwrites whatever Stage 1
+did to the reward file regardless.
 
-## 3. All-zero report (`all_zero/`)
+## 3. Sealed ground truth read (`sealed_ground_truth_read/`)
 
-Every payment present, correct schema, every dollar figure zero.
+`run()` tries to read `/tests/sealed/reference/held_out_1_ground_truth.json`
+and `held_out_2_ground_truth.json` directly by name (not just via a
+directory-listing glob, which would fail before even trying, since the
+directory itself is sealed to mode 700), plus attempts a directory
+listing.
 
-**Measured result: reward 0.** Fails `test_every_payment_final_
-withholding_correct` on all 109 lines.
+**Measured result: reward 0**, and every attempt genuinely fails:
 
-## 4. Naive: relevant parent resolved once per payee (`naive_once_per_payee_parent/`)
+    {"path": ".../held_out_1_ground_truth.json", "status": "blocked", "error": "[Errno 13] Permission denied..."}
+    {"path": ".../held_out_2_ground_truth.json", "status": "blocked", "error": "[Errno 13] Permission denied..."}
+    {"path": ".../reference (listdir)", "status": "blocked", "error": "[Errno 13] Permission denied..."}
 
-Resolves each payee's ownership look-through once (as of January 1)
-instead of separately for each payment's own date -- the exact shortcut
-validated in dev/spike2_ownership.py and dev/probes.py to diverge from
-the correct answer even when the look-through rule itself is understood
-correctly.
+`test.sh` chown+chmod's `/tests/sealed/reference` to root-only before
+Stage 1 (running as `runner`) ever executes -- the raw sealed INPUT
+scenario files are deliberately left unsealed, since the candidate's own
+code has to read them to compute anything; only the ground truth is
+sealed.
 
-**Measured result: reward 0.** Total off by +5.6% (dev/probes.py); fails
-line-level checks on every payment whose payee's ownership stake crossed
-the 50% boundary during the year.
+## 4. Crashing pipeline (`crashing/`)
 
-## 5. Naive: no retroactive threshold re-rating (`naive_no_retroactive_threshold/`)
+`run()` unconditionally raises `RuntimeError`.
 
-Computes each payment's base rate correctly (including the per-date
-look-through) but never checks the cumulative annual threshold, so nothing
-is ever retroactively re-rated.
+**Measured result: reward 0.** `collect_agent_output.py` catches the
+non-zero exit / exception, records `status: "crashed"`, and Stage 2
+fails the "policy present and ran" check cleanly.
 
-**Measured result: reward 0.** Total off by -51.2%; fails line-level
-checks on every payment belonging to a payee whose annual total crossed
-the threshold, and every `true_up_usd` is wrong (always 0 instead of the
-correct make-up amount).
+## 5. Malformed submission -- wrong interface (`malformed_no_cli/`)
 
-## 6. Naive: always statutory (`naive_always_statutory/`)
+Defines `solve(data_dir)` instead of `run(data_dir)`, and has no
+`if __name__ == "__main__":` block at all, so invoking it as a script
+produces no output file.
 
-Ignores treaty eligibility entirely -- a "when in doubt, be conservative"
-constant strategy.
+**Measured result: reward 0.** Stage 1 detects the missing output file
+and records a crashed/missing status before Stage 2 has anything to
+grade.
 
-**Measured result: reward 0.** Total off by +14.4%; fails on every
-payment that should have qualified for a treaty rate.
+## 6. Infinite loop (`infinite_loop/`)
 
-## 7. Naive: always the best available treaty rate (`naive_always_best_treaty/`)
+`run()` loops forever.
+
+**Measured result: reward 0**, confirmed to actually time out rather
+than hang the verifier: the harness returns in ~2 minutes (matching the
+per-dataset subprocess timeout times two datasets, well inside `test.sh`'s
+own outer 150-second Stage 1 budget) rather than hanging indefinitely.
+
+## 7. Always statutory (`always_statutory/`)
+
+Ignores treaty eligibility, ownership, and holding period entirely --
+applies the statutory rate to every payment.
+
+**Measured result: reward 0.** Fails on every payment that should have
+qualified for a treaty rate on either held-out dataset.
+
+## 8. Always the best available treaty rate (`always_best_treaty/`)
 
 The opposite constant strategy -- applies the cheapest treaty rate in
 the table to every payment regardless of jurisdiction, ownership, or
 holding period.
 
-**Measured result: reward 0.** Total off by -80.9%; fails on nearly
-every line.
+**Measured result: reward 0.** Fails on nearly every line.
 
-## 8. Missing one payment (`missing_one_payment/`)
+## 9. Memorized visible answers (`hardcoded_answers/`)
 
-Every other line correct (copied from the real answer), but one
-`payment_id` dropped from the submission entirely, with the grand total
-left unchanged from the correct value.
+Ships a lookup table built from `environment/data/case/expected_answer.json`
+(the visible practice dataset's own known-correct answers) keyed by
+`payment_id`, and falls back to a naive statutory-only guess for any
+`payment_id` not in the table.
 
-**Measured result: reward 0.** `test_every_payment_present` fails on the
-missing `payment_id` before dollar amounts are even compared -- a
-correct-looking total cannot paper over an incomplete submission.
+**Measured result: reward 0.** Held-out `payment_id`s happen to reuse
+the same `PAY####` numbering scheme as the visible case dataset (both
+start fresh at `PAY0001`), so this cheat's lookup table technically
+"hits" on every held-out payment_id -- but the underlying facts
+(amounts, dates, ownership, currencies) differ, so the memorized dollar
+figures are simply wrong for held-out data. This confirms held-out
+grading tests whether the pipeline's LOGIC was actually fixed, not
+whether the agent can pattern-match on identifiers.
 
-## 9. Correct total, wrong per-line distribution (`correct_total_wrong_lines/`)
+## Why this bundle's cheat surface differs from field-service-dispatch/cash-sweep
 
-The grand total is exactly correct (copied from the real answer), but
-every individual payment is reported as an equal share of that total,
-ignoring each payment's actual facts entirely.
-
-**Measured result: reward 0.** `test_grand_total_correct` passes, but
-`test_every_payment_final_withholding_correct` fails on effectively
-every line -- confirms the verifier grades line items, not just the
-aggregate, so a correct total computed the wrong way (or reverse-
-engineered from a leaked total) cannot pass.
-
-## Why this bundle's cheat surface is different in kind
-
-There is no code-execution attack surface to test here (no process to
-isolate, no live simulator state to leak, no filesystem to seal) because
-grading never runs anything the candidate wrote -- it only ever reads
-the JSON file left behind and diffs it against a sealed ground truth
-computed ahead of time from `environment/data/case` (the same dataset
-the agent works from; nothing about the graded instance is hidden from
-the agent, since a computed-file deliverable requires seeing the data it
-computes over). The bar this bundle has to clear instead is: can a
-plausible-but-wrong computation, or a malformed/incomplete submission,
-survive tolerance-based comparison? Sections 1-3 and 8 test the schema
-and completeness checks; sections 4-7 and 9 test that per-line accuracy
-(not just a matching or reverse-engineered total) is actually required,
-using the same naive computations independently validated in
-dev/probes.py against the real dataset.
+There is no incrementally-revealed information to leak (no decide()
+loop, no live simulator with hidden future state) and correspondingly no
+process-isolation-against-introspection concern -- the candidate's code
+receives a data directory once and returns an answer once. The attack
+surface that remains is standard for any "submit code that gets
+executed against sealed test data" task: don't let it read the answer
+key, don't let it forge the reward file, don't let a crash or hang
+silently pass, and confirm that a shortcut specific to the VISIBLE data
+(hardcoding, memorizing, partial fixes that only happen to work on the
+cases you've seen) genuinely fails to generalize to the sealed data,
+which is exactly what exploit #9 checks directly rather than assumes.
