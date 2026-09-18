@@ -16,11 +16,11 @@ You have three scenarios to work with:
 `/app/data/sample_87/`
 `/app/data/sample_150/`
 
-Run the policy against all three. They are only development cases, though. The grader uses a different shift, with its own technicians and jobs, so don't build something that depends on the particular contents of these samples.
+Run the policy against all three. They are only development cases, though. The grader uses two different shifts, each with its own technicians and jobs, and each grading shift has to clear its own quality bar. Results are not averaged across the two shifts.
 
-The submitted module is imported and run through the real simulator on that hidden shift. The returned assignments are replayed and the resulting cost is checked against a hidden quality bar. The bar was set using measured baseline and reference results. Its exact value, and the grading scenario itself, are not available here.
+The submitted module is imported and run through the real simulator on those hidden shifts. The returned assignments are replayed and the resulting cost is checked against hidden quality bars. The bars were set using measured baseline and reference results. Their exact values, and the grading scenarios themselves, are not available here.
 
-There is another practical constraint: the complete shift simulation has a combined wall-clock budget of 120 seconds. Keep the decision function cheap enough to run repeatedly. A clever policy that spends too much time making each decision will not help if the simulation cannot finish.
+There is another practical constraint: the complete shift simulation has a combined wall-clock budget of 200 seconds across both grading shifts. Keep the decision function cheap enough to run repeatedly. A clever policy that spends too much time making each decision will not help if the simulations cannot finish.
 
 Keep `decide` deterministic. Given the same state, it should give back the same list. In particular, don't let wall-clock time, unseeded random choices, or changing outside state affect its result.
 

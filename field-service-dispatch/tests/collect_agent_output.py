@@ -3,18 +3,23 @@
 Stage 1 (UNTRUSTED). Runs as the unprivileged `runner` user, under a
 wall-clock timeout enforced by test.sh (`timeout` wraps this whole script).
 
-Imports the candidate's submitted policy module ONCE and runs it, via the
-real simulator, against EVERY sealed held-out scenario (there are two,
-with deliberately different structure -- technician-pool size, skill
-scarcity, arrival cadence -- so a policy tuned to only one shape can't
-coast on the other). Records the RAW decision trace (list of (tech_id,
-job_id) pairs the candidate's decide() returned at each call) per scenario
-to /work/trace.json. Makes no pass/fail judgment and does not trust its
-own computed cost for grading purposes -- Stage 2 independently replays
-each trace through the trusted simulator from scratch. This script never
-reads anything under tests/sealed/reference (sealed 700/600 before this
-runs) and the scenario input data it does read is not the answer to
-anything -- only the traces it produces matter downstream.
+Imports the candidate's submitted policy module FRESH for each sealed
+held-out scenario (there are two, with deliberately different structure --
+technician-pool size, skill scarcity, arrival cadence -- so a policy tuned
+to only one shape can't coast on the other) and runs it via the real
+simulator. A fresh module instance per scenario matters because the
+instruction explicitly invites the candidate to keep internal bookkeeping
+across decide() calls -- reusing one imported module across both shifts
+would let shift-1 module-level state silently leak into shift-2's grading
+run, an accidental failure mode with nothing to do with the task's actual
+difficulty. Records the RAW decision trace (list of (tech_id, job_id)
+pairs the candidate's decide() returned at each call) per scenario to
+/work/trace.json. Makes no pass/fail judgment and does not trust its own
+computed cost for grading purposes -- Stage 2 independently replays each
+trace through the trusted simulator from scratch. This script never reads
+anything under tests/sealed/reference (sealed 700/600 before this runs)
+and the scenario input data it does read is not the answer to anything --
+only the traces it produces matter downstream.
 """
 import importlib.util
 import json
@@ -58,6 +63,19 @@ def load_scenario(data_dir):
     return techs, jobs, cfg["shift_length"]
 
 
+def _load_fresh_policy():
+    """Executes the candidate's module into a brand-new namespace (never
+    registered in sys.modules), so no global/module-level state can survive
+    from a previous load. Returns the callable decide(state)."""
+    spec = importlib.util.spec_from_file_location("candidate_policy", ARTIFACT_PATH)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    decide = getattr(mod, "decide", None)
+    if decide is None or not callable(decide):
+        raise AttributeError("policy.py does not define a callable decide(state)")
+    return decide
+
+
 def main():
     out = {"status": "ok", "traces": {}, "error": None}
 
@@ -66,23 +84,14 @@ def main():
         _write(out)
         return
 
-    try:
-        spec = importlib.util.spec_from_file_location("candidate_policy", ARTIFACT_PATH)
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
-        decide = getattr(mod, "decide", None)
-        if decide is None or not callable(decide):
-            out["status"] = "malformed"
-            out["error"] = "policy.py does not define a callable decide(state)"
-            _write(out)
-            return
-    except Exception as e:  # noqa: BLE001 - untrusted import must never crash uncaught
-        out["status"] = "malformed"
-        out["error"] = f"failed to load policy.py: {e}"
-        _write(out)
-        return
-
     for name, data_dir in SEALED_SCENARIO_DIRS.items():
+        try:
+            decide = _load_fresh_policy()
+        except Exception as e:  # noqa: BLE001 - untrusted import must never crash uncaught
+            out["status"] = "malformed"
+            out["error"] = f"{name}: failed to load policy.py: {e}"
+            out["traces"][name] = None
+            continue
         try:
             techs, jobs, shift_length = load_scenario(data_dir)
             result = sim.run_simulation(techs, jobs, shift_length, decide)
