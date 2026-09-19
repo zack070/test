@@ -1,29 +1,35 @@
-Work in `/app`. Your submission is `/app/outputs/poster.py`.
+Work in `/app`. The only file you need to leave as the submission is:
 
-The grader will call it like this:
+`/app/outputs/poster.py`
+
+The command-line interface matters. The grader will invoke the program in this form:
 
 `python3 poster.py --loans <loans.json> --payments <payments.json> --window-days <N> --output <output.json>`
 
-The script must produce one JSON object. It needs the two top-level fields `final_ledger` and `payment_allocations`, using the exact formats described in section 5 of `/app/SERVICING_SPEC.md`. Both parts matter.
+The output file is one JSON object containing `final_ledger` and `payment_allocations`. Section 5 of `/app/SERVICING_SPEC.md` has the exact shape. Use that rather than guessing at field names or nesting.
 
-For `final_ledger`, include every loan from the input exactly once, keyed by its `loan_id`. Do not add loans that were not supplied. The allocation list follows a different rule. There should be one allocation record for each loan and posting day where a payment was actually posted. If a loan has money sitting in suspense, that does not by itself create another allocation record on a later day.
+The main reference for the actual loan servicing behaviour is `/app/SERVICING_SPEC.md`. Read the whole thing before coding. This isn't a case where you need to invent a reasonable posting system. The date rules, actual/365 accrual, escrow processing, suspense handling, installment release test, waterfall and late-fee behaviour are all spelled out there, including the order in which things happen.
 
-Most of the work is in the servicing rules. `/app/SERVICING_SPEC.md` is the authority for them, so use that file rather than making assumptions about how a loan system normally behaves. It covers the date convention, daily interest using actual/365, escrow disbursements and release checks, suspense handling, the hold-until-full-installment rule, the payment waterfall, and the late-fee cycle rule. The grader follows those details.
+One easy trap is the payment data. `posting_date` is the date that counts. `effective_date` is not used for accrual, release timing, or delinquency. `memo` is just text. Don't let either field sneak into the calculations.
 
-There are two payment fields that are deliberately irrelevant. Use `posting_date` for the simulation. Do not use `effective_date` for accrual, release timing, or delinquency calculations. Treat `memo` as ordinary display text. It has no effect on the waterfall or on whether a payment is held in suspense.
+I'd use the small example first. `/app/data/worked_example/` has two loans and a 45-day window, plus a README that works through the arithmetic and gives you figures to compare against. It is much easier to find an accrual or posting-order bug there than after running the larger case. There is also `/app/data/case/`, an 80-loan, 75-day practice portfolio. That one is useful for exercising the script at a more realistic size, but it is still only practice data.
 
-This is not a search for a good policy or an optimization exercise. Given the input and the rules, the result is fixed. The implementation needs to simulate the events in the specified order and record the resulting ledger and payment allocations.
+The output has two separate jobs.
 
-Start with `/app/data/worked_example/` while developing. It contains two loans over a 45-day period, and the README works through the figures manually. The numbers there are useful for checking both the ending balances and the payment records. The larger material in `/app/data/case/` is an 80-loan, 75-day practice portfolio. It has the same general data shape as the grading input, but it is not the portfolio used for grading.
+`final_ledger` needs exactly one record for every `loan_id` in the input. Nothing extra, nothing missing.
 
-The real test uses one sealed portfolio with 80 loans and 75 days. Its loan IDs and generated figures differ from the visible case. The program is launched in a fresh subprocess with a firm timeout.
+`payment_allocations` is based on actual payment posting days. If loan 17 gets a payment on day 12, there should be an allocation entry for that loan/day. If it has suspense sitting on the account on day 13 but no payment posts that day, there is no new allocation entry for day 13. This distinction is checked.
 
-The final ledger is compared against a frozen reference. Monetary values such as `principal_balance`, `accrued_interest`, `escrow_balance`, `suspense_balance`, and every bucket under `fees_owed` must agree to the cent. `next_due_date` and `days_past_due` must agree exactly as well.
+The sealed test uses another 80-loan, 75-day portfolio. You won't see its figures or loan IDs. Your program is run as a fresh subprocess, so it needs to work from the supplied files and arguments rather than relying on anything outside the task.
 
-The grader also checks `payment_allocations` on its own. It matches records by loan and posting day, then checks the `event` value and every monetary breakdown field. A correct ending ledger will still fail if the allocation trace has a missing day, an extra record, duplicate entries, or incorrect amounts. Both comparisons must pass. There is no partial score.
+The final ledger is compared field by field with the frozen result. Monetary fields are required to match to the cent, including principal, accrued interest, escrow, suspense and every `fees_owed` bucket. `next_due_date` and `days_past_due` have to match exactly.
 
-Leave `/app/SERVICING_SPEC.md` and all files under `/app/data/` alone. The script should give the same result every time for the same inputs and should not spend excessive time processing the portfolio. Several minutes are available for the sealed run, though the reference implementation is much faster than that.
+The payment trace gets its own comparison. For each loan/posting-day entry, the grader checks the `event` and all of the monetary breakdown fields. So don't treat the allocation list as something you can reconstruct loosely from the final balances. A correct ledger with a wrong or incomplete trace still gets a zero.
 
-Use the worked example and practice case to test the script before submitting. Check the JSON structure too, not just the balances. The final ledger must cover every input loan once, and allocation records belong only to days on which that loan received a posted payment.
+There isn't any optimization here. Don't spend time looking for a "better" posting outcome. Once the servicing rules and input are fixed, the ledger and allocation trace are fixed too.
+
+Leave `/app/SERVICING_SPEC.md` and everything below `/app/data/` untouched. Keep the program deterministic. Runtime shouldn't be an issue for a normal implementation; the reference finishes in well under a second, while the sealed run allows several minutes.
+
+Before calling it done, run the worked example and the practice case yourself. Check the actual JSON as well as the balances. Missing allocation rows are easy to overlook.
 
 You have 10800 seconds to complete this task. Do not cheat by using online solutions or hints specific to this task.
