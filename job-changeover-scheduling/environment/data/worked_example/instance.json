@@ -1,0 +1,46 @@
+{
+  "jobs": [
+    {
+      "job_id": "A",
+      "family": 0,
+      "proc_time": 10,
+      "due_date": 15,
+      "weight": 2
+    },
+    {
+      "job_id": "B",
+      "family": 1,
+      "proc_time": 8,
+      "due_date": 20,
+      "weight": 3
+    },
+    {
+      "job_id": "C",
+      "family": 0,
+      "proc_time": 12,
+      "due_date": 55,
+      "weight": 1
+    },
+    {
+      "job_id": "D",
+      "family": 1,
+      "proc_time": 6,
+      "due_date": 60,
+      "weight": 4
+    }
+  ],
+  "setup_matrix": [
+    [
+      3,
+      20
+    ],
+    [
+      25,
+      4
+    ]
+  ],
+  "initial_setup": [
+    8,
+    30
+  ]
+}
