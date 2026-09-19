@@ -1,0 +1,30 @@
+[
+  {
+    "loan_id": "W001",
+    "posting_date": 10,
+    "effective_date": 10,
+    "amount": 150.0,
+    "memo": ""
+  },
+  {
+    "loan_id": "W001",
+    "posting_date": 18,
+    "effective_date": 18,
+    "amount": 300.0,
+    "memo": ""
+  },
+  {
+    "loan_id": "W002",
+    "posting_date": 10,
+    "effective_date": 10,
+    "amount": 250.0,
+    "memo": ""
+  },
+  {
+    "loan_id": "W002",
+    "posting_date": 40,
+    "effective_date": 39,
+    "amount": 250.0,
+    "memo": ""
+  }
+]

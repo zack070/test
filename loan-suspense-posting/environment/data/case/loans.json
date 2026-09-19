@@ -1,0 +1,1786 @@
+[
+  {
+    "loan_id": "L000",
+    "annual_rate": 0.0672,
+    "monthly_installment": 256.98,
+    "late_fee_amount": 50.0,
+    "first_due_day": 15,
+    "opening_principal": 17182.26,
+    "opening_escrow": 309.66,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        32,
+        207.75
+      ]
+    ]
+  },
+  {
+    "loan_id": "L001",
+    "annual_rate": 0.0818,
+    "monthly_installment": 154.94,
+    "late_fee_amount": 35.0,
+    "first_due_day": 10,
+    "opening_principal": 16037.83,
+    "opening_escrow": 411.13,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        5,
+        196.0
+      ],
+      [
+        69,
+        196.0
+      ]
+    ]
+  },
+  {
+    "loan_id": "L002",
+    "annual_rate": 0.061,
+    "monthly_installment": 413.52,
+    "late_fee_amount": 25.0,
+    "first_due_day": 3,
+    "opening_principal": 28214.33,
+    "opening_escrow": 1374.73,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        11,
+        1321.01
+      ]
+    ]
+  },
+  {
+    "loan_id": "L003",
+    "annual_rate": 0.0753,
+    "monthly_installment": 265.57,
+    "late_fee_amount": 25.0,
+    "first_due_day": 17,
+    "opening_principal": 13243.91,
+    "opening_escrow": 794.72,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        41,
+        1027.7
+      ]
+    ]
+  },
+  {
+    "loan_id": "L004",
+    "annual_rate": 0.0603,
+    "monthly_installment": 478.55,
+    "late_fee_amount": 25.0,
+    "first_due_day": 24,
+    "opening_principal": 32726.31,
+    "opening_escrow": 293.42,
+    "opening_fees": {
+      "late": 25.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        8,
+        164.98
+      ],
+      [
+        17,
+        164.98
+      ]
+    ]
+  },
+  {
+    "loan_id": "L005",
+    "annual_rate": 0.0655,
+    "monthly_installment": 353.13,
+    "late_fee_amount": 35.0,
+    "first_due_day": 7,
+    "opening_principal": 40410.64,
+    "opening_escrow": 1311.45,
+    "opening_fees": {
+      "late": 35.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        35,
+        1615.73
+      ]
+    ]
+  },
+  {
+    "loan_id": "L006",
+    "annual_rate": 0.0886,
+    "monthly_installment": 650.58,
+    "late_fee_amount": 35.0,
+    "first_due_day": 27,
+    "opening_principal": 40615.16,
+    "opening_escrow": 368.74,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        10,
+        231.08
+      ],
+      [
+        47,
+        231.08
+      ]
+    ]
+  },
+  {
+    "loan_id": "L007",
+    "annual_rate": 0.1072,
+    "monthly_installment": 223.5,
+    "late_fee_amount": 50.0,
+    "first_due_day": 10,
+    "opening_principal": 19972.24,
+    "opening_escrow": 1058.46,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        41,
+        1018.87
+      ]
+    ]
+  },
+  {
+    "loan_id": "L008",
+    "annual_rate": 0.0581,
+    "monthly_installment": 279.88,
+    "late_fee_amount": 35.0,
+    "first_due_day": 16,
+    "opening_principal": 14543.13,
+    "opening_escrow": 1134.48,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        16,
+        1466.2
+      ]
+    ]
+  },
+  {
+    "loan_id": "L009",
+    "annual_rate": 0.1075,
+    "monthly_installment": 403.47,
+    "late_fee_amount": 25.0,
+    "first_due_day": 16,
+    "opening_principal": 35993.95,
+    "opening_escrow": 717.34,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        12,
+        384.97
+      ],
+      [
+        61,
+        384.97
+      ]
+    ]
+  },
+  {
+    "loan_id": "L010",
+    "annual_rate": 0.0803,
+    "monthly_installment": 235.46,
+    "late_fee_amount": 35.0,
+    "first_due_day": 9,
+    "opening_principal": 19381.99,
+    "opening_escrow": 1083.19,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        35,
+        857.14
+      ]
+    ]
+  },
+  {
+    "loan_id": "L011",
+    "annual_rate": 0.0921,
+    "monthly_installment": 801.11,
+    "late_fee_amount": 35.0,
+    "first_due_day": 3,
+    "opening_principal": 38403.2,
+    "opening_escrow": 1053.17,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        61,
+        335.44
+      ],
+      [
+        62,
+        335.44
+      ]
+    ]
+  },
+  {
+    "loan_id": "L012",
+    "annual_rate": 0.1024,
+    "monthly_installment": 310.17,
+    "late_fee_amount": 50.0,
+    "first_due_day": 24,
+    "opening_principal": 14517.22,
+    "opening_escrow": 548.27,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        7,
+        217.99
+      ],
+      [
+        8,
+        217.99
+      ]
+    ]
+  },
+  {
+    "loan_id": "L013",
+    "annual_rate": 0.0699,
+    "monthly_installment": 413.38,
+    "late_fee_amount": 25.0,
+    "first_due_day": 30,
+    "opening_principal": 27398.33,
+    "opening_escrow": 359.58,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        5,
+        174.16
+      ],
+      [
+        15,
+        174.16
+      ]
+    ]
+  },
+  {
+    "loan_id": "L014",
+    "annual_rate": 0.0673,
+    "monthly_installment": 330.29,
+    "late_fee_amount": 35.0,
+    "first_due_day": 12,
+    "opening_principal": 28790.46,
+    "opening_escrow": 1038.97,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        36,
+        956.88
+      ]
+    ]
+  },
+  {
+    "loan_id": "L015",
+    "annual_rate": 0.0872,
+    "monthly_installment": 149.16,
+    "late_fee_amount": 35.0,
+    "first_due_day": 26,
+    "opening_principal": 14950.95,
+    "opening_escrow": 423.5,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        17,
+        207.57
+      ],
+      [
+        33,
+        207.57
+      ]
+    ]
+  },
+  {
+    "loan_id": "L016",
+    "annual_rate": 0.0743,
+    "monthly_installment": 820.56,
+    "late_fee_amount": 35.0,
+    "first_due_day": 10,
+    "opening_principal": 41018.51,
+    "opening_escrow": 646.61,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        34,
+        296.59
+      ],
+      [
+        59,
+        296.59
+      ]
+    ]
+  },
+  {
+    "loan_id": "L017",
+    "annual_rate": 0.0807,
+    "monthly_installment": 317.68,
+    "late_fee_amount": 50.0,
+    "first_due_day": 29,
+    "opening_principal": 26104.02,
+    "opening_escrow": 1045.53,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        41,
+        1130.6
+      ]
+    ]
+  },
+  {
+    "loan_id": "L018",
+    "annual_rate": 0.0775,
+    "monthly_installment": 503.57,
+    "late_fee_amount": 50.0,
+    "first_due_day": 28,
+    "opening_principal": 41960.85,
+    "opening_escrow": 276.52,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        51,
+        317.44
+      ]
+    ]
+  },
+  {
+    "loan_id": "L019",
+    "annual_rate": 0.0615,
+    "monthly_installment": 390.69,
+    "late_fee_amount": 25.0,
+    "first_due_day": 12,
+    "opening_principal": 34953.01,
+    "opening_escrow": 896.94,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        44,
+        569.6
+      ],
+      [
+        51,
+        569.6
+      ]
+    ]
+  },
+  {
+    "loan_id": "L020",
+    "annual_rate": 0.0917,
+    "monthly_installment": 169.78,
+    "late_fee_amount": 35.0,
+    "first_due_day": 25,
+    "opening_principal": 8146.53,
+    "opening_escrow": 483.96,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        59,
+        544.68
+      ]
+    ]
+  },
+  {
+    "loan_id": "L021",
+    "annual_rate": 0.0741,
+    "monthly_installment": 209.01,
+    "late_fee_amount": 50.0,
+    "first_due_day": 19,
+    "opening_principal": 17677.92,
+    "opening_escrow": 301.74,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        12,
+        106.19
+      ],
+      [
+        18,
+        106.19
+      ]
+    ]
+  },
+  {
+    "loan_id": "L022",
+    "annual_rate": 0.0748,
+    "monthly_installment": 252.6,
+    "late_fee_amount": 25.0,
+    "first_due_day": 13,
+    "opening_principal": 27282.42,
+    "opening_escrow": 1185.16,
+    "opening_fees": {
+      "late": 25.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        31,
+        639.3
+      ],
+      [
+        35,
+        639.3
+      ]
+    ]
+  },
+  {
+    "loan_id": "L023",
+    "annual_rate": 0.1047,
+    "monthly_installment": 831.45,
+    "late_fee_amount": 50.0,
+    "first_due_day": 18,
+    "opening_principal": 38709.66,
+    "opening_escrow": 424.12,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        57,
+        270.2
+      ]
+    ]
+  },
+  {
+    "loan_id": "L024",
+    "annual_rate": 0.1082,
+    "monthly_installment": 538.15,
+    "late_fee_amount": 35.0,
+    "first_due_day": 6,
+    "opening_principal": 39357.4,
+    "opening_escrow": 526.08,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        47,
+        292.48
+      ],
+      [
+        67,
+        292.48
+      ]
+    ]
+  },
+  {
+    "loan_id": "L025",
+    "annual_rate": 0.0871,
+    "monthly_installment": 244.41,
+    "late_fee_amount": 25.0,
+    "first_due_day": 11,
+    "opening_principal": 11854.24,
+    "opening_escrow": 345.54,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        19,
+        307.91
+      ]
+    ]
+  },
+  {
+    "loan_id": "L026",
+    "annual_rate": 0.0791,
+    "monthly_installment": 425.65,
+    "late_fee_amount": 35.0,
+    "first_due_day": 16,
+    "opening_principal": 44783.2,
+    "opening_escrow": 205.77,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        7,
+        77.89
+      ],
+      [
+        42,
+        77.89
+      ]
+    ]
+  },
+  {
+    "loan_id": "L027",
+    "annual_rate": 0.0997,
+    "monthly_installment": 452.69,
+    "late_fee_amount": 25.0,
+    "first_due_day": 4,
+    "opening_principal": 27293.93,
+    "opening_escrow": 584.02,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        18,
+        356.84
+      ]
+    ]
+  },
+  {
+    "loan_id": "L028",
+    "annual_rate": 0.0794,
+    "monthly_installment": 380.41,
+    "late_fee_amount": 25.0,
+    "first_due_day": 18,
+    "opening_principal": 18787.96,
+    "opening_escrow": 1483.24,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        44,
+        1552.33
+      ]
+    ]
+  },
+  {
+    "loan_id": "L029",
+    "annual_rate": 0.0754,
+    "monthly_installment": 137.46,
+    "late_fee_amount": 50.0,
+    "first_due_day": 3,
+    "opening_principal": 14791.74,
+    "opening_escrow": 552.41,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        60,
+        169.68
+      ],
+      [
+        65,
+        169.68
+      ]
+    ]
+  },
+  {
+    "loan_id": "L030",
+    "annual_rate": 0.064,
+    "monthly_installment": 573.86,
+    "late_fee_amount": 35.0,
+    "first_due_day": 21,
+    "opening_principal": 29399.57,
+    "opening_escrow": 630.57,
+    "opening_fees": {
+      "late": 35.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        13,
+        458.85
+      ]
+    ]
+  },
+  {
+    "loan_id": "L031",
+    "annual_rate": 0.0725,
+    "monthly_installment": 210.99,
+    "late_fee_amount": 50.0,
+    "first_due_day": 29,
+    "opening_principal": 23113.02,
+    "opening_escrow": 1362.98,
+    "opening_fees": {
+      "late": 50.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        9,
+        852.46
+      ],
+      [
+        10,
+        852.46
+      ]
+    ]
+  },
+  {
+    "loan_id": "L032",
+    "annual_rate": 0.0986,
+    "monthly_installment": 376.93,
+    "late_fee_amount": 35.0,
+    "first_due_day": 15,
+    "opening_principal": 17798.1,
+    "opening_escrow": 1096.53,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        32,
+        919.41
+      ]
+    ]
+  },
+  {
+    "loan_id": "L033",
+    "annual_rate": 0.0587,
+    "monthly_installment": 251.19,
+    "late_fee_amount": 35.0,
+    "first_due_day": 29,
+    "opening_principal": 30016.53,
+    "opening_escrow": 948.3,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        13,
+        559.05
+      ],
+      [
+        39,
+        559.05
+      ]
+    ]
+  },
+  {
+    "loan_id": "L034",
+    "annual_rate": 0.0872,
+    "monthly_installment": 340.46,
+    "late_fee_amount": 35.0,
+    "first_due_day": 6,
+    "opening_principal": 16508.78,
+    "opening_escrow": 254.98,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        66,
+        153.29
+      ]
+    ]
+  },
+  {
+    "loan_id": "L035",
+    "annual_rate": 0.0654,
+    "monthly_installment": 262.31,
+    "late_fee_amount": 35.0,
+    "first_due_day": 24,
+    "opening_principal": 23059.86,
+    "opening_escrow": 1267.18,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        41,
+        597.8
+      ],
+      [
+        46,
+        597.8
+      ]
+    ]
+  },
+  {
+    "loan_id": "L036",
+    "annual_rate": 0.0687,
+    "monthly_installment": 193.41,
+    "late_fee_amount": 35.0,
+    "first_due_day": 10,
+    "opening_principal": 21692.83,
+    "opening_escrow": 1011.14,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        12,
+        353.74
+      ],
+      [
+        36,
+        353.74
+      ]
+    ]
+  },
+  {
+    "loan_id": "L037",
+    "annual_rate": 0.1061,
+    "monthly_installment": 536.62,
+    "late_fee_amount": 35.0,
+    "first_due_day": 21,
+    "opening_principal": 39588.15,
+    "opening_escrow": 957.43,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        15,
+        703.51
+      ]
+    ]
+  },
+  {
+    "loan_id": "L038",
+    "annual_rate": 0.108,
+    "monthly_installment": 772.32,
+    "late_fee_amount": 50.0,
+    "first_due_day": 4,
+    "opening_principal": 35684.72,
+    "opening_escrow": 439.78,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        14,
+        245.09
+      ],
+      [
+        16,
+        245.09
+      ]
+    ]
+  },
+  {
+    "loan_id": "L039",
+    "annual_rate": 0.0589,
+    "monthly_installment": 356.34,
+    "late_fee_amount": 50.0,
+    "first_due_day": 6,
+    "opening_principal": 42526.82,
+    "opening_escrow": 1007.67,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        26,
+        511.2
+      ],
+      [
+        55,
+        511.2
+      ]
+    ]
+  },
+  {
+    "loan_id": "L040",
+    "annual_rate": 0.0791,
+    "monthly_installment": 380.69,
+    "late_fee_amount": 35.0,
+    "first_due_day": 28,
+    "opening_principal": 31500.22,
+    "opening_escrow": 582.77,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        17,
+        285.61
+      ],
+      [
+        53,
+        285.61
+      ]
+    ]
+  },
+  {
+    "loan_id": "L041",
+    "annual_rate": 0.0586,
+    "monthly_installment": 310.45,
+    "late_fee_amount": 50.0,
+    "first_due_day": 19,
+    "opening_principal": 37121.44,
+    "opening_escrow": 699.22,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        21,
+        362.83
+      ],
+      [
+        66,
+        362.83
+      ]
+    ]
+  },
+  {
+    "loan_id": "L042",
+    "annual_rate": 0.089,
+    "monthly_installment": 637.28,
+    "late_fee_amount": 25.0,
+    "first_due_day": 4,
+    "opening_principal": 39734.85,
+    "opening_escrow": 218.18,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        55,
+        155.82
+      ]
+    ]
+  },
+  {
+    "loan_id": "L043",
+    "annual_rate": 0.0906,
+    "monthly_installment": 325.15,
+    "late_fee_amount": 35.0,
+    "first_due_day": 18,
+    "opening_principal": 15641.6,
+    "opening_escrow": 1410.71,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        25,
+        674.41
+      ],
+      [
+        57,
+        674.41
+      ]
+    ]
+  },
+  {
+    "loan_id": "L044",
+    "annual_rate": 0.0724,
+    "monthly_installment": 229.54,
+    "late_fee_amount": 50.0,
+    "first_due_day": 15,
+    "opening_principal": 15090.81,
+    "opening_escrow": 970.08,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        48,
+        363.87
+      ],
+      [
+        52,
+        363.87
+      ]
+    ]
+  },
+  {
+    "loan_id": "L045",
+    "annual_rate": 0.0701,
+    "monthly_installment": 292.74,
+    "late_fee_amount": 50.0,
+    "first_due_day": 19,
+    "opening_principal": 19390.11,
+    "opening_escrow": 638.18,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        33,
+        651.4
+      ]
+    ]
+  },
+  {
+    "loan_id": "L046",
+    "annual_rate": 0.0795,
+    "monthly_installment": 252.4,
+    "late_fee_amount": 50.0,
+    "first_due_day": 18,
+    "opening_principal": 26491.64,
+    "opening_escrow": 996.47,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        18,
+        955.09
+      ]
+    ]
+  },
+  {
+    "loan_id": "L047",
+    "annual_rate": 0.0882,
+    "monthly_installment": 340.98,
+    "late_fee_amount": 25.0,
+    "first_due_day": 20,
+    "opening_principal": 27125.94,
+    "opening_escrow": 411.59,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        23,
+        299.44
+      ]
+    ]
+  },
+  {
+    "loan_id": "L048",
+    "annual_rate": 0.094,
+    "monthly_installment": 118.16,
+    "late_fee_amount": 25.0,
+    "first_due_day": 27,
+    "opening_principal": 9170.06,
+    "opening_escrow": 1089.27,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        46,
+        615.68
+      ],
+      [
+        61,
+        615.68
+      ]
+    ]
+  },
+  {
+    "loan_id": "L049",
+    "annual_rate": 0.0802,
+    "monthly_installment": 206.53,
+    "late_fee_amount": 50.0,
+    "first_due_day": 15,
+    "opening_principal": 17007.44,
+    "opening_escrow": 1282.42,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        18,
+        1312.38
+      ]
+    ]
+  },
+  {
+    "loan_id": "L050",
+    "annual_rate": 0.1059,
+    "monthly_installment": 382.71,
+    "late_fee_amount": 25.0,
+    "first_due_day": 11,
+    "opening_principal": 17768.59,
+    "opening_escrow": 1397.13,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        28,
+        429.27
+      ],
+      [
+        37,
+        429.27
+      ]
+    ]
+  },
+  {
+    "loan_id": "L051",
+    "annual_rate": 0.0845,
+    "monthly_installment": 421.01,
+    "late_fee_amount": 25.0,
+    "first_due_day": 25,
+    "opening_principal": 42880.67,
+    "opening_escrow": 284.06,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        35,
+        123.14
+      ],
+      [
+        36,
+        123.14
+      ]
+    ]
+  },
+  {
+    "loan_id": "L052",
+    "annual_rate": 0.0892,
+    "monthly_installment": 810.5,
+    "late_fee_amount": 50.0,
+    "first_due_day": 6,
+    "opening_principal": 39117.57,
+    "opening_escrow": 377.05,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        27,
+        176.66
+      ],
+      [
+        43,
+        176.66
+      ]
+    ]
+  },
+  {
+    "loan_id": "L053",
+    "annual_rate": 0.0911,
+    "monthly_installment": 244.52,
+    "late_fee_amount": 50.0,
+    "first_due_day": 4,
+    "opening_principal": 23953.72,
+    "opening_escrow": 698.11,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        12,
+        639.73
+      ]
+    ]
+  },
+  {
+    "loan_id": "L054",
+    "annual_rate": 0.0785,
+    "monthly_installment": 328.91,
+    "late_fee_amount": 50.0,
+    "first_due_day": 6,
+    "opening_principal": 16278.86,
+    "opening_escrow": 733.46,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        37,
+        831.62
+      ]
+    ]
+  },
+  {
+    "loan_id": "L055",
+    "annual_rate": 0.0674,
+    "monthly_installment": 873.38,
+    "late_fee_amount": 50.0,
+    "first_due_day": 7,
+    "opening_principal": 44381.65,
+    "opening_escrow": 1379.15,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        34,
+        1408.26
+      ]
+    ]
+  },
+  {
+    "loan_id": "L056",
+    "annual_rate": 0.1019,
+    "monthly_installment": 268.97,
+    "late_fee_amount": 25.0,
+    "first_due_day": 15,
+    "opening_principal": 24761.59,
+    "opening_escrow": 871.4,
+    "opening_fees": {
+      "late": 25.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        29,
+        453.95
+      ],
+      [
+        53,
+        453.95
+      ]
+    ]
+  },
+  {
+    "loan_id": "L057",
+    "annual_rate": 0.0793,
+    "monthly_installment": 236.98,
+    "late_fee_amount": 25.0,
+    "first_due_day": 11,
+    "opening_principal": 19592.31,
+    "opening_escrow": 729.63,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        54,
+        916.16
+      ]
+    ]
+  },
+  {
+    "loan_id": "L058",
+    "annual_rate": 0.0565,
+    "monthly_installment": 768.59,
+    "late_fee_amount": 25.0,
+    "first_due_day": 29,
+    "opening_principal": 40092.47,
+    "opening_escrow": 937.4,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        65,
+        605.21
+      ]
+    ]
+  },
+  {
+    "loan_id": "L059",
+    "annual_rate": 0.0663,
+    "monthly_installment": 488.09,
+    "late_fee_amount": 25.0,
+    "first_due_day": 7,
+    "opening_principal": 32730.55,
+    "opening_escrow": 855.99,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        58,
+        498.4
+      ],
+      [
+        66,
+        498.4
+      ]
+    ]
+  },
+  {
+    "loan_id": "L060",
+    "annual_rate": 0.1083,
+    "monthly_installment": 196.09,
+    "late_fee_amount": 35.0,
+    "first_due_day": 9,
+    "opening_principal": 11512.3,
+    "opening_escrow": 1026.67,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        6,
+        354.08
+      ],
+      [
+        24,
+        354.08
+      ]
+    ]
+  },
+  {
+    "loan_id": "L061",
+    "annual_rate": 0.0726,
+    "monthly_installment": 306.36,
+    "late_fee_amount": 35.0,
+    "first_due_day": 14,
+    "opening_principal": 15376.36,
+    "opening_escrow": 419.83,
+    "opening_fees": {
+      "late": 35.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        35,
+        383.18
+      ]
+    ]
+  },
+  {
+    "loan_id": "L062",
+    "annual_rate": 0.1051,
+    "monthly_installment": 826.92,
+    "late_fee_amount": 25.0,
+    "first_due_day": 21,
+    "opening_principal": 38463.32,
+    "opening_escrow": 844.8,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        18,
+        989.75
+      ]
+    ]
+  },
+  {
+    "loan_id": "L063",
+    "annual_rate": 0.1015,
+    "monthly_installment": 848.48,
+    "late_fee_amount": 25.0,
+    "first_due_day": 13,
+    "opening_principal": 39795.48,
+    "opening_escrow": 430.4,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        12,
+        157.84
+      ],
+      [
+        55,
+        157.84
+      ]
+    ]
+  },
+  {
+    "loan_id": "L064",
+    "annual_rate": 0.1014,
+    "monthly_installment": 358.95,
+    "late_fee_amount": 50.0,
+    "first_due_day": 9,
+    "opening_principal": 33138.77,
+    "opening_escrow": 781.34,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        55,
+        271.88
+      ],
+      [
+        61,
+        271.88
+      ]
+    ]
+  },
+  {
+    "loan_id": "L065",
+    "annual_rate": 0.1004,
+    "monthly_installment": 436.62,
+    "late_fee_amount": 25.0,
+    "first_due_day": 21,
+    "opening_principal": 40538.16,
+    "opening_escrow": 644.3,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        36,
+        401.13
+      ],
+      [
+        68,
+        401.13
+      ]
+    ]
+  },
+  {
+    "loan_id": "L066",
+    "annual_rate": 0.0921,
+    "monthly_installment": 245.76,
+    "late_fee_amount": 50.0,
+    "first_due_day": 9,
+    "opening_principal": 19227.83,
+    "opening_escrow": 1158.04,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        6,
+        480.96
+      ],
+      [
+        8,
+        480.96
+      ]
+    ]
+  },
+  {
+    "loan_id": "L067",
+    "annual_rate": 0.1078,
+    "monthly_installment": 292.85,
+    "late_fee_amount": 35.0,
+    "first_due_day": 17,
+    "opening_principal": 17219.32,
+    "opening_escrow": 1360.73,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        27,
+        559.34
+      ],
+      [
+        69,
+        559.34
+      ]
+    ]
+  },
+  {
+    "loan_id": "L068",
+    "annual_rate": 0.1028,
+    "monthly_installment": 288.61,
+    "late_fee_amount": 25.0,
+    "first_due_day": 19,
+    "opening_principal": 13495.78,
+    "opening_escrow": 680.71,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        34,
+        299.85
+      ],
+      [
+        57,
+        299.85
+      ]
+    ]
+  },
+  {
+    "loan_id": "L069",
+    "annual_rate": 0.096,
+    "monthly_installment": 410.3,
+    "late_fee_amount": 50.0,
+    "first_due_day": 9,
+    "opening_principal": 25025.64,
+    "opening_escrow": 1078.4,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        38,
+        483.67
+      ],
+      [
+        49,
+        483.67
+      ]
+    ]
+  },
+  {
+    "loan_id": "L070",
+    "annual_rate": 0.0851,
+    "monthly_installment": 437.92,
+    "late_fee_amount": 35.0,
+    "first_due_day": 24,
+    "opening_principal": 44444.53,
+    "opening_escrow": 1472.88,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        23,
+        870.13
+      ],
+      [
+        57,
+        870.13
+      ]
+    ]
+  },
+  {
+    "loan_id": "L071",
+    "annual_rate": 0.1069,
+    "monthly_installment": 897.68,
+    "late_fee_amount": 50.0,
+    "first_due_day": 24,
+    "opening_principal": 41581.91,
+    "opening_escrow": 600.48,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        60,
+        713.41
+      ]
+    ]
+  },
+  {
+    "loan_id": "L072",
+    "annual_rate": 0.0749,
+    "monthly_installment": 430.44,
+    "late_fee_amount": 50.0,
+    "first_due_day": 17,
+    "opening_principal": 36278.29,
+    "opening_escrow": 660.16,
+    "opening_fees": {
+      "late": 50.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        33,
+        571.06
+      ]
+    ]
+  },
+  {
+    "loan_id": "L073",
+    "annual_rate": 0.0702,
+    "monthly_installment": 144.27,
+    "late_fee_amount": 50.0,
+    "first_due_day": 3,
+    "opening_principal": 16030.87,
+    "opening_escrow": 1265.51,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        16,
+        543.52
+      ],
+      [
+        41,
+        543.52
+      ]
+    ]
+  },
+  {
+    "loan_id": "L074",
+    "annual_rate": 0.1062,
+    "monthly_installment": 524.68,
+    "late_fee_amount": 50.0,
+    "first_due_day": 20,
+    "opening_principal": 24343.42,
+    "opening_escrow": 1416.46,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        12,
+        686.78
+      ],
+      [
+        47,
+        686.78
+      ]
+    ]
+  },
+  {
+    "loan_id": "L075",
+    "annual_rate": 0.0636,
+    "monthly_installment": 194.27,
+    "late_fee_amount": 35.0,
+    "first_due_day": 8,
+    "opening_principal": 13142.47,
+    "opening_escrow": 803.86,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        28,
+        360.69
+      ],
+      [
+        62,
+        360.69
+      ]
+    ]
+  },
+  {
+    "loan_id": "L076",
+    "annual_rate": 0.0763,
+    "monthly_installment": 478.35,
+    "late_fee_amount": 35.0,
+    "first_due_day": 9,
+    "opening_principal": 31056.43,
+    "opening_escrow": 792.88,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        54,
+        238.05
+      ],
+      [
+        55,
+        238.05
+      ]
+    ]
+  },
+  {
+    "loan_id": "L077",
+    "annual_rate": 0.1099,
+    "monthly_installment": 577.75,
+    "late_fee_amount": 25.0,
+    "first_due_day": 23,
+    "opening_principal": 41959.4,
+    "opening_escrow": 1091.58,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        32,
+        690.61
+      ],
+      [
+        59,
+        690.61
+      ]
+    ]
+  },
+  {
+    "loan_id": "L078",
+    "annual_rate": 0.0662,
+    "monthly_installment": 352.28,
+    "late_fee_amount": 35.0,
+    "first_due_day": 17,
+    "opening_principal": 17952.83,
+    "opening_escrow": 625.03,
+    "opening_fees": {
+      "late": 0.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        65,
+        454.65
+      ]
+    ]
+  },
+  {
+    "loan_id": "L079",
+    "annual_rate": 0.0657,
+    "monthly_installment": 247.7,
+    "late_fee_amount": 25.0,
+    "first_due_day": 21,
+    "opening_principal": 12638.43,
+    "opening_escrow": 973.62,
+    "opening_fees": {
+      "late": 25.0,
+      "nsf": 0.0,
+      "extension": 0.0
+    },
+    "disbursements": [
+      [
+        12,
+        517.0
+      ],
+      [
+        24,
+        517.0
+      ]
+    ]
+  }
+]
