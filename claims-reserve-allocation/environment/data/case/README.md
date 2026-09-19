@@ -7,9 +7,9 @@ your policy on before submitting. Not the graded data itself.
 Same model, same disclosed parameters (`config.json`, matching
 `MODEL_SPEC.md`), just a fresh, larger claim mix and its own budget. As
 with the worked example, some claims share `incident_cluster_id`s in
-groups larger than one -- look at the distribution of cluster sizes in
-`claims.csv` yourself rather than assuming it matches the worked example's
-exact shape.
+groups larger than one, and some have a `linked_claim_id` -- look at the
+distribution of cluster sizes and linked pairs in `claims.csv` yourself
+rather than assuming it matches the worked example's exact shape.
 
 `reference_metrics.json` gives the same three baseline measurements as
 the worked example (settle-nothing, plain ratio-greedy, and the exact
