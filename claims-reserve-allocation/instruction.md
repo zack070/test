@@ -23,7 +23,7 @@ The returned result, and the JSON written by the script, should look like this:
 
 There needs to be exactly one decision for every claim in the input. Use `0` for defer and `1` for settle now. Don't leave out claims or add IDs that aren't in the dataset.
 
-The settlement budget is a hard constraint. The `settlement_offer_usd` for all claims marked `1` must fit within the portfolio's `budget_usd` from `config.json`. A policy that goes over the budget is infeasible and scores zero.
+The settlement budget is a hard constraint. The total amount charged against the portfolio's `budget_usd` must stay within the limit. The exact budget treatment, including how linked claims affect the amount counted, is defined in `/app/MODEL_SPEC.md`. A policy that goes over the budget is infeasible and scores zero.
 
 The model mechanics are fully available in `/app/MODEL_SPEC.md`. What you don't get is the exact random draws that will be used during grading or the numeric pass bars. You'll need to make your own estimates of the objective when comparing possible decision sets.
 
