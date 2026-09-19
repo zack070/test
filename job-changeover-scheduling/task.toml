@@ -1,0 +1,42 @@
+artifacts = ["/app/outputs/scheduler.py"]
+
+[task]
+name = "afterquery/job-changeover-scheduling"
+
+[metadata]
+author_name = "Tonny Muthoka"
+author_email = "tonnysammy952@gmail.com"
+
+difficulty_explanation = """
+Production schedulers on lines with real changeover costs -- paint booths switching colors, chemical batch trains between product runs, PCB lines switching component reels, printing presses switching plates -- spend real time deciding the order to run a day's jobs in, because the wrong order burns hours in avoidable setups and lets high-priority jobs run late. This task reproduces that decision with a fully disclosed model (each job's processing time, due date, priority weight and product family; a complete family-by-family setup-time table; and a fixed initial setup for whichever family runs first -- see SCHEDULING_SPEC.md) over a synthetic 45-job single-machine instance (synthetic data, disclosed as such), scored by total weighted tardiness. This is genuinely hard, not because the rules are numerous, but because single-machine scheduling with sequence-dependent setup times and weighted tardiness (1|s_ij|SUM w_j T_j in scheduling notation) is a well-known NP-hard sequencing problem whose combinatorics explode with n! rather than 2^n, and this was checked directly rather than assumed: at the SAME 180-second time budget the verifier gives any submission, Google OR-Tools CP-SAT -- a state-of-the-art, off-the-shelf exact solver, the natural first move for anyone who recognizes this as an optimization problem -- never matched the reference solution on either sealed instance (reference beat CP-SAT's best-found solution by 28.8% and 49.7% respectively, with CP-SAT never proving optimality). A genuinely competent, published dispatch heuristic for this exact problem class (Apparent Tardiness Cost with Setups, Lee/Bhaskaran/Pinedo 1997) plus adjacent-swap and reinsertion local search -- a real, non-strawman approach requiring real familiarity with scheduling heuristics, not a naive guess -- was also measured directly and falls short of the sealed pass bar on both instances (85.3% and 26.6% worse than the reference respectively). Two weaker, more naive baselines (a plain earliest-due-date sort, and the ATCS dispatch rule with no follow-up search at all) were also measured and fail by an order of magnitude, confirming the task is not trivially gamed by any obvious shortcut.
+"""
+
+solution_explanation = """
+The reference solution (solution/scheduler.py) constructs an initial sequence with the ATCS dispatch rule, improves it with adjacent-swap and single-job-reinsertion local search until no improving move remains, then spends the rest of its time budget on simulated-annealing restarts (swap and reinsertion moves, geometric cooling, multiple random restarts alongside the incumbent), keeping the best sequence found across all restarts. This measurably and consistently outperforms both a state-of-the-art exact solver (CP-SAT) and the ATCS+local-search heuristic alone at the same time budget on both sealed instances, confirmed directly against the real verifier rather than assumed.
+"""
+
+verification_explanation = """
+The agent's deliverable is /app/outputs/scheduler.py -- a single Python file, run once per sealed held-out instance as a fresh subprocess under an unprivileged runner user with a firm timeout matching the disclosed 180-second time budget (the same one-shot-batch isolation pattern as this account's other batch tasks; no live decide()-per-event loop, so no incrementally-revealed state and no frame-introspection surface). What stays hidden is each sealed instance's reference objective and pass bar (tests/sealed/reference/), chown+chmod root-only before Stage 1 (untrusted) ever runs; the sealed INPUT instance data is deliberately left readable, since the candidate's code legitimately needs it and the scheduling model itself is fully disclosed on purpose. Stage 2 (trusted, root, executes no candidate code) independently re-scores the submitted sequence with an independently-written scorer (tests/lib/scorer.py, structured differently from the reference solution's own objective function) and checks it against the sealed pass bar; a structural check (the submitted sequence must be an exact permutation of the instance's job ids) runs before any scoring and is exact/deterministic. The pass bar on each instance is set at 1.15x the reference solution's measured objective -- comfortably above the reference (which clears it with 13%+ margin on both instances) and comfortably below every measured adversarial baseline. Nine adversarial submissions were tested against the real two-stage verifier (see cheat/README.md for each one's measured result): reward forgery and a sealed-reference read attempt (both blocked by root-owned chmod-700 sealing), a crash, a malformed CLI, an infinite loop (verified against the real subprocess-timeout code path), an empty sequence, a memorized sequence for the visible practice instance (fails because the sealed instances use disjoint job-id ranges), a bare ATCS-dispatch-rule construction with no search, and a plain earliest-due-date sort -- all measure reward 0 on both sealed instances, alongside the two headline adversarial baselines (ATCS+local-search, and CP-SAT at the same 180-second budget) described in difficulty_explanation. The reference solution measures reward 1 on both.
+"""
+
+category = "Operations"
+subcategory = "Supply chain"
+tags = ["scheduling", "operations-research", "manufacturing", "combinatorial-optimization", "metaheuristics"]
+expert_time_estimate_hours = 6
+relevant_experience = """
+I work as an operations and business data analyst (2024-present), where I have directly reviewed business scenarios involving resource-constrained scheduling, throughput planning, and reconciliation of production outcomes against operational targets. This gives me a working sense of what a genuine production-scheduling operation actually has to weigh (changeover costs against due-date pressure, priority-weighted lateness, the real cost of a naive first-come-first-served or earliest-due-date ordering) and what a realistic versus contrived version of that tradeoff looks like, including what kind of approach a competent-but-not-expert engineer plausibly reaches for (a known dispatch rule, or a call to an off-the-shelf solver) versus what genuine scheduling expertise requires. I also evaluate AI-generated business outputs against predefined criteria and have supported AI training/evaluation projects involving business reasoning and quality assurance, which is directly relevant to judging whether this task's grading (a sealed pass bar calibrated directly against a measured exact-solver run and a measured published heuristic, both run at the same time budget the agent's own submission receives) is a fair and meaningful test rather than an arbitrary one. I am not an operations-research specialist by training; the technical implementation (the scheduling model and its parameters, the ATCS-plus-metaheuristic reference solution, the calibration of the pass bar against measured exact-solver and heuristic baselines on independently-generated instances, and the two-stage sealed verifier) was built with AI assistance under my direction, with my own judgment applied to whether the model, the baselines, and the grading reflect a realistic production-scheduling tradeoff and a realistic test of solving it well.
+"""
+
+[verifier]
+timeout_sec = 900.0
+environment_mode = "separate"
+
+[agent]
+timeout_sec = 10800.0
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 4
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0

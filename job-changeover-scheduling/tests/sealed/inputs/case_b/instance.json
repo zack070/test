@@ -1,0 +1,377 @@
+{
+  "jobs": [
+    {
+      "job_id": "J300",
+      "family": 3,
+      "proc_time": 10,
+      "weight": 5,
+      "due_date": 858
+    },
+    {
+      "job_id": "J301",
+      "family": 3,
+      "proc_time": 23,
+      "weight": 1,
+      "due_date": 928
+    },
+    {
+      "job_id": "J302",
+      "family": 5,
+      "proc_time": 39,
+      "weight": 1,
+      "due_date": 751
+    },
+    {
+      "job_id": "J303",
+      "family": 0,
+      "proc_time": 16,
+      "weight": 2,
+      "due_date": 1229
+    },
+    {
+      "job_id": "J304",
+      "family": 3,
+      "proc_time": 23,
+      "weight": 2,
+      "due_date": 727
+    },
+    {
+      "job_id": "J305",
+      "family": 5,
+      "proc_time": 36,
+      "weight": 3,
+      "due_date": 857
+    },
+    {
+      "job_id": "J306",
+      "family": 0,
+      "proc_time": 18,
+      "weight": 2,
+      "due_date": 1233
+    },
+    {
+      "job_id": "J307",
+      "family": 2,
+      "proc_time": 36,
+      "weight": 3,
+      "due_date": 542
+    },
+    {
+      "job_id": "J308",
+      "family": 0,
+      "proc_time": 29,
+      "weight": 2,
+      "due_date": 1178
+    },
+    {
+      "job_id": "J309",
+      "family": 4,
+      "proc_time": 15,
+      "weight": 1,
+      "due_date": 469
+    },
+    {
+      "job_id": "J310",
+      "family": 4,
+      "proc_time": 18,
+      "weight": 3,
+      "due_date": 917
+    },
+    {
+      "job_id": "J311",
+      "family": 5,
+      "proc_time": 38,
+      "weight": 2,
+      "due_date": 593
+    },
+    {
+      "job_id": "J312",
+      "family": 4,
+      "proc_time": 35,
+      "weight": 1,
+      "due_date": 678
+    },
+    {
+      "job_id": "J313",
+      "family": 0,
+      "proc_time": 11,
+      "weight": 1,
+      "due_date": 910
+    },
+    {
+      "job_id": "J314",
+      "family": 0,
+      "proc_time": 18,
+      "weight": 3,
+      "due_date": 1096
+    },
+    {
+      "job_id": "J315",
+      "family": 4,
+      "proc_time": 40,
+      "weight": 1,
+      "due_date": 627
+    },
+    {
+      "job_id": "J316",
+      "family": 0,
+      "proc_time": 20,
+      "weight": 1,
+      "due_date": 725
+    },
+    {
+      "job_id": "J317",
+      "family": 4,
+      "proc_time": 35,
+      "weight": 3,
+      "due_date": 439
+    },
+    {
+      "job_id": "J318",
+      "family": 5,
+      "proc_time": 21,
+      "weight": 3,
+      "due_date": 1127
+    },
+    {
+      "job_id": "J319",
+      "family": 4,
+      "proc_time": 24,
+      "weight": 3,
+      "due_date": 507
+    },
+    {
+      "job_id": "J320",
+      "family": 2,
+      "proc_time": 16,
+      "weight": 1,
+      "due_date": 995
+    },
+    {
+      "job_id": "J321",
+      "family": 5,
+      "proc_time": 17,
+      "weight": 2,
+      "due_date": 575
+    },
+    {
+      "job_id": "J322",
+      "family": 1,
+      "proc_time": 13,
+      "weight": 3,
+      "due_date": 987
+    },
+    {
+      "job_id": "J323",
+      "family": 1,
+      "proc_time": 22,
+      "weight": 1,
+      "due_date": 475
+    },
+    {
+      "job_id": "J324",
+      "family": 2,
+      "proc_time": 16,
+      "weight": 2,
+      "due_date": 1048
+    },
+    {
+      "job_id": "J325",
+      "family": 4,
+      "proc_time": 10,
+      "weight": 2,
+      "due_date": 1236
+    },
+    {
+      "job_id": "J326",
+      "family": 0,
+      "proc_time": 10,
+      "weight": 3,
+      "due_date": 790
+    },
+    {
+      "job_id": "J327",
+      "family": 5,
+      "proc_time": 24,
+      "weight": 1,
+      "due_date": 408
+    },
+    {
+      "job_id": "J328",
+      "family": 2,
+      "proc_time": 33,
+      "weight": 1,
+      "due_date": 874
+    },
+    {
+      "job_id": "J329",
+      "family": 3,
+      "proc_time": 26,
+      "weight": 5,
+      "due_date": 866
+    },
+    {
+      "job_id": "J330",
+      "family": 2,
+      "proc_time": 14,
+      "weight": 2,
+      "due_date": 698
+    },
+    {
+      "job_id": "J331",
+      "family": 3,
+      "proc_time": 10,
+      "weight": 5,
+      "due_date": 1010
+    },
+    {
+      "job_id": "J332",
+      "family": 4,
+      "proc_time": 26,
+      "weight": 2,
+      "due_date": 1202
+    },
+    {
+      "job_id": "J333",
+      "family": 5,
+      "proc_time": 24,
+      "weight": 3,
+      "due_date": 1000
+    },
+    {
+      "job_id": "J334",
+      "family": 3,
+      "proc_time": 39,
+      "weight": 2,
+      "due_date": 831
+    },
+    {
+      "job_id": "J335",
+      "family": 1,
+      "proc_time": 14,
+      "weight": 2,
+      "due_date": 842
+    },
+    {
+      "job_id": "J336",
+      "family": 0,
+      "proc_time": 11,
+      "weight": 5,
+      "due_date": 611
+    },
+    {
+      "job_id": "J337",
+      "family": 2,
+      "proc_time": 15,
+      "weight": 3,
+      "due_date": 906
+    },
+    {
+      "job_id": "J338",
+      "family": 2,
+      "proc_time": 31,
+      "weight": 2,
+      "due_date": 511
+    },
+    {
+      "job_id": "J339",
+      "family": 2,
+      "proc_time": 32,
+      "weight": 5,
+      "due_date": 1009
+    },
+    {
+      "job_id": "J340",
+      "family": 4,
+      "proc_time": 37,
+      "weight": 1,
+      "due_date": 492
+    },
+    {
+      "job_id": "J341",
+      "family": 5,
+      "proc_time": 19,
+      "weight": 1,
+      "due_date": 756
+    },
+    {
+      "job_id": "J342",
+      "family": 0,
+      "proc_time": 11,
+      "weight": 1,
+      "due_date": 1149
+    },
+    {
+      "job_id": "J343",
+      "family": 1,
+      "proc_time": 23,
+      "weight": 3,
+      "due_date": 1066
+    },
+    {
+      "job_id": "J344",
+      "family": 1,
+      "proc_time": 23,
+      "weight": 2,
+      "due_date": 898
+    }
+  ],
+  "setup_matrix": [
+    [
+      2,
+      16,
+      54,
+      32,
+      24,
+      45
+    ],
+    [
+      21,
+      4,
+      60,
+      33,
+      31,
+      40
+    ],
+    [
+      55,
+      60,
+      2,
+      37,
+      44,
+      62
+    ],
+    [
+      29,
+      35,
+      38,
+      3,
+      16,
+      64
+    ],
+    [
+      29,
+      31,
+      43,
+      17,
+      4,
+      58
+    ],
+    [
+      49,
+      40,
+      64,
+      62,
+      58,
+      5
+    ]
+  ],
+  "initial_setup": [
+    21,
+    31,
+    43,
+    3,
+    31,
+    62
+  ]
+}
