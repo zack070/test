@@ -2,7 +2,7 @@ from ortools.sat.python import cp_model
 import time
 
 
-def solve_exact(jobs, setup_matrix, initial_setup, time_limit_sec=120):
+def solve_exact(jobs, setup_matrix, initial_setup, time_limit_sec=120, hint_order=None):
     n = len(jobs)
     model = cp_model.CpModel()
 
@@ -46,6 +46,18 @@ def solve_exact(jobs, setup_matrix, initial_setup, time_limit_sec=120):
         tardy.append(t)
 
     model.Minimize(sum(jobs[j]["weight"] * tardy[j] for j in range(n)))
+
+    if hint_order is not None:
+        hint_lits, hint_vals = [], []
+        prev_node = 0
+        for idx in hint_order:
+            node = idx + 1
+            hint_lits.append(lits[(prev_node, node)])
+            hint_vals.append(1)
+            prev_node = node
+        hint_lits.append(lits[(prev_node, 0)])
+        hint_vals.append(1)
+        model.AddHint(hint_lits, hint_vals)
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = time_limit_sec
