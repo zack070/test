@@ -169,7 +169,7 @@ def risk_aware(
     res = milp(
         c_obj, constraints=constraints,
         bounds=bounds, integrality=integrality,
-        options={"time_limit": 120},
+        options={"time_limit": 180},
     )
     x = np.round(res.x[x_sl]).astype(int)
     return {c.claim_id: int(x[i]) for i, c in enumerate(claims)}

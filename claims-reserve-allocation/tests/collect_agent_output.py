@@ -11,7 +11,7 @@ import sys
 POLICY_PATH = "/app/outputs/policy.py"
 SEALED_INPUTS_DIR = "/tests/sealed/inputs"
 WORK_DIR = "/work"
-PER_DATASET_TIMEOUT_SEC = 150
+PER_DATASET_TIMEOUT_SEC = 220
 
 
 def run_one(dataset_name: str) -> dict:

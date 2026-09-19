@@ -6,13 +6,13 @@
     "objective": 7017708.29
   },
   "naive_ratio_greedy": {
-    "expected_cost": 571402.76,
-    "cvar": 1141587.19,
-    "objective": 3996164.35
+    "expected_cost": 555463.62,
+    "cvar": 1120863.69,
+    "objective": 3918054.69
   },
   "ev_optimal_knapsack": {
-    "expected_cost": 571402.76,
-    "cvar": 1141587.19,
-    "objective": 3996164.35
+    "expected_cost": 555463.62,
+    "cvar": 1120863.69,
+    "objective": 3918054.69
   }
 }

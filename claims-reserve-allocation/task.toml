@@ -28,7 +28,7 @@ I work as an operations and business data analyst (2024-present), where I have d
 """
 
 [verifier]
-timeout_sec = 500.0
+timeout_sec = 650.0
 environment_mode = "separate"
 
 [agent]

@@ -12,15 +12,17 @@ A portfolio is a batch of open claims. Each claim belongs to exactly one
 `claim_type` and exactly one `incident_cluster_id`. For every claim you
 must decide, once, whether to **settle now** or **defer**:
 
-- **Settle now**: costs exactly `settlement_offer_usd` (given in the data,
-  fixed, known today).
+- **Settle now**: costs `settlement_offer_usd` (given in the data, fixed,
+  known today) -- except for a linked-pair claim, which costs less if its
+  pair partner is also settled; see "Linked claim pairs" below.
 - **Defer**: costs a random amount realized later (see "Deferred cost"
   below) -- you don't know this number today, only its distribution.
 
 Your decision for a portfolio is a 0/1 value per `claim_id` (1 = settle,
 0 = defer), subject to one hard constraint:
 
-> The sum of `settlement_offer_usd` over every claim you settle must not
+> The sum of each settled claim's actual settlement cost (see "Linked
+> claim pairs" for when that's less than `settlement_offer_usd`) must not
 > exceed that portfolio's `budget_usd`.
 
 A decision set that violates the budget is infeasible and is not scored
@@ -58,6 +60,29 @@ draw. `interest_rate_annual` and `deferral_years` are portfolio-level
 constants (given in `config.json`), applied identically to every deferred
 claim in that portfolio.
 
+## Linked claim pairs
+
+A small number of claims are pair-linked: each has a `linked_claim_id`
+pointing to exactly one other claim in the same portfolio, and that
+claim points back. Most claims have no pair (`linked_claim_id` is empty)
+and are entirely unaffected by this section.
+
+A linked pair represents claims that only settle as a package -- e.g.
+co-defendant claims under one agreement, or a single claimant's multiple
+related claims, where the settling party will only accept the deal if
+both go together. Concretely:
+
+- If **both** members of a pair are settled, each one's cost is
+  `settlement_offer_usd * (1 - linked_settlement_discount)` --
+  a package discount, disclosed as `linked_settlement_discount` in
+  `config.json`.
+- If **only one or neither** member is settled, each settled member
+  costs its full, undiscounted `settlement_offer_usd` -- there is no
+  partial-package benefit.
+
+This makes settling a pair's two claims a genuinely joint decision: the
+discount depends on both `x_i` and `x_j` at once, not on either alone.
+
 ## Objective
 
 Let `total_cost` be the sum, across all claims, of `settlement_offer_usd`
@@ -84,12 +109,14 @@ because they aren't independent.
 
 ## Data given to you, per portfolio
 
-- `claims.csv`: `claim_id, claim_type, incident_cluster_id, settlement_offer_usd`
+- `claims.csv`: `claim_id, claim_type, incident_cluster_id,
+  settlement_offer_usd, linked_claim_id` (the last column is empty for
+  claims with no pair).
 - `config.json`: the full disclosed parameters above --
   `claim_types` (per type: `mean_severity_usd`, `severity_cv`,
   `litigation_prob`, `escalation_factor`), `cluster_sigma`,
   `interest_rate_annual`, `deferral_years`, `risk_alpha`, `risk_lambda`,
-  `budget_usd`.
+  `budget_usd`, `linked_settlement_discount`.
 
 `claim_types`' parameters and `cluster_sigma` / `interest_rate_annual` /
 `deferral_years` / `risk_alpha` are the same across every portfolio you'll

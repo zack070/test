@@ -6,9 +6,7 @@ underlying claim facts (type, cluster, offer, budget) differ on held-out
 data even where the id matches, so this should fail to generalize.
 
 Only one file is ever graded (/app/outputs/policy.py), so the memorized
-table has to be embedded directly rather than shipped as a side file --
-see cheat/hardcoded_answers/memorized.json for the same table, kept
-separately only for readability in this directory.
+table is embedded directly rather than shipped as a side file.
 """
 import csv
 import json
