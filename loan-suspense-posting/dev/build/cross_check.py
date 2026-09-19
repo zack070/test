@@ -37,8 +37,8 @@ if __name__ == "__main__":
         print(lid, "B:", fb[lid])
     total_mism += diff(fa, fb, "worked_example")
 
-    for name, seed in (("case", 4242), ("sealed", 90909)):
-        loans, payments = make_portfolio(seed, n_loans=80, window_days=WINDOW_DAYS)
+    for name, seed, offset in (("case", 4242, 0), ("sealed", 90909, 100)):
+        loans, payments = make_portfolio(seed, n_loans=80, window_days=WINDOW_DAYS, id_offset=offset)
         fa, ba = model_a.run(loans, payments, WINDOW_DAYS)
         fb, bb = model_b.run(loans, payments, WINDOW_DAYS)
         print(f"== {name} (seed {seed}) ==")

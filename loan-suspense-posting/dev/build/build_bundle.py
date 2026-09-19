@@ -40,7 +40,7 @@ def main():
     dump({"window_days": WINDOW_DAYS}, os.path.join(ROOT, "environment/data/case/window.json"))
 
     # --- sealed grading case (never shown to agent) ---
-    s_loans, s_payments = make_portfolio(SEALED_SEED, n_loans=80, window_days=WINDOW_DAYS)
+    s_loans, s_payments = make_portfolio(SEALED_SEED, n_loans=80, window_days=WINDOW_DAYS, id_offset=100)
     dump(s_loans, os.path.join(ROOT, "tests/sealed/inputs/case/loans.json"))
     dump(s_payments, os.path.join(ROOT, "tests/sealed/inputs/case/payments.json"))
     dump({"window_days": WINDOW_DAYS}, os.path.join(ROOT, "tests/sealed/inputs/case/window.json"))

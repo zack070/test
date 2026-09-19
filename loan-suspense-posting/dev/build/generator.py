@@ -18,7 +18,7 @@ def _installment(principal, annual_rate, term_months):
     return principal * r * (1 + r) ** term_months / ((1 + r) ** term_months - 1)
 
 
-def make_portfolio(seed, n_loans=80, window_days=WINDOW_DAYS):
+def make_portfolio(seed, n_loans=80, window_days=WINDOW_DAYS, id_offset=0):
     rng = random.Random(seed)
     scenarios = []
     for name, count in SCENARIO_COUNTS.items():
@@ -30,7 +30,7 @@ def make_portfolio(seed, n_loans=80, window_days=WINDOW_DAYS):
     payments = []
 
     for i, scenario in enumerate(scenarios):
-        lid = f"L{i:03d}"
+        lid = f"L{i + id_offset:03d}"
         annual_rate = round(rng.uniform(0.055, 0.11), 4)
         principal = round(rng.uniform(8000, 45000), 2)
         term_months = rng.choice([60, 84, 120, 180])

@@ -73,11 +73,13 @@ every required event.
 ### `hardcoded_answers/`
 
 Embeds the fully-computed answer for the *visible* practice case
-(`environment/data/case`, seed 4242) inline in the single graded file
-(memorization must be inline — only one file is ever graded) and returns
-it regardless of the actual input. Since grading runs against a different
-sealed portfolio (seed 90909, disjoint `loan_id`s and figures), this fails
-loan-coverage before any monetary comparison even happens. Reward: **0**.
+(`environment/data/case`, seed 4242, loan ids `L000`-`L079`) inline in the
+single graded file (memorization must be inline — only one file is ever
+graded) and returns it regardless of the actual input. The sealed grading
+portfolio (seed 90909) uses a disjoint id range (`L100`-`L179`) precisely
+so a memorized visible-case answer cannot coincidentally match on ids;
+this fails loan-coverage before any monetary comparison even happens.
+Reward: **0**.
 
 ### `reward_forgery/`
 

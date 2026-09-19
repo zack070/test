@@ -2,8 +2,8 @@
 """Cheat: memorized answer for the visible practice case (seed 4242, in
 environment/data/case), embedded inline since only one file is graded.
 Outputs it regardless of the actual input -- should fail because grading
-runs against a DIFFERENT sealed portfolio (different seed) whose loan_ids
-and figures do not match this memorized blob."""
+runs against a DIFFERENT sealed portfolio (different seed, disjoint
+loan_ids: L100-L179 vs this case's L000-L079)."""
 import argparse
 import json
 
