@@ -1,35 +1,25 @@
-Work in `/app`. The only file you need to leave as the submission is:
+Work in /app. What you're handing in is /app/outputs/poster.py, and it has to run like this:
 
-`/app/outputs/poster.py`
+python3 poster.py --loans <loans.json> --payments <payments.json> --window-days <N> --output <output.json>
 
-The command-line interface matters. The grader will invoke the program in this form:
+Only two things in the output have to be right: final_ledger and payment_allocations. Section 5 of /app/SERVICING_SPEC.md gives the exact JSON structure. Read that file before you write any posting logic, because it's the actual spec for this task. Don't swap in your own interpretation of the date handling, actual/365 interest, escrow processing, suspense behaviour, payment waterfall, or the late-fee cycle rule. The order those operations happen in matters too.
 
-`python3 poster.py --loans <loans.json> --payments <payments.json> --window-days <N> --output <output.json>`
+A couple of the payment fields are there to trip up bad assumptions. Use posting_date everywhere in the simulation. effective_date isn't authoritative and shouldn't touch accrual, release timing, or delinquency at all. memo is just a memo, and it can't change how a payment gets posted.
 
-The output file is one JSON object containing `final_ledger` and `payment_allocations`. Section 5 of `/app/SERVICING_SPEC.md` has the exact shape. Use that rather than guessing at field names or nesting.
+For the ledger, every input loan should appear exactly once, under its loan_id. No missing loans and no made-up ones.
 
-The main reference for the actual loan servicing behaviour is `/app/SERVICING_SPEC.md`. Read the whole thing before coding. This isn't a case where you need to invent a reasonable posting system. The date rules, actual/365 accrual, escrow processing, suspense handling, installment release test, waterfall and late-fee behaviour are all spelled out there, including the order in which things happen.
+The allocation output follows payment postings, not every day of the simulation. If a payment posts for a loan on a given day, that loan/day needs an entry. A loan can still have suspense the next day without producing another allocation entry, as long as no payment posted that day.
 
-One easy trap is the payment data. `posting_date` is the date that counts. `effective_date` is not used for accrual, release timing, or delinquency. `memo` is just text. Don't let either field sneak into the calculations.
+There's a small test case in /app/data/worked_example/: two loans over 45 days, with a README that walks through the calculations. I'd get that matching first, then move on to /app/data/case/, the larger practice portfolio with 80 loans over 75 days. That case is only for development. The portfolio used for grading is a different one.
 
-I'd use the small example first. `/app/data/worked_example/` has two loans and a 45-day window, plus a README that works through the arithmetic and gives you figures to compare against. It is much easier to find an accrual or posting-order bug there than after running the larger case. There is also `/app/data/case/`, an 80-loan, 75-day practice portfolio. That one is useful for exercising the script at a more realistic size, but it is still only practice data.
+Grading uses a single sealed 80-loan, 75-day portfolio and starts your program as a fresh subprocess. The final ledger is compared against the reference to the cent on every monetary field: principal, interest, escrow, suspense, and each fee bucket. next_due_date and days_past_due have to match exactly.
 
-The output has two separate jobs.
+The payment trace is checked on its own. Entries are matched by loan and posting day, and the event plus every monetary breakdown field has to agree. So correct ending balances won't rescue a bad allocation trace. Both checks have to pass.
 
-`final_ledger` needs exactly one record for every `loan_id` in the input. Nothing extra, nothing missing.
+This is a deterministic simulation. There's no optimization step, and you're not choosing a "good" policy. Given the input and the servicing rules, there's exactly one result.
 
-`payment_allocations` is based on actual payment posting days. If loan 17 gets a payment on day 12, there should be an allocation entry for that loan/day. If it has suspense sitting on the account on day 13 but no payment posts that day, there is no new allocation entry for day 13. This distinction is checked.
+Leave /app/SERVICING_SPEC.md and everything under /app/data/ unchanged. Keep the program deterministic and reasonably quick. The grading run has several minutes, so normal simulation work is fine.
 
-The sealed test uses another 80-loan, 75-day portfolio. You won't see its figures or loan IDs. Your program is run as a fresh subprocess, so it needs to work from the supplied files and arguments rather than relying on anything outside the task.
-
-The final ledger is compared field by field with the frozen result. Monetary fields are required to match to the cent, including principal, accrued interest, escrow, suspense and every `fees_owed` bucket. `next_due_date` and `days_past_due` have to match exactly.
-
-The payment trace gets its own comparison. For each loan/posting-day entry, the grader checks the `event` and all of the monetary breakdown fields. So don't treat the allocation list as something you can reconstruct loosely from the final balances. A correct ledger with a wrong or incomplete trace still gets a zero.
-
-There isn't any optimization here. Don't spend time looking for a "better" posting outcome. Once the servicing rules and input are fixed, the ledger and allocation trace are fixed too.
-
-Leave `/app/SERVICING_SPEC.md` and everything below `/app/data/` untouched. Keep the program deterministic. Runtime shouldn't be an issue for a normal implementation; the reference finishes in well under a second, while the sealed run allows several minutes.
-
-Before calling it done, run the worked example and the practice case yourself. Check the actual JSON as well as the balances. Missing allocation rows are easy to overlook.
+Before you submit, run the worked example and the practice case, then look at the real output structure, especially the number of ledger entries and the number of payment-day allocation entries. Those are separate parts of the answer, and they're graded separately.
 
 You have 10800 seconds to complete this task. Do not cheat by using online solutions or hints specific to this task.
