@@ -45,7 +45,7 @@ DEFAULT_N_SINGLETON_ISH = 120
 # good deal jointly even though each half looks like a loss on its own.
 DEFAULT_PAIRS_PER_TRAP_CLUSTER = 6
 DEFAULT_PAIR_PREMIUM_RANGE = (1.10, 1.20)  # offer as a multiple of mean_severity_usd
-DEFAULT_LINKED_SETTLEMENT_DISCOUNT = 0.40
+DEFAULT_LINKED_SETTLEMENT_DISCOUNT = 0.60
 
 TYPE_WEIGHTS = {"AUTO": 0.50, "PROPERTY": 0.33, "LIABILITY": 0.17}
 

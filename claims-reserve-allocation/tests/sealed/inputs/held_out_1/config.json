@@ -25,5 +25,5 @@
   "risk_alpha": 0.95,
   "risk_lambda": 3.0,
   "budget_usd": 1422917.65,
-  "linked_settlement_discount": 0.4
+  "linked_settlement_discount": 0.6
 }
