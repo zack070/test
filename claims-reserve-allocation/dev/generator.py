@@ -38,14 +38,24 @@ DEFAULT_BUDGET_FRACTION = 0.40
 DEFAULT_TRAP_DISCOUNT_RANGE = (0.83, 0.85)
 DEFAULT_N_SINGLETON_ISH = 120
 
+# Linked-claim pairs: a handful of claims per trap cluster are priced ABOVE
+# their own expected deferred cost (a bad deal alone -- e.g. a claimant
+# demanding a premium to settle fast) but wired to a partner claim such
+# that settling BOTH together unlocks a group discount, making the pair a
+# good deal jointly even though each half looks like a loss on its own.
+DEFAULT_PAIRS_PER_TRAP_CLUSTER = 3
+DEFAULT_PAIR_PREMIUM_RANGE = (1.10, 1.20)  # offer as a multiple of mean_severity_usd
+DEFAULT_LINKED_SETTLEMENT_DISCOUNT = 0.30
+
 TYPE_WEIGHTS = {"AUTO": 0.50, "PROPERTY": 0.33, "LIABILITY": 0.17}
 
 
-def base_config(budget_usd: float) -> ModelConfig:
+def base_config(budget_usd: float, linked_settlement_discount: float = DEFAULT_LINKED_SETTLEMENT_DISCOUNT) -> ModelConfig:
     return ModelConfig(
         claim_types=CLAIM_TYPES, cluster_sigma=CLUSTER_SIGMA,
         interest_rate_annual=INTEREST_RATE_ANNUAL, deferral_years=DEFERRAL_YEARS,
         risk_alpha=RISK_ALPHA, risk_lambda=RISK_LAMBDA, budget_usd=budget_usd,
+        linked_settlement_discount=linked_settlement_discount,
     )
 
 
@@ -62,11 +72,15 @@ def generate_portfolio(
     budget_fraction: float = DEFAULT_BUDGET_FRACTION,
     trap_discount_range=DEFAULT_TRAP_DISCOUNT_RANGE,
     normal_discount_range=(0.50, 0.85),
+    pairs_per_trap_cluster: int = DEFAULT_PAIRS_PER_TRAP_CLUSTER,
+    pair_premium_range=DEFAULT_PAIR_PREMIUM_RANGE,
+    linked_settlement_discount: float = DEFAULT_LINKED_SETTLEMENT_DISCOUNT,
 ) -> Dict:
     if trap_clusters is None:
         trap_clusters = list(DEFAULT_TRAP_CLUSTERS)
     """trap_clusters: sizes of the deliberately large, moderate-ratio clusters
-    (e.g. [10, 8] for two traps of size 10 and 8). n_singleton_ish: number of
+    (e.g. [10, 8] for two traps of size 10 and 8), each of which also gets
+    `pairs_per_trap_cluster` linked-claim pairs. n_singleton_ish: number of
     additional claims spread across small clusters (size 1-3)."""
     rng = np.random.default_rng(seed)
     claims: List[Claim] = []
@@ -94,9 +108,36 @@ def generate_portfolio(
     # cluster large *correlated* dollar exposure (no diversification
     # benefit within the cluster), which is what should matter to a
     # risk-aware optimizer even though it's invisible to an EV-only one.
+    #
+    # A few members of each trap cluster are additionally priced as a
+    # linked pair: individually a bad deal (offer above expected deferred
+    # cost), only worthwhile once BOTH members of the pair are settled
+    # together and the linked-settlement discount applies. Neither half
+    # shows any standalone improvement, so a per-claim marginal-value
+    # search never finds them -- only genuine joint reasoning does.
     for size in trap_clusters:
         cid = new_cluster_id()
-        for _ in range(size):
+        n_pairs = min(pairs_per_trap_cluster, size // 2)
+        pair_claim_ids: List[str] = []
+        for _ in range(2 * n_pairs):
+            ctype = "AUTO"
+            premium = rng.uniform(*pair_premium_range)
+            offer = premium * CLAIM_TYPES[ctype].mean_severity_usd
+            new_id = new_claim_id()
+            claims.append(Claim(new_id, ctype, cid, round(offer, 2)))
+            pair_claim_ids.append(new_id)
+        # link them up two at a time
+        linked_updates = {}
+        for k in range(0, len(pair_claim_ids), 2):
+            a, b = pair_claim_ids[k], pair_claim_ids[k + 1]
+            linked_updates[a] = b
+            linked_updates[b] = a
+        for i, c in enumerate(claims):
+            if c.claim_id in linked_updates:
+                claims[i] = Claim(c.claim_id, c.claim_type, c.incident_cluster_id,
+                                   c.settlement_offer_usd, linked_updates[c.claim_id])
+
+        for _ in range(size - 2 * n_pairs):
             ctype = "AUTO"
             discount = rng.uniform(*trap_discount_range)
             offer = discount * CLAIM_TYPES[ctype].mean_severity_usd
@@ -116,7 +157,7 @@ def generate_portfolio(
 
     total_offer = sum(c.settlement_offer_usd for c in claims)
     budget_usd = round(budget_fraction * total_offer, 2)
-    cfg = base_config(budget_usd)
+    cfg = base_config(budget_usd, linked_settlement_discount)
     return {"claims": claims, "config": cfg}
 
 
@@ -127,9 +168,9 @@ def write_portfolio(portfolio: Dict, out_dir: str) -> None:
 
     with open(os.path.join(out_dir, "claims.csv"), "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["claim_id", "claim_type", "incident_cluster_id", "settlement_offer_usd"])
+        w.writerow(["claim_id", "claim_type", "incident_cluster_id", "settlement_offer_usd", "linked_claim_id"])
         for c in claims:
-            w.writerow([c.claim_id, c.claim_type, c.incident_cluster_id, f"{c.settlement_offer_usd:.2f}"])
+            w.writerow([c.claim_id, c.claim_type, c.incident_cluster_id, f"{c.settlement_offer_usd:.2f}", c.linked_claim_id])
 
     config = {
         "claim_types": {
@@ -147,6 +188,7 @@ def write_portfolio(portfolio: Dict, out_dir: str) -> None:
         "risk_alpha": cfg.risk_alpha,
         "risk_lambda": cfg.risk_lambda,
         "budget_usd": cfg.budget_usd,
+        "linked_settlement_discount": cfg.linked_settlement_discount,
     }
     with open(os.path.join(out_dir, "config.json"), "w") as f:
         json.dump(config, f, indent=2)
@@ -166,6 +208,7 @@ def load_portfolio(data_dir: str) -> Dict:
         risk_alpha=cfg_json["risk_alpha"],
         risk_lambda=cfg_json["risk_lambda"],
         budget_usd=cfg_json["budget_usd"],
+        linked_settlement_discount=cfg_json.get("linked_settlement_discount", 0.0),
     )
     claims: List[Claim] = []
     with open(os.path.join(data_dir, "claims.csv"), newline="") as f:
@@ -174,5 +217,6 @@ def load_portfolio(data_dir: str) -> Dict:
                 claim_id=r["claim_id"], claim_type=r["claim_type"],
                 incident_cluster_id=r["incident_cluster_id"],
                 settlement_offer_usd=float(r["settlement_offer_usd"]),
+                linked_claim_id=r.get("linked_claim_id", "") or "",
             ))
     return {"claims": claims, "config": cfg}

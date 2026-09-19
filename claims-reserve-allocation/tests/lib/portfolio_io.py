@@ -24,6 +24,7 @@ def load_portfolio(data_dir: str) -> Dict:
         risk_alpha=cfg_json["risk_alpha"],
         risk_lambda=cfg_json["risk_lambda"],
         budget_usd=cfg_json["budget_usd"],
+        linked_settlement_discount=cfg_json.get("linked_settlement_discount", 0.0),
     )
     claims: List[Claim] = []
     with open(os.path.join(data_dir, "claims.csv"), newline="") as f:
@@ -32,5 +33,6 @@ def load_portfolio(data_dir: str) -> Dict:
                 claim_id=r["claim_id"], claim_type=r["claim_type"],
                 incident_cluster_id=r["incident_cluster_id"],
                 settlement_offer_usd=float(r["settlement_offer_usd"]),
+                linked_claim_id=r.get("linked_claim_id", "") or "",
             ))
     return {"claims": claims, "config": cfg}

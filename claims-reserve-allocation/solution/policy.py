@@ -1,8 +1,12 @@
 """
 Reference solution: a scenario-based MILP (Rockafellar-Uryasev CVaR
 linearization) that jointly optimizes expected cost and tail risk, unlike
-a plain expected-value knapsack. See dev/solvers.py:risk_aware for the
-same logic developed during calibration.
+a plain expected-value knapsack. It also handles linked-claim pairs via
+an AND-linearization (w_p = x_i * x_j), since the linked-settlement
+discount is invisible to any per-claim marginal-value search -- it only
+shows up once both members of a pair are considered together.
+See dev/solvers.py:risk_aware for the same logic developed during
+calibration.
 
 Run it with: python3 policy.py <data_dir> <output_path>
 """
@@ -44,6 +48,7 @@ class Claim:
     claim_type: str
     incident_cluster_id: str
     settlement_offer_usd: float
+    linked_claim_id: str = ""
 
 
 def load_portfolio(data_dir: str) -> Tuple[List[Claim], Dict]:
@@ -56,6 +61,7 @@ def load_portfolio(data_dir: str) -> Tuple[List[Claim], Dict]:
                 claim_id=r["claim_id"], claim_type=r["claim_type"],
                 incident_cluster_id=r["incident_cluster_id"],
                 settlement_offer_usd=float(r["settlement_offer_usd"]),
+                linked_claim_id=r.get("linked_claim_id", "") or "",
             ))
     return claims, cfg
 
@@ -83,12 +89,30 @@ def _simulate_deferred_cost_matrix(
     return d
 
 
+def _build_pairs(claims: Sequence[Claim]) -> List[tuple]:
+    index = {c.claim_id: i for i, c in enumerate(claims)}
+    seen = set()
+    pairs = []
+    for i, c in enumerate(claims):
+        if not c.linked_claim_id:
+            continue
+        j = index[c.linked_claim_id]
+        key = tuple(sorted((i, j)))
+        if key not in seen:
+            seen.add(key)
+            pairs.append(key)
+    return pairs
+
+
 def solve(claims: List[Claim], cfg: Dict, n_scenarios: int = N_SCENARIOS) -> Dict[str, int]:
     rng = np.random.default_rng(SOLVER_SEED)
     n = len(claims)
     offers = np.array([c.settlement_offer_usd for c in claims])
-    d = _simulate_deferred_cost_matrix(claims, cfg, rng, n_scenarios)
+    pairs = _build_pairs(claims)
+    P = len(pairs)
+    discount = cfg.get("linked_settlement_discount", 0.0)
 
+    d = _simulate_deferred_cost_matrix(claims, cfg, rng, n_scenarios)
     a = offers.reshape(-1, 1) - d
     e = d.sum(axis=0)
     mean_a = a.mean(axis=1)
@@ -98,32 +122,53 @@ def solve(claims: List[Claim], cfg: Dict, n_scenarios: int = N_SCENARIOS) -> Dic
     budget = cfg["budget_usd"]
     S = n_scenarios
 
-    n_vars = n + 1 + S
+    n_vars = n + 1 + S + P
+    x_sl, eta_i, u_sl, w_sl = slice(0, n), n, slice(n + 1, n + 1 + S), slice(n + 1 + S, n_vars)
+
+    pair_amt = np.array([discount * (offers[i] + offers[j]) for i, j in pairs]) if P else np.zeros(0)
+
     c_obj = np.zeros(n_vars)
-    c_obj[:n] = mean_a
-    c_obj[n] = lam
-    c_obj[n + 1:] = lam / ((1 - alpha) * S)
+    c_obj[x_sl] = mean_a
+    c_obj[eta_i] = lam
+    c_obj[u_sl] = lam / ((1 - alpha) * S)
+    c_obj[w_sl] = -pair_amt
 
     row_budget = np.zeros(n_vars)
-    row_budget[:n] = offers
+    row_budget[x_sl] = offers
+    row_budget[w_sl] = -pair_amt
     budget_constraint = LinearConstraint(row_budget, -np.inf, budget)
 
     rows_cvar = np.zeros((S, n_vars))
-    rows_cvar[:, :n] = -a.T
-    rows_cvar[np.arange(S), n] = 1.0
-    rows_cvar[np.arange(S), n + 1:] = np.eye(S)
+    rows_cvar[:, x_sl] = -a.T
+    rows_cvar[np.arange(S), eta_i] = 1.0
+    rows_cvar[:, u_sl] = np.eye(S)
+    if P:
+        rows_cvar[:, w_sl] = pair_amt.reshape(1, -1)
     cvar_constraint = LinearConstraint(rows_cvar, e, np.inf)
 
-    lower = np.concatenate([np.zeros(n), [-np.inf], np.zeros(S)])
-    upper = np.concatenate([np.ones(n), [np.inf], np.full(S, np.inf)])
+    constraints = [budget_constraint, cvar_constraint]
+    if P:
+        rows_and = np.zeros((3 * P, n_vars))
+        lb_and = np.full(3 * P, -np.inf)
+        ub_and = np.zeros(3 * P)
+        for k, (i, j) in enumerate(pairs):
+            rows_and[3 * k, i] = -1; rows_and[3 * k, n + 1 + S + k] = 1
+            rows_and[3 * k + 1, j] = -1; rows_and[3 * k + 1, n + 1 + S + k] = 1
+            rows_and[3 * k + 2, i] = 1; rows_and[3 * k + 2, j] = 1
+            rows_and[3 * k + 2, n + 1 + S + k] = -1
+            ub_and[3 * k + 2] = 1.0
+        constraints.append(LinearConstraint(rows_and, lb_and, ub_and))
+
+    lower = np.concatenate([np.zeros(n), [-np.inf], np.zeros(S), np.zeros(P)])
+    upper = np.concatenate([np.ones(n), [np.inf], np.full(S, np.inf), np.ones(P)])
     bounds = Bounds(lower, upper)
-    integrality = np.concatenate([np.ones(n), [0], np.zeros(S)])
+    integrality = np.concatenate([np.ones(n), [0], np.zeros(S), np.ones(P)])
 
     res = milp(
-        c_obj, constraints=[budget_constraint, cvar_constraint],
-        bounds=bounds, integrality=integrality, options={"time_limit": 90},
+        c_obj, constraints=constraints,
+        bounds=bounds, integrality=integrality, options={"time_limit": 120},
     )
-    x = np.round(res.x[:n]).astype(int)
+    x = np.round(res.x[x_sl]).astype(int)
     return {c.claim_id: int(x[i]) for i, c in enumerate(claims)}
 
 

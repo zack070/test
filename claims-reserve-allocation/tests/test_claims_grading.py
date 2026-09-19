@@ -61,7 +61,7 @@ def test_dataset_meets_bar(dataset_name):
         assert v in (0, 1), f"[{dataset_name}] decision for {cid} must be 0 or 1, got {v!r}"
         decisions[cid] = int(v)
 
-    used = budget_used(claims, decisions)
+    used = budget_used(claims, decisions, cfg)
     assert is_feasible(claims, decisions, cfg), (
         f"[{dataset_name}] budget exceeded: used ${used:,.2f} > cap ${cfg.budget_usd:,.2f}"
     )

@@ -16,10 +16,18 @@ Model (single deferral period, no multi-period chains):
         realized_i = base_severity_i * Z_{cluster(i)}
         if litigated (Bernoulli(p_lit_type)): realized_i *= escalation_factor_type
         deferred_cost_i = realized_i * (1 + interest_rate_annual * deferral_years)
-  - If settled now, the claim costs exactly settlement_offer_usd_i (disclosed,
-    fixed, known today).
+  - If settled now, the claim costs settlement_offer_usd_i (disclosed, fixed,
+    known today) -- EXCEPT for a linked-pair claim, which costs
+    settlement_offer_usd_i * (1 - linked_settlement_discount) if its
+    designated pair partner is ALSO settled, and the full undiscounted
+    settlement_offer_usd_i if the partner is not. A small number of claims
+    are pair-linked (representing claims that settle only as a package --
+    co-defendant claims under one agreement, or a single claimant's
+    multiple related claims); most claims have no pair and are unaffected.
   - Decision x_i in {0,1}: 1 = settle now, 0 = defer.
-  - Feasibility: sum_i x_i * settlement_offer_usd_i <= budget_usd (hard cap).
+  - Feasibility: sum_i settlement_cost_i(x) <= budget_usd (hard cap), where
+    settlement_cost_i(x) is 0 for a deferred claim and the (possibly
+    pair-discounted) settled cost above otherwise.
   - Objective (minimize): E[total_cost(x)] + risk_lambda * CVaR_alpha(total_cost(x))
     where CVaR_alpha is the mean of the worst (1 - alpha) tail of the total
     cost distribution induced by the random draws above.
@@ -62,6 +70,7 @@ class ModelConfig:
     risk_alpha: float
     risk_lambda: float
     budget_usd: float
+    linked_settlement_discount: float = 0.0
 
     @property
     def cluster_lognormal_sigma(self) -> float:
@@ -83,6 +92,16 @@ class Claim:
     claim_type: str
     incident_cluster_id: str
     settlement_offer_usd: float
+    linked_claim_id: str = ""
+
+
+def settlement_cost(claim: Claim, decisions: Dict[str, int], cfg: ModelConfig) -> float:
+    """What settling `claim` actually costs, given the full decision set --
+    the full offer, unless it's pair-linked and its partner is ALSO settled,
+    in which case both get the linked discount."""
+    if claim.linked_claim_id and decisions.get(claim.linked_claim_id, 0) == 1:
+        return claim.settlement_offer_usd * (1.0 - cfg.linked_settlement_discount)
+    return claim.settlement_offer_usd
 
 
 def expected_deferred_cost(claim: Claim, cfg: ModelConfig) -> float:
@@ -117,7 +136,7 @@ def simulate_total_cost(
     total = np.zeros(n_paths, dtype=np.float64)
     for c in claims:
         if decisions[c.claim_id] == 1:
-            total += c.settlement_offer_usd
+            total += settlement_cost(c, decisions, cfg)
             continue
         t = cfg.claim_types[c.claim_type]
         base = rng.lognormal(mean=t.lognormal_mu, sigma=t.lognormal_sigma, size=n_paths)
@@ -155,9 +174,9 @@ def objective(
     }
 
 
-def budget_used(claims: Sequence[Claim], decisions: Dict[str, int]) -> float:
-    return sum(c.settlement_offer_usd for c in claims if decisions[c.claim_id] == 1)
+def budget_used(claims: Sequence[Claim], decisions: Dict[str, int], cfg: ModelConfig) -> float:
+    return sum(settlement_cost(c, decisions, cfg) for c in claims if decisions[c.claim_id] == 1)
 
 
 def is_feasible(claims: Sequence[Claim], decisions: Dict[str, int], cfg: ModelConfig) -> bool:
-    return budget_used(claims, decisions) <= cfg.budget_usd + 1e-6
+    return budget_used(claims, decisions, cfg) <= cfg.budget_usd + 1e-6

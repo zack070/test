@@ -80,13 +80,38 @@ def _simulate_deferred_cost_matrix(
     return d
 
 
+def _build_pairs(claims: Sequence[Claim]) -> List[tuple]:
+    """Each linked pair appears once, as (index_i, index_j)."""
+    index = {c.claim_id: i for i, c in enumerate(claims)}
+    seen = set()
+    pairs = []
+    for i, c in enumerate(claims):
+        if not c.linked_claim_id:
+            continue
+        j = index[c.linked_claim_id]
+        key = tuple(sorted((i, j)))
+        if key not in seen:
+            seen.add(key)
+            pairs.append(key)
+    return pairs
+
+
 def risk_aware(
     claims: Sequence[Claim], cfg: ModelConfig, rng: np.random.Generator, n_scenarios: int = 300,
 ) -> Dict[str, int]:
+    """Scenario-based MILP with a Rockafellar-Uryasev CVaR linearization,
+    PLUS an AND-linearization (w_p = x_i * x_j) for each linked-claim pair,
+    so the linked-settlement discount is only realized when both members
+    of a pair are jointly settled. Without this, the solver would only
+    ever find the discount by accident (it's invisible to any per-claim
+    marginal-value ranking, since the offer used is fixed per claim)."""
     n = len(claims)
     offers = np.array([c.settlement_offer_usd for c in claims])
-    d = _simulate_deferred_cost_matrix(claims, cfg, rng, n_scenarios)  # (n, S)
+    pairs = _build_pairs(claims)
+    P = len(pairs)
+    discount = cfg.linked_settlement_discount
 
+    d = _simulate_deferred_cost_matrix(claims, cfg, rng, n_scenarios)  # (n, S)
     a = offers.reshape(-1, 1) - d  # (n, S): contribution delta if settled vs deferred
     e = d.sum(axis=0)  # (S,): baseline cost if everything deferred
     mean_a = a.mean(axis=1)  # (n,)
@@ -95,34 +120,56 @@ def risk_aware(
     lam = cfg.risk_lambda
     S = n_scenarios
 
-    # variables: x (n binary), eta (1 free), u (S, >= 0)
-    n_vars = n + 1 + S
-    c_obj = np.zeros(n_vars)
-    c_obj[:n] = mean_a
-    c_obj[n] = lam  # eta coefficient
-    c_obj[n + 1:] = lam / ((1 - alpha) * S)  # u_s coefficients
+    # variables: x (n binary), eta (1 free), u (S, >= 0), w (P binary)
+    n_vars = n + 1 + S + P
+    x_sl, eta_i, u_sl, w_sl = slice(0, n), n, slice(n + 1, n + 1 + S), slice(n + 1 + S, n_vars)
 
-    # Budget constraint: sum offer_i * x_i <= budget
+    pair_amt = np.array([discount * (offers[i] + offers[j]) for i, j in pairs]) if P else np.zeros(0)
+
+    c_obj = np.zeros(n_vars)
+    c_obj[x_sl] = mean_a
+    c_obj[eta_i] = lam
+    c_obj[u_sl] = lam / ((1 - alpha) * S)
+    c_obj[w_sl] = -pair_amt  # settling both members of a pair reduces cost
+
+    # Budget: sum offer_i*x_i - sum discount*(offer_i+offer_j)*w_p <= budget
     row_budget = np.zeros(n_vars)
-    row_budget[:n] = offers
+    row_budget[x_sl] = offers
+    row_budget[w_sl] = -pair_amt
     budget_constraint = LinearConstraint(row_budget, -np.inf, cfg.budget_usd)
 
-    # CVaR constraints: -sum_i a_{i,s} x_i + u_s + eta >= e_s   for each s
+    # CVaR: u_s + eta - sum_i a_{i,s} x_i + sum_p pair_amt_p * w_p >= e_s
     rows_cvar = np.zeros((S, n_vars))
-    rows_cvar[:, :n] = -a.T  # (S, n)
-    rows_cvar[np.arange(S), n] = 1.0  # eta
-    rows_cvar[np.arange(S), n + 1:] = np.eye(S)  # u_s
+    rows_cvar[:, x_sl] = -a.T
+    rows_cvar[np.arange(S), eta_i] = 1.0
+    rows_cvar[:, u_sl] = np.eye(S)
+    if P:
+        rows_cvar[:, w_sl] = pair_amt.reshape(1, -1)
     cvar_constraint = LinearConstraint(rows_cvar, e, np.inf)
 
-    lower = np.concatenate([np.zeros(n), [-np.inf], np.zeros(S)])
-    upper = np.concatenate([np.ones(n), [np.inf], np.full(S, np.inf)])
+    constraints = [budget_constraint, cvar_constraint]
+    if P:
+        # AND-linearization: w_p <= x_i, w_p <= x_j, w_p >= x_i + x_j - 1
+        rows_and = np.zeros((3 * P, n_vars))
+        lb_and = np.full(3 * P, -np.inf)
+        ub_and = np.zeros(3 * P)
+        for k, (i, j) in enumerate(pairs):
+            rows_and[3 * k, x_sl.start + i] = -1; rows_and[3 * k, n + 1 + S + k] = 1        # w - x_i <= 0
+            rows_and[3 * k + 1, x_sl.start + j] = -1; rows_and[3 * k + 1, n + 1 + S + k] = 1  # w - x_j <= 0
+            rows_and[3 * k + 2, x_sl.start + i] = 1; rows_and[3 * k + 2, x_sl.start + j] = 1
+            rows_and[3 * k + 2, n + 1 + S + k] = -1                                          # x_i+x_j-w <= 1
+            ub_and[3 * k + 2] = 1.0
+        constraints.append(LinearConstraint(rows_and, lb_and, ub_and))
+
+    lower = np.concatenate([np.zeros(n), [-np.inf], np.zeros(S), np.zeros(P)])
+    upper = np.concatenate([np.ones(n), [np.inf], np.full(S, np.inf), np.ones(P)])
     bounds = Bounds(lower, upper)
-    integrality = np.concatenate([np.ones(n), [0], np.zeros(S)])
+    integrality = np.concatenate([np.ones(n), [0], np.zeros(S), np.ones(P)])
 
     res = milp(
-        c_obj, constraints=[budget_constraint, cvar_constraint],
+        c_obj, constraints=constraints,
         bounds=bounds, integrality=integrality,
         options={"time_limit": 120},
     )
-    x = np.round(res.x[:n]).astype(int)
+    x = np.round(res.x[x_sl]).astype(int)
     return {c.claim_id: int(x[i]) for i, c in enumerate(claims)}

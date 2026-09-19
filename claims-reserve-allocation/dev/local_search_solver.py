@@ -32,7 +32,7 @@ def local_search(
     eval_paths: int = 3000,
 ) -> Dict[str, int]:
     current = dict(initial)
-    current_used = budget_used(claims, current)
+    current_used = budget_used(claims, current, cfg)
     ids = [c.claim_id for c in claims]
     id_to_claim = {c.claim_id: c for c in claims}
 
@@ -46,7 +46,7 @@ def local_search(
             continue  # flipping two claims with the same decision is a no-op pair; try a single flip instead
         candidate = dict(current)
         candidate[a], candidate[b] = candidate[b], candidate[a]
-        cand_used = budget_used(claims, candidate)
+        cand_used = budget_used(claims, candidate, cfg)
         if cand_used > cfg.budget_usd + 1e-6:
             continue
 
