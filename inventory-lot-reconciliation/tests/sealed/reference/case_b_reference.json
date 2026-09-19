@@ -1,0 +1,244 @@
+{
+  "skus": {
+    "SKU200": {
+      "on_hand_qty": 50,
+      "valuation": 250.0
+    },
+    "SKU201": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU202": {
+      "on_hand_qty": 175,
+      "valuation": 1850.0
+    },
+    "SKU203": {
+      "on_hand_qty": 175,
+      "valuation": 1850.0
+    },
+    "SKU204": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU205": {
+      "on_hand_qty": 50,
+      "valuation": 250.0
+    },
+    "SKU206": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU207": {
+      "on_hand_qty": 50,
+      "valuation": 350.0
+    },
+    "SKU208": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU209": {
+      "on_hand_qty": 50,
+      "valuation": 350.0
+    },
+    "SKU210": {
+      "on_hand_qty": 175,
+      "valuation": 1850.0
+    },
+    "SKU211": {
+      "on_hand_qty": 50,
+      "valuation": 350.0
+    },
+    "SKU212": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU213": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU214": {
+      "on_hand_qty": 85,
+      "valuation": 770.0
+    },
+    "SKU215": {
+      "on_hand_qty": 175,
+      "valuation": 1850.0
+    },
+    "SKU216": {
+      "on_hand_qty": 50,
+      "valuation": 350.0
+    },
+    "SKU217": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU218": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU219": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU220": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU221": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU222": {
+      "on_hand_qty": 85,
+      "valuation": 770.0
+    },
+    "SKU223": {
+      "on_hand_qty": 50,
+      "valuation": 350.0
+    },
+    "SKU224": {
+      "on_hand_qty": 50,
+      "valuation": 350.0
+    },
+    "SKU225": {
+      "on_hand_qty": 50,
+      "valuation": 350.0
+    },
+    "SKU226": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU227": {
+      "on_hand_qty": 50,
+      "valuation": 250.0
+    },
+    "SKU228": {
+      "on_hand_qty": 85,
+      "valuation": 770.0
+    },
+    "SKU229": {
+      "on_hand_qty": 175,
+      "valuation": 1850.0
+    },
+    "SKU230": {
+      "on_hand_qty": 50,
+      "valuation": 350.0
+    },
+    "SKU231": {
+      "on_hand_qty": 85,
+      "valuation": 770.0
+    },
+    "SKU232": {
+      "on_hand_qty": 175,
+      "valuation": 1850.0
+    },
+    "SKU233": {
+      "on_hand_qty": 50,
+      "valuation": 250.0
+    },
+    "SKU234": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU235": {
+      "on_hand_qty": 50,
+      "valuation": 250.0
+    },
+    "SKU236": {
+      "on_hand_qty": 85,
+      "valuation": 770.0
+    },
+    "SKU237": {
+      "on_hand_qty": 50,
+      "valuation": 350.0
+    },
+    "SKU238": {
+      "on_hand_qty": 50,
+      "valuation": 350.0
+    },
+    "SKU239": {
+      "on_hand_qty": 85,
+      "valuation": 770.0
+    },
+    "SKU240": {
+      "on_hand_qty": 85,
+      "valuation": 770.0
+    },
+    "SKU241": {
+      "on_hand_qty": 50,
+      "valuation": 350.0
+    },
+    "SKU242": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU243": {
+      "on_hand_qty": 175,
+      "valuation": 1850.0
+    },
+    "SKU244": {
+      "on_hand_qty": 85,
+      "valuation": 770.0
+    },
+    "SKU245": {
+      "on_hand_qty": 50,
+      "valuation": 250.0
+    },
+    "SKU246": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU247": {
+      "on_hand_qty": 50,
+      "valuation": 250.0
+    },
+    "SKU248": {
+      "on_hand_qty": 85,
+      "valuation": 770.0
+    },
+    "SKU249": {
+      "on_hand_qty": 50,
+      "valuation": 250.0
+    },
+    "SKU250": {
+      "on_hand_qty": 175,
+      "valuation": 1850.0
+    },
+    "SKU251": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU252": {
+      "on_hand_qty": 175,
+      "valuation": 1850.0
+    },
+    "SKU253": {
+      "on_hand_qty": 175,
+      "valuation": 1850.0
+    },
+    "SKU254": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU255": {
+      "on_hand_qty": 85,
+      "valuation": 770.0
+    },
+    "SKU256": {
+      "on_hand_qty": 0,
+      "valuation": 0.0
+    },
+    "SKU257": {
+      "on_hand_qty": 50,
+      "valuation": 350.0
+    },
+    "SKU258": {
+      "on_hand_qty": 50,
+      "valuation": 250.0
+    },
+    "SKU259": {
+      "on_hand_qty": 175,
+      "valuation": 1850.0
+    }
+  }
+}

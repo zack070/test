@@ -1,0 +1,42 @@
+artifacts = ["/app/outputs/engine.py"]
+
+[task]
+name = "afterquery/inventory-lot-reconciliation"
+
+[metadata]
+author_name = "Tonny Muthoka"
+author_email = "tonnysammy952@gmail.com"
+
+difficulty_explanation = """
+Warehouse and ERP engineers who maintain a lot-tracked inventory system spend real time not writing that system from scratch but diagnosing why a mostly-working nightly reconciliation job produces a wrong on-hand quantity or valuation on specific SKUs -- the report looks plausible end-to-end, a subset of SKUs are off, and the job is to localize which piece of the pipeline's logic diverges from the disclosed reconciliation rules and fix it. This task reproduces that situation using a synthetic but fully disclosed rule set (FIFO lot consumption with a stated tie-break, correction/reversal semantics for amended picks, and in-sequence cycle-count application -- see INVENTORY_SPEC.md) and synthetic warehouse event data generated for this task, not real inventory records. The agent is handed a pipeline (environment/pipeline/engine.py) that implements this system but contains three real, independently-introduced, silent bugs: a FIFO tie-break that sorts same-day lots by unit cost instead of the disclosed lot_id rule; a correction handler that applies the corrected quantity as a fresh pick without first reversing the original pick's exact consumption; and cycle-count adjustments that are deferred to the end of the run instead of taking effect at their position in the event sequence. None of the three raises an exception, and a subset of SKUs are deliberately constructed so that two of the three bugs interact on the same SKU, so fixing only the more obvious one still leaves that SKU wrong -- this was added specifically because an unentangled three-bugs bundle was judged as sitting below the difficulty bar in an earlier review of this exact task. This was measured directly against the real pipeline and both sealed datasets, not assumed: the unmodified pipeline gets 51 of 60 SKUs wrong on both sealed datasets; leaving any single one of the three bugs unfixed (with the other two genuinely fixed) still produces 20-25 of 60 SKUs wrong; and an independently-written fresh implementation of the spec -- never derived from the buggy pipeline, using two natural, non-malicious shortcuts a competent engineer might reach for (relying on stable-sort-preserves-insertion-order instead of an explicit tie-break key, and a net-delta correction instead of fully reversing and redoing the original pick) -- still gets 33-36 of 60 SKUs wrong, which rules out "bypass the buggy code and reimplement from the spec" as an easy escape from the intended difficulty.
+"""
+
+solution_explanation = """
+The reference solution (solution/engine.py) is the shipped pipeline with all three bugs fixed: the FIFO tie-break comparator changed from (receipt_date, unit_cost) to the disclosed (receipt_date, lot_id); the correction handler changed to record each pick's exact per-lot consumption and fully reverse it before re-running FIFO for the corrected quantity against current inventory state; and cycle-count adjustments applied immediately, in sequence order, instead of collected and deferred to the end. This was cross-checked against tests/lib/reference_engine.py, a second implementation written independently (plain dicts instead of a Lot class, a single flat processing loop instead of per-event-type dispatch functions, reversal computed inline rather than via a shared helper) specifically to catch a bug shared between the reference solution and the grader. Both agree exactly, with zero discrepancies, on the worked example and both sealed datasets.
+"""
+
+verification_explanation = """
+The agent's deliverable is /app/outputs/engine.py -- a single Python file, run once per sealed held-out dataset as a fresh subprocess under an unprivileged runner user with a firm timeout, the same one-shot-batch isolation pattern as this account's other batch tasks (no live decide()-per-event loop, so no incrementally-revealed state and no frame-introspection surface). What stays hidden is each sealed dataset's frozen reference report (tests/sealed/reference/), chown+chmod root-only before Stage 1 (untrusted) ever runs, computed from the independently-written reference_engine.py and cross-checked against the reference solution before being trusted; the sealed INPUT event streams are deliberately left readable, since the candidate's code legitimately needs them and the reconciliation rules themselves are fully disclosed in INVENTORY_SPEC.md on purpose. Stage 2 (trusted, root, executes no candidate code) compares the candidate's output against the frozen reference exactly, per SKU. Ten adversarial submissions were run against the real two-stage verifier (see cheat/README.md for each one's measured result): reward forgery and a sealed-reference read attempt (both blocked by root-owned chmod-700 sealing, verified directly to raise PermissionError under the runner UID), a crash, a malformed interface, a memorized answer for the visible practice case (fails because the sealed datasets use disjoint SKU ranges), the unmodified buggy pipeline submitted as-is (51/60 SKUs wrong on both sealed datasets), three partial fixes each leaving exactly one of the three bugs in place (20-25/60 SKUs wrong on both datasets, confirming all three bugs are independently necessary to catch, including where two bugs are deliberately entangled on the same SKU), and an independently-written fresh reimplementation of the spec using natural non-malicious shortcuts (33-36/60 SKUs wrong on both datasets). All ten measure reward 0 on both sealed datasets; the reference solution measures reward 1 on both.
+"""
+
+category = "Operations"
+subcategory = "Supply chain"
+tags = ["inventory", "warehouse-management", "debugging", "fifo-costing", "reconciliation"]
+expert_time_estimate_hours = 5
+relevant_experience = """
+I work as an operations and business data analyst (2024-present), where I have directly reviewed business scenarios involving inventory reconciliation, transaction-level auditing, and diagnosing why a computed operational report diverges from a stated policy -- applying structured reasoning to localize which specific rule or step produced a wrong number, and assessing whether a proposed fix actually addresses the root cause rather than papering over one symptom. This gives me a working sense of what a genuine warehouse/ERP reconciliation operation actually has to get right (FIFO lot costing, correction/reversal handling for amended transactions, and cycle-count timing against a live transaction stream) and what a realistic versus contrived version of that debugging work looks like, including what kind of implementation mistake a competent-but-imperfect engineer plausibly makes (a wrong tie-break key, a shortcut correction that skips full reversal, batching a reconciliation step that needs to be in-sequence) versus an arbitrary one. I also evaluate AI-generated business outputs against predefined criteria and have supported AI training/evaluation projects involving business reasoning and quality assurance, which is directly relevant to judging whether this task's grading (an exact per-SKU comparison of a computed report, produced by the agent's own fixed pipeline running against sealed data, cross-checked by an independently-written second implementation) is a fair and meaningful test of the underlying diagnostic skill rather than an arbitrary one. I am not a warehouse operations or ERP systems specialist by training; the technical implementation (the reconciliation model and its independent cross-check, the three seeded bugs and their entangled placement, the adversarial baselines and the reasoning for why each is a realistic non-expert shortcut rather than an arbitrary one, and the two-stage sealed verifier) was built with AI assistance under my direction, with my own judgment applied to whether the rules, the bugs, and the grading reflect a realistic inventory reconciliation operation and a realistic debugging task.
+"""
+
+[verifier]
+timeout_sec = 400.0
+environment_mode = "separate"
+
+[agent]
+timeout_sec = 10800.0
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0

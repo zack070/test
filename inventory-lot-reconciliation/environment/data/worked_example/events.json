@@ -1,0 +1,41 @@
+[
+  {
+    "type": "RECEIPT",
+    "seq": 1,
+    "sku": "WIDGET",
+    "lot_id": "WIDGET-L1",
+    "receipt_date": 1,
+    "unit_cost": 4.0,
+    "qty": 40
+  },
+  {
+    "type": "PICK",
+    "seq": 2,
+    "sku": "WIDGET",
+    "qty": 15
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 3,
+    "sku": "GADGET",
+    "lot_id": "GADGET-L9",
+    "receipt_date": 5,
+    "unit_cost": 6.0,
+    "qty": 30
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 4,
+    "sku": "GADGET",
+    "lot_id": "GADGET-L2",
+    "receipt_date": 5,
+    "unit_cost": 9.0,
+    "qty": 30
+  },
+  {
+    "type": "PICK",
+    "seq": 5,
+    "sku": "GADGET",
+    "qty": 30
+  }
+]

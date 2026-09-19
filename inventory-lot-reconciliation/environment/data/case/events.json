@@ -1,0 +1,1647 @@
+[
+  {
+    "type": "PICK",
+    "seq": 199,
+    "sku": "SKU554",
+    "qty": 50
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 77,
+    "sku": "SKU521",
+    "lot_id": "SKU521-L1",
+    "true_qty": 50
+  },
+  {
+    "type": "PICK",
+    "seq": 129,
+    "sku": "SKU535",
+    "qty": 40
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 98,
+    "sku": "SKU526",
+    "corrects_seq": 96,
+    "corrected_qty": 25
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 122,
+    "sku": "SKU533",
+    "lot_id": "SKU533-L2",
+    "receipt_date": 101,
+    "unit_cost": 11.0,
+    "qty": 100
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 47,
+    "sku": "SKU512",
+    "lot_id": "SKU512-L1",
+    "true_qty": 50
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 15,
+    "sku": "SKU503",
+    "lot_id": "SKU503-L1",
+    "receipt_date": 100,
+    "unit_cost": 10.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 2,
+    "sku": "SKU500",
+    "qty": 30
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU555",
+    "lot_id": "SKU555-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 201
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU538",
+    "lot_id": "SKU538-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 137
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 103,
+    "sku": "SKU529",
+    "lot_id": "SKU529-L1",
+    "receipt_date": 100,
+    "unit_cost": 10.0,
+    "qty": 100
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 18,
+    "sku": "SKU503",
+    "corrects_seq": 16,
+    "corrected_qty": 25
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 218,
+    "sku": "SKU559",
+    "lot_id": "SKU559-L1",
+    "true_qty": 50
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU505",
+    "lot_id": "SKU505-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 22
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 217,
+    "sku": "SKU559",
+    "corrects_seq": 216,
+    "corrected_qty": 20
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU554",
+    "lot_id": "SKU554-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 197
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 211,
+    "sku": "SKU558",
+    "lot_id": "SKU558-L1",
+    "receipt_date": 100,
+    "unit_cost": 10.0,
+    "qty": 100
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU545",
+    "lot_id": "SKU545-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 164
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 148,
+    "sku": "SKU540",
+    "lot_id": "SKU540-L1",
+    "true_qty": 50
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 150,
+    "sku": "SKU541",
+    "lot_id": "SKU541-L1",
+    "receipt_date": 100,
+    "unit_cost": 9.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 114,
+    "sku": "SKU531",
+    "qty": 50
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 12,
+    "sku": "SKU502",
+    "corrects_seq": 11,
+    "corrected_qty": 20
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 112,
+    "sku": "SKU531",
+    "corrects_seq": 111,
+    "corrected_qty": 20
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU511",
+    "lot_id": "SKU511-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 41
+  },
+  {
+    "type": "PICK",
+    "seq": 152,
+    "sku": "SKU541",
+    "qty": 60
+  },
+  {
+    "type": "PICK",
+    "seq": 100,
+    "sku": "SKU527",
+    "qty": 30
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 172,
+    "sku": "SKU547",
+    "lot_id": "SKU547-L2",
+    "true_qty": 40
+  },
+  {
+    "type": "PICK",
+    "seq": 205,
+    "sku": "SKU556",
+    "qty": 60
+  },
+  {
+    "type": "PICK",
+    "seq": 212,
+    "sku": "SKU558",
+    "qty": 40
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 215,
+    "sku": "SKU559",
+    "lot_id": "SKU559-L1",
+    "receipt_date": 100,
+    "unit_cost": 8.0,
+    "qty": 100
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 139,
+    "sku": "SKU538",
+    "lot_id": "SKU538-L2",
+    "true_qty": 40
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 143,
+    "sku": "SKU539",
+    "lot_id": "SKU539-L2",
+    "true_qty": 40
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 65,
+    "sku": "SKU518",
+    "lot_id": "SKU518-L1",
+    "receipt_date": 100,
+    "unit_cost": 5.0,
+    "qty": 80
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU553",
+    "lot_id": "SKU553-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 194
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 120,
+    "sku": "SKU533",
+    "lot_id": "SKU533-L1",
+    "receipt_date": 100,
+    "unit_cost": 10.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 158,
+    "sku": "SKU543",
+    "qty": 30
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 31,
+    "sku": "SKU507",
+    "lot_id": "SKU507-L1",
+    "true_qty": 60
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU544",
+    "lot_id": "SKU544-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 160
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU516",
+    "lot_id": "SKU516-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 57
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 85,
+    "sku": "SKU523",
+    "lot_id": "SKU523-L1",
+    "true_qty": 50
+  },
+  {
+    "type": "PICK",
+    "seq": 5,
+    "sku": "SKU500",
+    "qty": 50
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU538",
+    "lot_id": "SKU538-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 138
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 20,
+    "sku": "SKU504",
+    "lot_id": "SKU504-L1",
+    "true_qty": 60
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 90,
+    "sku": "SKU524",
+    "corrects_seq": 89,
+    "corrected_qty": 15
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 73,
+    "sku": "SKU520",
+    "corrects_seq": 71,
+    "corrected_qty": 25
+  },
+  {
+    "type": "PICK",
+    "seq": 187,
+    "sku": "SKU551",
+    "qty": 40
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 155,
+    "sku": "SKU542",
+    "lot_id": "SKU542-L2",
+    "receipt_date": 101,
+    "unit_cost": 11.0,
+    "qty": 100
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU535",
+    "lot_id": "SKU535-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 127
+  },
+  {
+    "type": "PICK",
+    "seq": 149,
+    "sku": "SKU540",
+    "qty": 50
+  },
+  {
+    "type": "PICK",
+    "seq": 61,
+    "sku": "SKU517",
+    "qty": 30
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU547",
+    "lot_id": "SKU547-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 171
+  },
+  {
+    "type": "PICK",
+    "seq": 154,
+    "sku": "SKU542",
+    "qty": 40
+  },
+  {
+    "type": "PICK",
+    "seq": 192,
+    "sku": "SKU552",
+    "qty": 50
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 84,
+    "sku": "SKU523",
+    "corrects_seq": 83,
+    "corrected_qty": 20
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU546",
+    "lot_id": "SKU546-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 166
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 44,
+    "sku": "SKU512",
+    "lot_id": "SKU512-L1",
+    "receipt_date": 100,
+    "unit_cost": 8.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 59,
+    "sku": "SKU516",
+    "qty": 50
+  },
+  {
+    "type": "PICK",
+    "seq": 48,
+    "sku": "SKU512",
+    "qty": 50
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 19,
+    "sku": "SKU504",
+    "lot_id": "SKU504-L1",
+    "receipt_date": 100,
+    "unit_cost": 9.0,
+    "qty": 100
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU535",
+    "lot_id": "SKU535-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 126
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 50,
+    "sku": "SKU513",
+    "lot_id": "SKU513-L1",
+    "true_qty": 60
+  },
+  {
+    "type": "PICK",
+    "seq": 21,
+    "sku": "SKU504",
+    "qty": 60
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU511",
+    "lot_id": "SKU511-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 42
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 68,
+    "sku": "SKU519",
+    "lot_id": "SKU519-L1",
+    "true_qty": 60
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU525",
+    "lot_id": "SKU525-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 92
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 55,
+    "sku": "SKU515",
+    "lot_id": "SKU515-L1",
+    "true_qty": 60
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU524",
+    "lot_id": "SKU524-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 87
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 54,
+    "sku": "SKU515",
+    "lot_id": "SKU515-L1",
+    "receipt_date": 100,
+    "unit_cost": 9.0,
+    "qty": 100
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 28,
+    "sku": "SKU506",
+    "lot_id": "SKU506-L2",
+    "true_qty": 40
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 185,
+    "sku": "SKU550",
+    "corrects_seq": 184,
+    "corrected_qty": 15
+  },
+  {
+    "type": "PICK",
+    "seq": 40,
+    "sku": "SKU510",
+    "qty": 30
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 74,
+    "sku": "SKU521",
+    "lot_id": "SKU521-L1",
+    "receipt_date": 100,
+    "unit_cost": 8.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 168,
+    "sku": "SKU546",
+    "qty": 30
+  },
+  {
+    "type": "PICK",
+    "seq": 56,
+    "sku": "SKU515",
+    "qty": 60
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 177,
+    "sku": "SKU548",
+    "corrects_seq": 175,
+    "corrected_qty": 25
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 101,
+    "sku": "SKU528",
+    "lot_id": "SKU528-L1",
+    "receipt_date": 100,
+    "unit_cost": 5.0,
+    "qty": 80
+  },
+  {
+    "type": "PICK",
+    "seq": 131,
+    "sku": "SKU536",
+    "qty": 30
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 30,
+    "sku": "SKU507",
+    "lot_id": "SKU507-L1",
+    "receipt_date": 100,
+    "unit_cost": 9.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 78,
+    "sku": "SKU521",
+    "qty": 50
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 49,
+    "sku": "SKU513",
+    "lot_id": "SKU513-L1",
+    "receipt_date": 100,
+    "unit_cost": 9.0,
+    "qty": 100
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 24,
+    "sku": "SKU505",
+    "lot_id": "SKU505-L2",
+    "true_qty": 40
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 124,
+    "sku": "SKU534",
+    "lot_id": "SKU534-L1",
+    "receipt_date": 100,
+    "unit_cost": 5.0,
+    "qty": 80
+  },
+  {
+    "type": "PICK",
+    "seq": 75,
+    "sku": "SKU521",
+    "qty": 30
+  },
+  {
+    "type": "PICK",
+    "seq": 25,
+    "sku": "SKU505",
+    "qty": 40
+  },
+  {
+    "type": "PICK",
+    "seq": 83,
+    "sku": "SKU523",
+    "qty": 30
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU553",
+    "lot_id": "SKU553-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 193
+  },
+  {
+    "type": "PICK",
+    "seq": 144,
+    "sku": "SKU539",
+    "qty": 40
+  },
+  {
+    "type": "PICK",
+    "seq": 71,
+    "sku": "SKU520",
+    "qty": 40
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 70,
+    "sku": "SKU520",
+    "lot_id": "SKU520-L1",
+    "receipt_date": 100,
+    "unit_cost": 10.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 125,
+    "sku": "SKU534",
+    "qty": 30
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 169,
+    "sku": "SKU546",
+    "corrects_seq": 168,
+    "corrected_qty": 15
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 206,
+    "sku": "SKU557",
+    "lot_id": "SKU557-L1",
+    "receipt_date": 100,
+    "unit_cost": 8.0,
+    "qty": 100
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU530",
+    "lot_id": "SKU530-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 107
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 115,
+    "sku": "SKU532",
+    "lot_id": "SKU532-L1",
+    "receipt_date": 100,
+    "unit_cost": 8.0,
+    "qty": 100
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU555",
+    "lot_id": "SKU555-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 200
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 1,
+    "sku": "SKU500",
+    "lot_id": "SKU500-L1",
+    "receipt_date": 100,
+    "unit_cost": 8.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 173,
+    "sku": "SKU547",
+    "qty": 40
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 208,
+    "sku": "SKU557",
+    "corrects_seq": 207,
+    "corrected_qty": 20
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU544",
+    "lot_id": "SKU544-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 159
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 174,
+    "sku": "SKU548",
+    "lot_id": "SKU548-L1",
+    "receipt_date": 100,
+    "unit_cost": 10.0,
+    "qty": 100
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU549",
+    "lot_id": "SKU549-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 178
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 36,
+    "sku": "SKU509",
+    "lot_id": "SKU509-L1",
+    "receipt_date": 100,
+    "unit_cost": 9.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 94,
+    "sku": "SKU525",
+    "qty": 40
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 161,
+    "sku": "SKU544",
+    "lot_id": "SKU544-L2",
+    "true_qty": 40
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 156,
+    "sku": "SKU542",
+    "corrects_seq": 154,
+    "corrected_qty": 25
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 106,
+    "sku": "SKU529",
+    "corrects_seq": 104,
+    "corrected_qty": 25
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 52,
+    "sku": "SKU514",
+    "lot_id": "SKU514-L1",
+    "receipt_date": 100,
+    "unit_cost": 5.0,
+    "qty": 80
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 153,
+    "sku": "SKU542",
+    "lot_id": "SKU542-L1",
+    "receipt_date": 100,
+    "unit_cost": 10.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 9,
+    "sku": "SKU501",
+    "qty": 40
+  },
+  {
+    "type": "PICK",
+    "seq": 14,
+    "sku": "SKU502",
+    "qty": 50
+  },
+  {
+    "type": "PICK",
+    "seq": 64,
+    "sku": "SKU517",
+    "qty": 50
+  },
+  {
+    "type": "PICK",
+    "seq": 11,
+    "sku": "SKU502",
+    "qty": 30
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU525",
+    "lot_id": "SKU525-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 91
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 8,
+    "sku": "SKU501",
+    "lot_id": "SKU501-L2",
+    "true_qty": 40
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU524",
+    "lot_id": "SKU524-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 88
+  },
+  {
+    "type": "PICK",
+    "seq": 162,
+    "sku": "SKU544",
+    "qty": 40
+  },
+  {
+    "type": "PICK",
+    "seq": 116,
+    "sku": "SKU532",
+    "qty": 30
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 72,
+    "sku": "SKU520",
+    "lot_id": "SKU520-L2",
+    "receipt_date": 101,
+    "unit_cost": 11.0,
+    "qty": 100
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 213,
+    "sku": "SKU558",
+    "lot_id": "SKU558-L2",
+    "receipt_date": 101,
+    "unit_cost": 11.0,
+    "qty": 100
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 132,
+    "sku": "SKU536",
+    "corrects_seq": 131,
+    "corrected_qty": 20
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 180,
+    "sku": "SKU549",
+    "lot_id": "SKU549-L2",
+    "true_qty": 40
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 118,
+    "sku": "SKU532",
+    "lot_id": "SKU532-L1",
+    "true_qty": 50
+  },
+  {
+    "type": "PICK",
+    "seq": 140,
+    "sku": "SKU538",
+    "qty": 40
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU546",
+    "lot_id": "SKU546-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 167
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 99,
+    "sku": "SKU527",
+    "lot_id": "SKU527-L1",
+    "receipt_date": 100,
+    "unit_cost": 5.0,
+    "qty": 80
+  },
+  {
+    "type": "PICK",
+    "seq": 38,
+    "sku": "SKU509",
+    "qty": 60
+  },
+  {
+    "type": "PICK",
+    "seq": 32,
+    "sku": "SKU507",
+    "qty": 60
+  },
+  {
+    "type": "PICK",
+    "seq": 45,
+    "sku": "SKU512",
+    "qty": 30
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 82,
+    "sku": "SKU523",
+    "lot_id": "SKU523-L1",
+    "receipt_date": 100,
+    "unit_cost": 8.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 146,
+    "sku": "SKU540",
+    "qty": 30
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 4,
+    "sku": "SKU500",
+    "lot_id": "SKU500-L1",
+    "true_qty": 50
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 176,
+    "sku": "SKU548",
+    "lot_id": "SKU548-L2",
+    "receipt_date": 101,
+    "unit_cost": 11.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 121,
+    "sku": "SKU533",
+    "qty": 40
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU522",
+    "lot_id": "SKU522-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 80
+  },
+  {
+    "type": "PICK",
+    "seq": 96,
+    "sku": "SKU526",
+    "qty": 40
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU505",
+    "lot_id": "SKU505-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 23
+  },
+  {
+    "type": "PICK",
+    "seq": 111,
+    "sku": "SKU531",
+    "qty": 30
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 113,
+    "sku": "SKU531",
+    "lot_id": "SKU531-L1",
+    "true_qty": 50
+  },
+  {
+    "type": "PICK",
+    "seq": 104,
+    "sku": "SKU529",
+    "qty": 40
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 10,
+    "sku": "SKU502",
+    "lot_id": "SKU502-L1",
+    "receipt_date": 100,
+    "unit_cost": 8.0,
+    "qty": 100
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 147,
+    "sku": "SKU540",
+    "corrects_seq": 146,
+    "corrected_qty": 20
+  },
+  {
+    "type": "PICK",
+    "seq": 89,
+    "sku": "SKU524",
+    "qty": 30
+  },
+  {
+    "type": "PICK",
+    "seq": 202,
+    "sku": "SKU555",
+    "qty": 50
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU522",
+    "lot_id": "SKU522-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 79
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU508",
+    "lot_id": "SKU508-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 33
+  },
+  {
+    "type": "PICK",
+    "seq": 119,
+    "sku": "SKU532",
+    "qty": 50
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 188,
+    "sku": "SKU551",
+    "lot_id": "SKU551-L2",
+    "receipt_date": 101,
+    "unit_cost": 11.0,
+    "qty": 100
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU516",
+    "lot_id": "SKU516-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 58
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU501",
+    "lot_id": "SKU501-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 7
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 189,
+    "sku": "SKU551",
+    "corrects_seq": 187,
+    "corrected_qty": 25
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 46,
+    "sku": "SKU512",
+    "corrects_seq": 45,
+    "corrected_qty": 20
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 17,
+    "sku": "SKU503",
+    "lot_id": "SKU503-L2",
+    "receipt_date": 101,
+    "unit_cost": 11.0,
+    "qty": 100
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 209,
+    "sku": "SKU557",
+    "lot_id": "SKU557-L1",
+    "true_qty": 50
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 67,
+    "sku": "SKU519",
+    "lot_id": "SKU519-L1",
+    "receipt_date": 100,
+    "unit_cost": 9.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 109,
+    "sku": "SKU530",
+    "qty": 50
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 130,
+    "sku": "SKU536",
+    "lot_id": "SKU536-L1",
+    "receipt_date": 100,
+    "unit_cost": 8.0,
+    "qty": 100
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 93,
+    "sku": "SKU525",
+    "lot_id": "SKU525-L2",
+    "true_qty": 40
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU545",
+    "lot_id": "SKU545-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 163
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 97,
+    "sku": "SKU526",
+    "lot_id": "SKU526-L2",
+    "receipt_date": 101,
+    "unit_cost": 11.0,
+    "qty": 100
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 76,
+    "sku": "SKU521",
+    "corrects_seq": 75,
+    "corrected_qty": 20
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 37,
+    "sku": "SKU509",
+    "lot_id": "SKU509-L1",
+    "true_qty": 60
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU530",
+    "lot_id": "SKU530-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 108
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU501",
+    "lot_id": "SKU501-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 6
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 203,
+    "sku": "SKU556",
+    "lot_id": "SKU556-L1",
+    "receipt_date": 100,
+    "unit_cost": 9.0,
+    "qty": 100
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 13,
+    "sku": "SKU502",
+    "lot_id": "SKU502-L1",
+    "true_qty": 50
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 195,
+    "sku": "SKU553",
+    "lot_id": "SKU553-L2",
+    "true_qty": 40
+  },
+  {
+    "type": "PICK",
+    "seq": 35,
+    "sku": "SKU508",
+    "qty": 50
+  },
+  {
+    "type": "PICK",
+    "seq": 175,
+    "sku": "SKU548",
+    "qty": 40
+  },
+  {
+    "type": "PICK",
+    "seq": 66,
+    "sku": "SKU518",
+    "qty": 30
+  },
+  {
+    "type": "PICK",
+    "seq": 196,
+    "sku": "SKU553",
+    "qty": 40
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU552",
+    "lot_id": "SKU552-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 190
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU552",
+    "lot_id": "SKU552-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 191
+  },
+  {
+    "type": "PICK",
+    "seq": 181,
+    "sku": "SKU549",
+    "qty": 40
+  },
+  {
+    "type": "PICK",
+    "seq": 219,
+    "sku": "SKU559",
+    "qty": 50
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 133,
+    "sku": "SKU536",
+    "lot_id": "SKU536-L1",
+    "true_qty": 50
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 63,
+    "sku": "SKU517",
+    "lot_id": "SKU517-L1",
+    "true_qty": 50
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 151,
+    "sku": "SKU541",
+    "lot_id": "SKU541-L1",
+    "true_qty": 60
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 3,
+    "sku": "SKU500",
+    "corrects_seq": 2,
+    "corrected_qty": 20
+  },
+  {
+    "type": "PICK",
+    "seq": 69,
+    "sku": "SKU519",
+    "qty": 60
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU539",
+    "lot_id": "SKU539-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 142
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU506",
+    "lot_id": "SKU506-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 26
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 110,
+    "sku": "SKU531",
+    "lot_id": "SKU531-L1",
+    "receipt_date": 100,
+    "unit_cost": 8.0,
+    "qty": 100
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 135,
+    "sku": "SKU537",
+    "lot_id": "SKU537-L1",
+    "receipt_date": 100,
+    "unit_cost": 5.0,
+    "qty": 80
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 105,
+    "sku": "SKU529",
+    "lot_id": "SKU529-L2",
+    "receipt_date": 101,
+    "unit_cost": 11.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 51,
+    "sku": "SKU513",
+    "qty": 60
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 157,
+    "sku": "SKU543",
+    "lot_id": "SKU543-L1",
+    "receipt_date": 100,
+    "unit_cost": 5.0,
+    "qty": 80
+  },
+  {
+    "type": "PICK",
+    "seq": 136,
+    "sku": "SKU537",
+    "qty": 30
+  },
+  {
+    "type": "PICK",
+    "seq": 184,
+    "sku": "SKU550",
+    "qty": 30
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU539",
+    "lot_id": "SKU539-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 141
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU554",
+    "lot_id": "SKU554-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 198
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 186,
+    "sku": "SKU551",
+    "lot_id": "SKU551-L1",
+    "receipt_date": 100,
+    "unit_cost": 10.0,
+    "qty": 100
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU549",
+    "lot_id": "SKU549-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 179
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 214,
+    "sku": "SKU558",
+    "corrects_seq": 212,
+    "corrected_qty": 25
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 128,
+    "sku": "SKU535",
+    "lot_id": "SKU535-L2",
+    "true_qty": 40
+  },
+  {
+    "type": "PICK",
+    "seq": 102,
+    "sku": "SKU528",
+    "qty": 30
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU550",
+    "lot_id": "SKU550-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 182
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 117,
+    "sku": "SKU532",
+    "corrects_seq": 116,
+    "corrected_qty": 20
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 62,
+    "sku": "SKU517",
+    "corrects_seq": 61,
+    "corrected_qty": 20
+  },
+  {
+    "type": "PICK",
+    "seq": 81,
+    "sku": "SKU522",
+    "qty": 50
+  },
+  {
+    "type": "PICK",
+    "seq": 216,
+    "sku": "SKU559",
+    "qty": 30
+  },
+  {
+    "type": "PICK",
+    "seq": 86,
+    "sku": "SKU523",
+    "qty": 50
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 145,
+    "sku": "SKU540",
+    "lot_id": "SKU540-L1",
+    "receipt_date": 100,
+    "unit_cost": 8.0,
+    "qty": 100
+  },
+  {
+    "type": "CORRECTION",
+    "seq": 123,
+    "sku": "SKU533",
+    "corrects_seq": 121,
+    "corrected_qty": 25
+  },
+  {
+    "type": "PICK",
+    "seq": 210,
+    "sku": "SKU557",
+    "qty": 50
+  },
+  {
+    "type": "PICK",
+    "seq": 43,
+    "sku": "SKU511",
+    "qty": 50
+  },
+  {
+    "type": "PICK",
+    "seq": 134,
+    "sku": "SKU536",
+    "qty": 50
+  },
+  {
+    "type": "PICK",
+    "seq": 29,
+    "sku": "SKU506",
+    "qty": 40
+  },
+  {
+    "type": "PICK",
+    "seq": 207,
+    "sku": "SKU557",
+    "qty": 30
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU506",
+    "lot_id": "SKU506-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 27
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU547",
+    "lot_id": "SKU547-L9",
+    "receipt_date": 100,
+    "unit_cost": 7.0,
+    "qty": 50,
+    "seq": 170
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU508",
+    "lot_id": "SKU508-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 34
+  },
+  {
+    "type": "PICK",
+    "seq": 16,
+    "sku": "SKU503",
+    "qty": 40
+  },
+  {
+    "type": "CYCLE_COUNT",
+    "seq": 204,
+    "sku": "SKU556",
+    "lot_id": "SKU556-L1",
+    "true_qty": 60
+  },
+  {
+    "type": "RECEIPT",
+    "sku": "SKU550",
+    "lot_id": "SKU550-L2",
+    "receipt_date": 100,
+    "unit_cost": 12.0,
+    "qty": 50,
+    "seq": 183
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 39,
+    "sku": "SKU510",
+    "lot_id": "SKU510-L1",
+    "receipt_date": 100,
+    "unit_cost": 5.0,
+    "qty": 80
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 60,
+    "sku": "SKU517",
+    "lot_id": "SKU517-L1",
+    "receipt_date": 100,
+    "unit_cost": 8.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 165,
+    "sku": "SKU545",
+    "qty": 50
+  },
+  {
+    "type": "RECEIPT",
+    "seq": 95,
+    "sku": "SKU526",
+    "lot_id": "SKU526-L1",
+    "receipt_date": 100,
+    "unit_cost": 10.0,
+    "qty": 100
+  },
+  {
+    "type": "PICK",
+    "seq": 53,
+    "sku": "SKU514",
+    "qty": 30
+  }
+]
