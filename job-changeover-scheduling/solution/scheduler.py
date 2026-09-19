@@ -62,16 +62,20 @@ def atcs_construct(jobs_by_idx, n, setup_matrix, initial_setup, k1=2.0, k2=2.0):
     return order
 
 
-def local_search_improve(order, jobs_by_idx, setup_matrix, initial_setup, max_iters=2000):
+def local_search_improve(order, jobs_by_idx, setup_matrix, initial_setup, max_iters=2000, deadline=None):
     order = list(order)
     n = len(order)
     best_obj = sequence_objective(order, jobs_by_idx, setup_matrix, initial_setup)
     improved = True
     iters = 0
     while improved and iters < max_iters:
+        if deadline is not None and time.time() > deadline:
+            break
         improved = False
         iters += 1
         for i in range(n):
+            if deadline is not None and i % 10 == 0 and time.time() > deadline:
+                return order, best_obj
             for j in range(i + 1, n):
                 cand = order[:]
                 cand[i], cand[j] = cand[j], cand[i]
@@ -80,6 +84,8 @@ def local_search_improve(order, jobs_by_idx, setup_matrix, initial_setup, max_it
                     order, best_obj = cand, obj
                     improved = True
         for i in range(n):
+            if deadline is not None and i % 10 == 0 and time.time() > deadline:
+                return order, best_obj
             job = order[i]
             rest = order[:i] + order[i + 1:]
             for pos in range(n):
@@ -127,12 +133,13 @@ def sa_timeboxed(order, jobs_by_idx, setup_matrix, initial_setup, seed, deadline
 
 def solve(jobs_by_idx, n, setup_matrix, initial_setup, time_budget_sec):
     t0 = time.time()
-    order = atcs_construct(jobs_by_idx, n, setup_matrix, initial_setup)
-    order, best_obj = local_search_improve(order, jobs_by_idx, setup_matrix, initial_setup)
-    best = list(order)
-
     # reserve a safety margin so we always have time to write output
     hard_deadline = t0 + max(time_budget_sec - 3.0, 0.5)
+
+    order = atcs_construct(jobs_by_idx, n, setup_matrix, initial_setup)
+    order, best_obj = local_search_improve(order, jobs_by_idx, setup_matrix, initial_setup,
+                                            deadline=hard_deadline)
+    best = list(order)
 
     restart_seed = 0
     while time.time() < hard_deadline:
