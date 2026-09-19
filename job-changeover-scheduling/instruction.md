@@ -1,31 +1,41 @@
-Work in /app. What you're handing in is /app/outputs/scheduler.py, and it has to run like this:
+Start in `/app`. Your submission is `/app/outputs/scheduler.py`.
 
-python3 scheduler.py --instance <instance.json> --output <output.json> --time-budget <seconds>
+The grader will invoke it as:
 
-The --time-budget value is real, so treat it as a hard deadline. There's no grace period once it runs out, which means an answer has to be written to the output path before the process gets killed.
+`python3 scheduler.py --instance <instance.json> --output <output.json> --time-budget <seconds>`
 
-The output itself is simple: {"sequence": [job_id, ...]}. The list has to contain every job from the instance exactly once. No missing IDs, no duplicates, no made-up jobs.
+The time value passed to the program is a real cutoff. Once it expires, the process is stopped. There is no cleanup time afterward, so don't leave the final schedule waiting in memory.
 
-The actual scheduling rules are in /app/SCHEDULING_SPEC.md, so read that before you build anything. It's a single-machine, non-preemptive schedule. Each job has a family, a processing time, a due date and a weight. Setup time depends on the family of the job that ran immediately before, using the supplied setup_matrix. The first job uses initial_setup instead. Don't assume that switching to the same family means no setup. The matrix covers same-family transitions too, and those entries can be nonzero.
+Your program should write one JSON object:
 
-For a given sequence, start the clock at zero, apply the required setup, run each job, and work out its weighted tardiness from its completion time. The objective is the sum of weight * max(0, completion_time - due_date), and lower is better. Finishing before a due date earns nothing extra.
+`{"sequence": [job_id, ...]}`
 
-There's no reference sequence to reproduce here. This is an optimization task, so pick whatever approach you think will get a strong result in the time available: heuristics, local improvement, an exact method, or some mix. What matters is the schedule that actually gets written.
+Every job in the input must appear in that list once, and only once.
 
-There's a small sanity check in /app/data/worked_example/, with four jobs and two families. Its README gives two sequences evaluated by hand, with objectives 308 and 159. Make sure the scorer in your own code agrees with both before you start tuning.
+Read `/app/SCHEDULING_SPEC.md` before working on the scheduler. That file defines the actual problem. In short, this is a single-machine scheduling problem with no preemption. A job has a family, processing time, due date, and weight. Setup time is part of the schedule too. It comes from the family of the previous job through `setup_matrix`, while the first job uses `initial_setup`.
 
-/app/data/case/ is a larger practice instance with 45 jobs, IDs J000 through J044. It isn't the grading instance, so don't build a solution that leans on those particular IDs or figures.
+One easy detail to get wrong: a transition from a family to that same family still uses the matrix entry. Those entries are not necessarily zero.
 
-The real evaluation uses two different hidden 45-job instances. They're run separately, each with a 180-second budget. Each has its own quality threshold, and you need to clear both to score 1.
+The score comes from simulating the sequence from time zero. Include setup and processing time when determining each completion time, then add:
 
-The grader starts by checking the sequence itself. It has to be an exact permutation of the hidden instance's job IDs. If that's wrong, there's no useful objective score to recover. After that, the grader calculates the objective on its own and compares it with the sealed threshold for that instance.
+`weight * max(0, completion_time - due_date)`
 
-Those thresholds are deliberately not trivial. They were calibrated from real runs at the same 180-second limit, and in those measurements even CP-SAT and a competent dispatch heuristic with local search didn't reliably hit the required result on both hidden cases. A basic one-pass priority rule is unlikely to be enough.
+for each job. Lower total weighted tardiness is the target. Being early does not give a bonus.
 
-Keep an eye on the clock while you search for improvements. A schedule that's still sitting in memory when time runs out scores the same as a failed run. The program should also behave reasonably consistently from one run to the next.
+You have room to choose the algorithm. There isn't a particular sequence hidden in the task that you are expected to reproduce. A good solution could use constructive scheduling, repeated improvement, search, an exact component, or several of these together. Spend the available time on the quality of the schedule rather than building something that only works for the sample IDs.
 
-Leave /app/SCHEDULING_SPEC.md and everything under /app/data/ unchanged.
+There is a small worked case at `/app/data/worked_example/`. It has four jobs. The README evaluates two sequences and gives objectives of 308 and 159. Check your objective calculation against those before trusting the search code.
 
-Before you submit, run the worked example and the practice instance to confirm the sequence format and the objective calculation behave as expected, and make sure the output file is written before the supplied --time-budget expires.
+For something larger, `/app/data/case/` contains a 45-job practice case using IDs `J000` through `J044`. It has the same general data shape as the evaluation data, but it is only there for practice.
+
+The actual run uses two separate hidden 45-job cases. Each is given 180 seconds. They have separate quality thresholds, and both have to pass. The checker first makes sure your sequence is a valid permutation of the jobs it supplied, then calculates the objective itself and compares it with that case's sealed threshold.
+
+The target is intentionally demanding. Real 180-second calibration runs showed that even CP-SAT and a reasonably strong dispatch heuristic plus local search missed the required quality on at least some of the cases. A simple sort by one priority value is therefore unlikely to carry the task by itself.
+
+Make the search time-aware. Keep a valid complete sequence available throughout the run so there is something to write if improvement stops or the deadline gets close. Avoid depending on randomness in a way that makes the result swing wildly between otherwise identical runs.
+
+Don't modify `/app/SCHEDULING_SPEC.md` or anything in `/app/data/`.
+
+Use the worked example and practice case before submitting. Check both the permutation handling and the objective calculation, and test the actual command-line interface with a time budget so you know the output is written before the cutoff.
 
 You have 10800 seconds to complete this task. Do not cheat by using online solutions or hints specific to this task.
