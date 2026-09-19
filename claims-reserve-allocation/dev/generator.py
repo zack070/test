@@ -43,9 +43,9 @@ DEFAULT_N_SINGLETON_ISH = 120
 # demanding a premium to settle fast) but wired to a partner claim such
 # that settling BOTH together unlocks a group discount, making the pair a
 # good deal jointly even though each half looks like a loss on its own.
-DEFAULT_PAIRS_PER_TRAP_CLUSTER = 3
+DEFAULT_PAIRS_PER_TRAP_CLUSTER = 6
 DEFAULT_PAIR_PREMIUM_RANGE = (1.10, 1.20)  # offer as a multiple of mean_severity_usd
-DEFAULT_LINKED_SETTLEMENT_DISCOUNT = 0.30
+DEFAULT_LINKED_SETTLEMENT_DISCOUNT = 0.40
 
 TYPE_WEIGHTS = {"AUTO": 0.50, "PROPERTY": 0.33, "LIABILITY": 0.17}
 
