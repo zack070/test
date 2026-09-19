@@ -16,6 +16,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from generator import generate_portfolio, write_portfolio  # noqa: E402
 from model import objective  # noqa: E402
 from solvers import ev_optimal, naive_greedy, risk_aware  # noqa: E402
+from greedy_swap_solver import greedy_swap  # noqa: E402
 
 BUNDLE_ROOT = os.path.join(os.path.dirname(__file__), "..")
 EVAL_N_PATHS_CALIBRATION = 80000
@@ -30,20 +31,33 @@ def calibrate_and_write_reference(name: str, seed: int, out_input_dir: str, out_
 
     d_naive = naive_greedy(claims, cfg)
     d_ev = ev_optimal(claims, cfg)
+    d_gs = greedy_swap(claims, cfg, np.random.default_rng(seed + 4000), n_scenarios=4000)
     d_risk = risk_aware(claims, cfg, np.random.default_rng(seed + 5000), n_scenarios=SOLVER_N_SCENARIOS)
 
     eval_seed = seed + 900000
     eval_rng = lambda: np.random.default_rng(eval_seed)  # noqa: E731
     r_naive = objective(claims, d_naive, cfg, eval_rng(), EVAL_N_PATHS_CALIBRATION)
     r_ev = objective(claims, d_ev, cfg, eval_rng(), EVAL_N_PATHS_CALIBRATION)
+    r_gs = objective(claims, d_gs, cfg, eval_rng(), EVAL_N_PATHS_CALIBRATION)
     r_risk = objective(claims, d_risk, cfg, eval_rng(), EVAL_N_PATHS_CALIBRATION)
 
-    bar = r_ev["objective"] - 0.5 * (r_ev["objective"] - r_risk["objective"])
+    # The bar must sit below BOTH: (a) the classic EV-only, correlation-blind
+    # knapsack, and (b) a genuinely strong pair-blind heuristic (greedy by
+    # simulated marginal objective gain per dollar + 1-1 swaps -- this is
+    # what an earlier version of this bundle's bar failed to rule out).
+    # Whichever of the two gives the stricter (lower) bar wins, so neither
+    # baseline can slip through.
+    bar_vs_ev = r_ev["objective"] - 0.5 * (r_ev["objective"] - r_risk["objective"])
+    bar_vs_gs = r_risk["objective"] + 0.35 * (r_gs["objective"] - r_risk["objective"])
+    bar = min(bar_vs_ev, bar_vs_gs)
     gap_pct = (r_ev["objective"] - r_risk["objective"]) / r_ev["objective"] * 100
+    gap_gs_pct = (r_gs["objective"] - r_risk["objective"]) / r_gs["objective"] * 100
 
     print(f"[{name}] n_claims={len(claims)} naive={r_naive['objective']:.0f} "
-          f"ev_optimal={r_ev['objective']:.0f} risk_aware={r_risk['objective']:.0f} "
-          f"gap%={gap_pct:.2f} bar={bar:.0f}")
+          f"ev_optimal={r_ev['objective']:.0f} greedy_swap={r_gs['objective']:.0f} "
+          f"risk_aware={r_risk['objective']:.0f} gap_vs_ev%={gap_pct:.2f} "
+          f"gap_vs_gs%={gap_gs_pct:.2f} bar={bar:.0f} "
+          f"(ev_would_pass={r_ev['objective']<=bar} gs_would_pass={r_gs['objective']<=bar})")
 
     os.makedirs(out_reference_dir, exist_ok=True)
     with open(os.path.join(out_reference_dir, f"{name}_reference.json"), "w") as f:
@@ -54,8 +68,10 @@ def calibrate_and_write_reference(name: str, seed: int, out_input_dir: str, out_
             "_calibration_measured": {
                 "naive_objective": round(r_naive["objective"], 2),
                 "ev_optimal_objective": round(r_ev["objective"], 2),
+                "greedy_swap_objective": round(r_gs["objective"], 2),
                 "risk_aware_objective": round(r_risk["objective"], 2),
-                "gap_pct": round(gap_pct, 3),
+                "gap_vs_ev_pct": round(gap_pct, 3),
+                "gap_vs_greedy_swap_pct": round(gap_gs_pct, 3),
             },
         }, f, indent=2)
 

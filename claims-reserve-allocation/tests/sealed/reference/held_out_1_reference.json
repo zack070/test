@@ -1,0 +1,11 @@
+{
+  "eval_seed": 900901,
+  "eval_n_paths": 150000,
+  "pass_bar_objective": 25223676.21,
+  "_calibration_measured": {
+    "naive_objective": 25852831.52,
+    "ev_optimal_objective": 25852831.52,
+    "risk_aware_objective": 24594520.89,
+    "gap_pct": 4.867
+  }
+}
