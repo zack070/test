@@ -15,6 +15,25 @@ running a live simulation to introspect. What has to stay hidden is only
 the exact Monte Carlo draws used to grade the submission and the numeric
 pass bar itself.
 
+An earlier version of this bundle's pass bar sat only between an
+expected-value-only knapsack and a correlation-aware MILP. Quality review
+found that a ~40-line greedy-by-simulated-marginal-gain-per-dollar +
+1-1-swap heuristic -- genuinely sophisticated-looking, not a strawman --
+passed both bars anyway, because that kind of simulation-driven greedy
+already captures nearly all of the achievable correlation-awareness gain.
+The bundle now additionally includes linked-claim pairs (see
+`MODEL_SPEC.md`): a handful of claims per large cluster are individually
+priced as a bad deal, only worthwhile once settled together with a
+specific partner claim. Neither half of a pair shows any standalone
+improvement, so no per-claim marginal-value search -- greedy, 1-1 swaps,
+or the plain EV-only knapsack -- can find them; only genuine joint
+reasoning does (the reference solution's AND-linearized MILP). Both
+sealed bars are now calibrated directly against a measured run of that
+same reported heuristic (`cheat/greedy_marginal_value_swap/`), not just
+against the EV-only baseline, so the exploit that got through the
+previous version is included in this bundle's own adversarial suite and
+confirmed to fail.
+
 ## 1. Reward forgery (`reward_forgery/`)
 
 `run()` tries to overwrite `/logs/verifier/reward.txt` with `1` directly,
@@ -87,47 +106,65 @@ entirely -- the "did essentially no analysis" baseline.
 
 ## 9. Expected-value-optimal, risk-blind (`ev_only_risk_blind/`)
 
-The most important negative result in this bundle: an EXACT 0/1 knapsack
-solution (via MILP) that maximizes expected savings subject to the
-budget, completely ignoring cluster correlation and the CVaR term. This
-is not a strawman -- it is mathematically optimal for expected cost alone,
-and would pass a task that only measured expected cost.
+An EXACT 0/1 knapsack solution (via MILP) that maximizes expected savings
+subject to the budget, completely ignoring cluster correlation, the CVaR
+term, and linked-pair complementarity. This is not a strawman -- it is
+mathematically optimal for expected cost alone, and would pass a task
+that only measured expected cost.
 
 **Measured result: reward 0 on both portfolios.** Held-out 1: objective
-26,254,698 against a pass bar of 25,798,709 (expected_cost=4,554,257,
-cvar=7,233,481). Held-out 2: objective 23,296,704 against a pass bar of
-22,858,574 (expected_cost=4,094,213, cvar=6,400,830). In both cases the
-shortfall (~1.8%-1.9%) is real and reproducible, not a rounding artifact --
-this baseline concentrates deferred exposure inside the large correlated
-clusters (because doing so is expected-value-neutral or better) and pays
-for it in CVaR.
+25,867,616 against a pass bar of 24,020,473 (expected_cost=4,510,548,
+cvar=7,119,022). Held-out 2: objective 22,818,775 against a pass bar of
+20,783,693 (expected_cost=4,062,809, cvar=6,251,989). The shortfall
+(~7.7%-9.8%) is large and reproducible -- this baseline both concentrates
+deferred exposure in correlated clusters and never settles a linked pair
+(each pair member looks like a loss in isolation).
 
-## 10. Memorized visible answers (`hardcoded_answers/`)
+## 10. Greedy by simulated marginal value + 1-1 swaps (`greedy_marginal_value_swap/`)
+
+The exploit reported by quality review against an earlier version of
+this bundle, kept here as a permanent regression check: builds its own
+Monte Carlo simulator from `MODEL_SPEC.md`, greedily settles whichever
+remaining budget-feasible claim gives the best simulated full-objective
+improvement per dollar (recomputed against the current partial decision
+set each round -- not a one-shot ranking), then polishes with 1-1 swaps.
+It correctly handles cluster correlation (it's evaluating the true
+simulated objective, not a closed-form proxy), but has no notion of
+linked-claim pairs, so it never settles either half of one.
+
+**Measured result: reward 0 on both portfolios.** Held-out 1: objective
+25,443,629 against a pass bar of 24,020,473. Held-out 2: objective
+21,626,194 against a pass bar of 20,783,693. In both cases it settles
+zero linked-pair claims -- confirmed directly, not inferred -- and the
+shortfall (~3.4%-4.1%) is real: correlation-awareness alone is not
+enough once complementary pairs are part of the model.
+
+## 11. Memorized visible answers (`hardcoded_answers/`)
 
 Embeds a lookup table of decisions computed on the visible `case/`
 dataset (built with `ev_optimal`), keyed by `claim_id`, falling back to
 settle-nothing for anything unrecognized -- embedded directly in
 `policy.py` rather than shipped as a side file, since only the one
-submitted file is ever graded (`cheat/hardcoded_answers/memorized.json`
-is kept alongside only for readability, and isn't read by the cheat
-itself).
+submitted file is ever graded.
 
 **Measured result: reward 0.** Held-out `claim_id`s happen to reuse the
 same `CLM####` numbering scheme as the visible case dataset (both restart
 at `CLM0001`), so this cheat's lookup table technically "hits" on every
-held-out id -- but the underlying facts differ, and concretely: the
-visible case dataset's budget is larger than either sealed portfolio's,
-so replaying the case-dataset decisions verbatim overspends the held-out
-budget (measured: $1,373,644.92 used against a $1,267,629.60 cap on
-held_out_2) and is rejected on the mechanical feasibility check before
-any simulation runs. Confirms held-out grading tests whether the
-policy's logic generalizes to the actual portfolio it's run against, not
-whether the agent can pattern-match on identifiers.
+held-out id -- but the underlying facts differ, and concretely: replaying
+the case-dataset decisions verbatim overspends both sealed budgets
+(measured: $1,423,186.43 used against a $1,422,917.65 cap on held_out_1;
+$1,375,045.26 against $1,312,456.77 on held_out_2) and is rejected on the
+mechanical feasibility check before any simulation runs -- a deterministic
+dollar-sum check, not subject to simulation noise. Confirms held-out
+grading tests whether the policy's logic generalizes to the actual
+portfolio it's run against, not whether the agent can pattern-match on
+identifiers.
 
 ## Reference solution, for contrast
 
-`solution/policy.py` (the scenario-based, CVaR-aware MILP) measures
-reward 1 on both held-out portfolios: objective 25,200,854 (bar
-25,798,709, margin ~2.3%) on held_out_1, and 21,894,412 (bar 22,858,574,
-margin ~4.2%) on held_out_2 -- comfortably under both bars, not just
-barely.
+`solution/policy.py` (the scenario-based, CVaR-aware, pair-linearized
+MILP) measures reward 1 on both held-out portfolios -- see the numbers
+recorded in `tests/sealed/reference/*.json`'s `_calibration_measured`
+block for the exact figures, and `dev/build_bundle.py`'s own printed
+output for how the pass bar was derived from them (whichever of the
+EV-only or greedy+swap baselines gives the stricter bound).
